@@ -33,3 +33,14 @@ button.btn.btn-default3:hover{
     color: black;
     box-shadow: inset 0 0 0 3px black;
 }
+
+button.btn.btn-default4{
+    background-color: #DFC26A; 
+    border-radius: 5px;
+    color: black;
+}
+button.btn.btn-default4:hover{
+    background-color: transparent;
+    color: #DFC26A;
+    box-shadow: inset 0 0 0 3px #DFC26A;
+}

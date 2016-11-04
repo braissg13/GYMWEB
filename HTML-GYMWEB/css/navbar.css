@@ -1,0 +1,50 @@
+.container-fluid,#ulDrop{
+	font-color: white;
+	background-color: #0275d8;
+}
+
+a{
+	color: white;
+}
+
+#botonBuscar,#botonLogin{
+	color: #ccc;
+	background-color: transparent;
+	border-color: #ccc;
+}
+
+#Item1,#Item2,#Item3,#Item4{
+	color: white;
+}
+
+#modalLogin{
+	background-image: url(../img/navBar/fondo-azul.jpg);
+	width: 100%;
+}
+
+#separador{
+	background-color: black;
+}
+
+#drop,#aVerPerf,#aModificarPerf{
+	color: white;
+	background-color: transparent;
+}
+
+#aCerrarSesion{
+	background-color: #b30c0c;
+	color: black;
+}
+
+#Item1:hover,#Item2:hover,#Item3:hover,#Item4:hover,#drop:hover,#aVerPerf:hover,#aModificarPerf:hover,#aCerrarSesion:hover{
+	color: #e4b70a;
+	font-size: 16px;
+	font-family: cursive;
+}
+
+#footer{
+	margin-top: 100px;
+	border-style: double;
+	border-color: #000 transparent transparent transparent;
+  	
+}

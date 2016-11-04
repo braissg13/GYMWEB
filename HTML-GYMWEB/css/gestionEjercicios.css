@@ -21,8 +21,18 @@ button.btn.btn-default2:hover{
  	box-shadow: inset 0 0 0 3px #C20900;
 }
 
+button.btn.btn-default3{
+	background-color: #DFC26A; 
+	border-radius: 5px;
+	color: black;
+}
+button.btn.btn-default3:hover{
+	background-color: transparent;
+ 	color: #DFC26A;
+ 	box-shadow: inset 0 0 0 3px #DFC26A;
+}
 
-/* PAGINACION NO VISIBLE XS*/
+/* PAGINACION*/
 ul.pagination {
     display: inline-block;
     padding: 0;
@@ -50,39 +60,6 @@ ul.pagination li a {
 }
 
 ul.pagination li a:hover{
-	background-color: #000;
-	color:#e4b70a;
-	font-size: 16px;
-}
-
-/* PAGINACION VISIBLE XS*/
-
-ul.pagi {
-    display: inline-block;
-    padding: 0;
-    margin: 0;
-}
-
-ul.pagi li {
-	display: inline;
-}
-
-ul.pagi li a {
-    margin: 0 4px;
-    background-color: transparent;
-    color: black;
-    float: left;
-    padding: 8px 16px;
-    text-decoration: none;
-    border-radius: 5px;
-    margin-top: 20px;
-}
-
-#paginacion2{
-    text-align: center;
-}
-
-ul.pagi li a:hover{
 	background-color: #000;
 	color:#e4b70a;
 	font-size: 16px;
