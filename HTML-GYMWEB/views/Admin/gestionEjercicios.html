@@ -70,7 +70,7 @@
 		 <h1>Ejercicios</h1>
 		 <!-- BOTON MOSTRAR EJERCICIOS CREAR EJERCICIOS ELIMINAR EJERCICIOS-->
 		 <div class="row" style="margin-top: 20px; margin-bottom: 10px;">
-		 	<div class="btn-group col-xs-6 col-sm-4 col-md-4 col-lg-4" role="group" style="margin-top: 10px;">
+		 	<div class="btn-group col-xs-6 col-sm-3 col-md-3 col-lg-3" role="group" style="margin-top: 10px;">
     		<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       			<span class="glyphicon glyphicon-list" aria-hidden="true";></span>
     		</button>
@@ -83,22 +83,22 @@
     		</ul>
   		 </div>
 
-  		 <div class="btn-group col-xs-6 col-sm-4 col-md-4 col-lg-4" role="group" style="margin-top: 10px;">
-    		<a href="#" style="text-decoration: none;"><button type="button" class="btn btn-default1" id="botonCrear">Crear Ejercicio</button></a>
+  		 <div class="btn-group col-xs-6 col-sm-3 col-md-3 col-lg-3" role="group" style="margin-top: 10px;">
+    		<a href="crearEjercicios.html" style="text-decoration: none;"><button type="button" class="btn btn-default1" id="botonCrear">Crear Ejercicio</button></a>
     	 </div>
 
-    	 <div class="btn-group col-xs-12 col-sm-4 col-md-4 col-lg-4" role="group" style="margin-top: 10px;">
+    	 <div class="btn-group col-xs-6 col-sm-3 col-md-3 col-lg-3" role="group" style="margin-top: 10px;">
     		<a href="gestionEjercicios.html" style="text-decoration: none;"><button type="button" class="btn btn-default2" id="botonEliminar">Eliminar Ejercicio</button></a>
+    	 </div>
+
+    	 <div class="btn-group col-xs-6 col-sm-3 col-md-3 col-lg-3" role="group" style="margin-top: 10px;">
+    		<a href="gestionEjercicios.html" style="text-decoration: none;"><button type="button" class="btn btn-default3" id="botonModificar">Modificar Ejercicio</button></a>
     	 </div>
 
   		 </div><!-- FIN BOTONES -->
 
   		 <!-- DIV CONTENEDOR DE LOS EJERCICIOS -->
-		 <div id=container-ejercicios>
-		 	<div class="row">
-  				<div class="hidden-xs" style="position: absolute;"><img alt="Fondo" src="../../img/ejercicios/fondo-ejercicios.jpg" style="max-width: 100%; z-index: -1;">
-  				</div>
-			</div>
+		 <div id="container-ejercicios" style="background:#0275d8; border: solid;border-radius:5px; border-color: black;">
 
 			<div class="row" style="margin-top: 20px;">
   				<div class="col-xs-6 col-sm-4 col-md-4 col-lg-4"><a href="consultarEjercicios.html"><img alt="AperMancuernas" src="../../img/ejercicios/aperturas-mancuernas.png" style="max-width: 100%;"></a></div>
@@ -118,18 +118,8 @@
   				<div class="col-xs-6 col-sm-4 col-md-4 col-lg-4"><a href="#"><img alt="PredicadorBarra" src="../../img/ejercicios/predicador-con-barra.png" style="max-width: 100%;"></a></div>
 			</div>
 			<!--  PAGINACION NO VISIBLE XS -->
-			<div id= "paginacion" class="hidden-xs" >
+			<div id= "paginacion">
 				<ul class="pagination">
-				  <li><a href="#">«</a></li>
-				  <li><a href="#">1</a></li>
-				  <li><a href="#">2</a></li>
-				  <li><a href="#">3</a></li>
-				  <li><a href="#">»</a></li>
-				</ul>
-			</div>
-			<!--  PAGINACION VISIBLE XS -->
-			<div id= "paginacion2" class="visible-xs" >
-				<ul class="pagi">
 				  <li><a href="#">«</a></li>
 				  <li><a href="#">1</a></li>
 				  <li><a href="#">2</a></li>
