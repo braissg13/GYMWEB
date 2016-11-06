@@ -71,64 +71,66 @@
 
   <h1>Crear Usuario</h1>
 
-     <FORM method=post action="cgi-bin/script.pl">
-
-<TABLE BORDER=0>
-<TR>
-<TD>Apellidos</TD>
-<TD>
-<INPUT type=text name="apellido">
-</TD>
-</TR>
-
-<TR>
-<TD>Nombre</TD>
-<TD>
-<INPUT type=text name="nombre">
-</TD>
-</TR>
-
-<TR>
-  <TD>Nombre usuario</TD>
-  <TD>
-  <INPUT type=text name="nombreUsuario">
-  </TD>
-</TR>
-<TD>Password</TD>
-<TD>
-<INPUT type=text name="password">
-</TD>
-
-<TR>
-<TD>Email</TD>
-<TD>
-<INPUT type=text name="email">
-</TD>
-</TR>
-
-<TR>
-<TD>Tipo usuario</TD>
-<TD>
-<SELECT name="tipoUsuario">
-<OPTION VALUE="Administrador">Administrador</OPTION>
-<OPTION VALUE="Deportista">Deportista</OPTION>
-<OPTION VALUE="Entrenador">Entrenador</OPTION>
-
-</SELECT>
-</TD>
-</TR>
 
 
-<TR>
-<TD COLSPAN=4>
-<INPUT type="submit" value="Enviar">
-</TD>
-</TR>
 
-</TABLE>
-</FORM>
+    <!-- DIV FORMULARIO -->
+  <div id="container-usuarios" style="background:#0275d8; border: solid;border-radius:5px; border-color: black;">
+     <form action="#" method="post" style="margin:10px;">
+     <!-- COMIENZO ROW-->
+     <div class="row">
+       <!-- DIV NOMBRE USU -->
+       <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-4">
+           <label for="nomUsu">Nombre: </label>
+           <input type="text" class="form-control" id="nomUsu" maxlength="30" placeholder="Nombre usuario">
+       </div>
+       <!-- DIV APELLIDOS USU -->
+       <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-4">
+           <label for="nomUsu">Apellidos: </label>
+           <input type="text" class="form-control" id="apelUsu" maxlength="30" placeholder="Apellidos usuario ">
+       </div>
 
 
+         <!-- DIV EMAIL USU -->
+         <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-4">
+                     <label for="emailUsu">Email: </label>
+                     <input type="text" class="form-control" id="emailUsu" maxlength="30" placeholder="email usuario">
+         </div>
+         <!-- DIV login USU -->
+         <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-4">
+                     <label for="logUsu">Login: </label>
+                     <input type="text" class="form-control" id="logUsu" maxlength="30" placeholder="login usuario">
+         </div>
+
+         <!-- DIV password USU -->
+         <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-4">
+                     <label for="passUsu">Password: </label>
+                     <input type="text" class="form-control" id="passUsu" maxlength="30" placeholder="password usuario">
+         </div>
+
+         <!-- DIV TIPO USU -->
+                   <div class="form-group">
+                       <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                         <label for="tipoUsu">TipoUsuario: </label>
+                           <select class="form-control" id="TipoUsuario" name="TipoUsuario">
+                             <option value=0>Administrador</option>
+                 <option value=1>Entrenador</option>
+                 <option value=2>Deportista</option>
+
+                           </select>
+                       </div>
+                 </div>
+
+       </div> <!-- FIN ROW -->
+
+       <p style="text-align:center">
+       <button type="submit" class="btn btn-default1" style="margin-right: 10px;">
+         <span class="glyphicon glyphicon-floppy-saved" aria-hidden="true"></span>
+       </button>
+
+       <a href="gestionUsuarios.html"><button type="button" class="btn btn-default2">Atr&aacutes</button></a></p>
+     </form>
+  </div> <!-- FIN FORMULARIO USUARIOS -->
 
 	</div>
 
