@@ -65,26 +65,49 @@
   </header>
 
   	<div class="container">
-		 <!-- --------------------------- ----------------EDITAR TODALA VISTA DENTRO DE ESTE DIV ----------------------- -->
-     <h1>Consultar usuarios</h1>
 
-     <div class="row" style="margin-top: 20px; margin-bottom: 10px;">
-      <div class="btn-group col-xs-6 col-sm-4 col-md-4 col-lg-4" role="group" style="margin-top: 10px;">
 
-     <table>
-     <tr>
-       <th>Usuarios registrados</th>
-     </tr>
-     <tr>
-       <td><a href="#">Juan</a></td>
-     </tr>
-     <tr>
-       <td><a href="#">Ana</a></td>
-     </tr>
-     <tr>
-       <td><a href="#">Maria</a></td>
-     </tr>
-     </table>
+        <h1>Usuario: Ana Fernandez</h1>
+        <!-- DIV MUESTRA USUARIO -->
+      <div id="container-usuarios">
+      <!-- COMIENZO ROW -->
+       <div class="row">
+
+
+           <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"><p><b>Nombre: Ana</b></p></div>
+           <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8"><p><b>Apellidos: Fernandez Gomez</b></p></div>
+           <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8"><p><b>email: anafg@gmail.com</b></p></div>
+           <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8"><p><b>login: anafg</b></p></div>
+
+           <!-- PRINCIPIO MODAL ELMINAR EJERCICIO -->
+           <div class="form-group">
+               <button type="button" class="btn btn-default1" data-toggle="modal" data-target=".bs-example-modal-sm">Eliminar</button>
+               <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+               <div class="modal-dialog modal-sm" role="document">
+                 <div class="modal-content" id="modalLogin">
+                 <!-- COMIENZO FOMRULARIO LOGIN -->
+                     <div class="text-center" style="padding:50px 0">
+
+                 <h3><b>&iquest Desea eliminar este usuario?</b></h3>
+                 <button type="submit" class="btn btn-default2">
+                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                 </button>
+                 <a href="gestionEjercicioUsuarios.html"><button type="button" class="btn btn-default3">Atr&aacutes</button></a>
+
+                 </div>
+
+                 </div>
+               </div>
+               </div>
+             </div>	<!-- FIN MODAL -->
+           </div>
+           <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+               <a href="modificarUsuario.html" style="text-decoration: none;"><button type="button" class="btn btn-default4" id="botonModificar">Modificar</button></a>
+           </div>
+
+       </div><!-- FIN ROW -->
+
+     </div> <!-- FIN CONTAINER USUARIOS -->
 
 	</div>
 
