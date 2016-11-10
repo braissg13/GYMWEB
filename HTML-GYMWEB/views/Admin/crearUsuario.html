@@ -8,7 +8,7 @@
     <!-- Bootstrap -->
     <link href="../../css/navbar.css" rel="stylesheet">
     <link href="../../css/bootstrap.min.css" rel="stylesheet">
-
+    <link href="../../css/crearUsuarios.css" rel="stylesheet">
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
@@ -34,7 +34,7 @@
 	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 	      <ul class="nav navbar-nav">
 	        <li><a id="Item1" href="#">Principal</a></li>
-	        <li><a id="Item2" href="#">Gesti&oacuten de Usuarios</a></li>
+	        <li><a id="Item2" href="gestionUsuarios.html">Gesti&oacuten de Usuarios</a></li>
 	        <li><a id="Item3" href="#">Gesti&oacuten de Actividades</a></li>
 	        <li><a id="Item4" href="gestionEjercicios.html">Gesti&oacuten de Ejercicios</a></li>
 	      </ul>
@@ -66,69 +66,68 @@
 
   	<div class="container">
 
-  <h1>Crear Usuario</h1>
+        <h1>Crear Usuario</h1>
 
-    <!-- DIV FORMULARIO -->
-  <div id="container-usuarios" style="background:#0275d8; border: solid;border-radius:5px; border-color: black;">
-     <form action="#" method="post" style="margin:10px;">
-     <!-- COMIENZO ROW-->
-     <div class="row">
-       <!-- DIV NOMBRE USU -->
-       <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-4">
-           <label for="nomUsu">Nombre: </label>
-           <input type="text" class="form-control" id="nomUsu" maxlength="30" placeholder="Nombre usuario">
-       </div>
-       <!-- DIV APELLIDOS USU -->
-       <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-4">
-           <label for="nomUsu">Apellidos: </label>
-           <input type="text" class="form-control" id="apelUsu" maxlength="30" placeholder="Apellidos usuario ">
-       </div>
+          <!-- DIV FORMULARIO -->
+        <div id="container-usuarios" style="background:#0275d8; border: solid;border-radius:5px; border-color: black;">
+           <form action="#" method="post" style="margin:10px;">
+           <!-- COMIENZO ROW-->
+           <div class="row" style="margin-bottom: 10px;">
+             
+              <!-- DIV Nombre Usuario USU -->
+              <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-4">
+                           <label for="nomUser">Nombre Usuario: </label>
+                           <input type="text" class="form-control" name="nomUsuario" id="nomUsuario" maxlength="30" placeholder="Nombre Usuario">
+              </div>
+
+              <!-- DIV password USU -->
+              <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-4">
+                           <label for="passUsu">Password: </label>
+                           <input type="text" class="form-control" name="password"  id="password" maxlength="20" placeholder="password">
+              </div>
+
+             <!-- DIV NOMBRE  -->
+             <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-4">
+                 <label for="nomUsu">Nombre: </label>
+                 <input type="text" class="form-control" id="nombre" name="nombre" maxlength="30" placeholder="Nombre">
+             </div>
+             <!-- DIV APELLIDOS -->
+             <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-4">
+                 <label for="apellidoUser">Apellidos: </label>
+                 <input type="text" class="form-control" id="apellidos" name="apellidos" maxlength="30" placeholder="Apellidos">
+             </div>
 
 
-         <!-- DIV EMAIL USU -->
-         <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-4">
-                     <label for="emailUsu">Email: </label>
-                     <input type="text" class="form-control" id="emailUsu" maxlength="30" placeholder="email usuario">
-         </div>
-         <!-- DIV login USU -->
-         <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-4">
-                     <label for="logUsu">Login: </label>
-                     <input type="text" class="form-control" id="logUsu" maxlength="30" placeholder="login usuario">
-         </div>
-
-
-
-         <!-- DIV password USU -->
-         <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-4">
-                     <label for="passUsu">Password: </label>
-                     <input type="text" class="form-control" id="passUsu" maxlength="30" placeholder="password usuario">
-         </div>
-
-         <!-- DIV TIPO USU -->
-                   <div class="form-group">
-                       <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
-                         <label for="tipoUsu">TipoUsuario: </label>
-                           <select class="form-control" id="TipoUsuario" name="TipoUsuario">
-                             <option value=0>Administrador</option>
-                 <option value=1>Entrenador</option>
-                 <option value=2>Deportista</option>
-
-                           </select>
+               <!-- DIV EMAIL USU -->
+               <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-4">
+                           <label for="emailUsu">Email: </label>
+                           <input type="text" class="form-control" id="email" name="email" maxlength="30" placeholder="email">
+               </div>
+               <!-- DIV TIPO USU -->
+                         <div class="form-group">
+                             <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                               <label for="tipoUsu">TipoUsuario: </label>
+                                 <select class="form-control" id="tipoUsuario" name="tipoUsuario">
+                                      <option value="Administrador">Administrador</option>
+                                       <option value="Entrenador">Entrenador</option>
+                                       <option value="DeportistaPEF">DeportistaPEF</option>
+                                       <option value="DeportistaTDU">DeportistaTDU</option>
+                                 </select>
+                             </div>
                        </div>
-                 </div>
 
-       </div> <!-- FIN ROW -->
+             </div> <!-- FIN ROW -->
 
-       <p style="text-align:center">
-       <button type="submit" class="btn btn-default1" style="margin-right: 10px;">
-         <span class="glyphicon glyphicon-floppy-saved" aria-hidden="true"></span>
-       </button>
+             <p style="text-align:center">
+             <button type="submit" class="btn btn-default1" style="margin-right: 10px;">
+               <span class="glyphicon glyphicon-floppy-saved" aria-hidden="true"></span>
+             </button>
 
-       <a href="gestionUsuarios.html"><button type="button" class="btn btn-default2">Atr&aacutes</button></a></p>
-     </form>
-  </div> <!-- FIN FORMULARIO USUARIOS -->
+             <a href="gestionUsuarios.html"><button type="button" class="btn btn-default2">Atr&aacutes</button></a></p>
+           </form>
+        </div> <!-- FIN FORMULARIO USUARIOS -->
 
-	</div>
+	   </div>
 
 
 

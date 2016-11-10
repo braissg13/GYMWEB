@@ -8,6 +8,7 @@
     <!-- Bootstrap -->
     <link href="../../css/navbar.css" rel="stylesheet">
     <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../css/consultarUsuarios.css" rel="stylesheet">
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
@@ -34,7 +35,7 @@
 	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 	      <ul class="nav navbar-nav">
 	        <li><a id="Item1" href="#">Principal</a></li>
-	        <li><a id="Item2" href="#">Gesti&oacuten de Usuarios</a></li>
+	        <li><a id="Item2" href="gestionUsuarios.html">Gesti&oacuten de Usuarios</a></li>
 	        <li><a id="Item3" href="#">Gesti&oacuten de Actividades</a></li>
 	        <li><a id="Item4" href="gestionEjercicios.html">Gesti&oacuten de Ejercicios</a></li>
 	      </ul>
@@ -67,18 +68,22 @@
   	<div class="container">
 
 
-        <h1>Usuario: Ana Fernandez</h1>
+        <h1>Usuario: anafg</h1>
         <!-- DIV MUESTRA USUARIO -->
       <div id="container-usuarios">
       <!-- COMIENZO ROW -->
        <div class="row">
 
+            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4" style="border-style: solid;border-color: black; margin-bottom: 10px;">
+            <p><b>Nombre Usuario: anafg</b></p>
+            <p><b>Nombre: Ana</b></p>
+            <p><b>Apellidos: Fernandez Gomez</b></p>
+            <p><b>Email: anafg@gmail.com</b></p>
+            <p><b>Tipo Usuario: DeportistaPEF</b></p>
+            </div>
+           
 
-           <div ><p><b>Nombre: Ana</b></p></div>
-           <div ><p><b>Apellidos: Fernandez Gomez</b></p></div>
-           <div ><p><b>email: anafg@gmail.com</b></p></div>
-           <div><p><b>login: anafg</b></p></div>
-	<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+  <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
            <!-- PRINCIPIO MODAL ELMINAR Usuario -->
            <div class="form-group">
 
@@ -102,10 +107,9 @@
                </div>
              </div>	<!-- FIN MODAL -->
            </div>
-           <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
-               <a href="modificarUsuario.html" style="text-decoration: none;"><button type="button" class="btn btn-default4" id="botonModificar">Modificar</button></a>
-           </div>
-
+           <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+            <a href="gestionUsuarios.html"><button type="button" class="btn btn-default3">Atr&aacutes</button></a>
+            </div>
        </div><!-- FIN ROW -->
 
      </div> <!-- FIN CONTAINER USUARIOS -->

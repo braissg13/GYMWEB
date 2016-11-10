@@ -8,7 +8,7 @@
     <!-- Bootstrap -->
     <link href="../../css/navbar.css" rel="stylesheet">
     <link href="../../css/bootstrap.min.css" rel="stylesheet">
-
+    <link href="../../css/gestionUsuarios.css" rel="stylesheet">
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
@@ -34,7 +34,7 @@
 	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 	      <ul class="nav navbar-nav">
 	        <li><a id="Item1" href="#">Principal</a></li>
-	        <li><a id="Item2" href="#">Gesti&oacuten de Usuarios</a></li>
+	        <li><a id="Item2" href="gestionUsuarios.html">Gesti&oacuten de Usuarios</a></li>
 	        <li><a id="Item3" href="#">Gesti&oacuten de Actividades</a></li>
 	        <li><a id="Item4" href="gestionEjercicios.html">Gesti&oacuten de Ejercicios</a></li>
 	      </ul>
@@ -73,38 +73,80 @@
     <!-- BOTON MOSTRAR USUARIOS CREAR USUARIOS ELIMINAR USUARIOS-->
 
     <div class="row" style="margin-top: 20px; margin-bottom: 10px;">
-      <div class="btn-group col-xs-6 col-sm-4 col-md-2 col-lg-2" role="group" style="margin-top: 10px;">
 
 
-        <th>Usuarios registrados</th>
-
-      <!-- DIV CONTENEDOR DE LOS usuarios -->
-    <div id="container-usuarios" >
-         <div><a href="consultarUsuarios.html">Ana</a></div>
-         <div><a href="#">Juan</a></div>
-         <div><a href="#">Maria</a></div>
-    	</div>
-      
-</div>
-
-      <div class="btn-group col-xs-6 col-sm-4 col-md-4 col-lg-2" role="group" style="margin-top: 10px;">
+      <div class="btn-group col-xs-6 col-sm-4 col-md-4 col-lg-2" role="group" style="margin-bottom: 10px;">
        <a href="crearUsuario.html" style="text-decoration: none;"><button type="button" class="btn btn-default1" id="botonCrear">Crear Usuario</button></a>
       </div>
 
-      <div class="btn-group col-xs-6 col-sm-4 col-md-4 col-lg-2" role="group" style="margin-top: 10px;">
-       <a href="eliminarUsuarios.html" style="text-decoration: none;"><button type="button" class="btn btn-default2" id="botonEliminar">Eliminar Usuario</button></a>
+      <!-- COMIENZO DIV TABLA -->
+      <div class="table-responsive col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <table class="table table-striped">
+         
+         <thead>
+
+            <tr>
+              <th>#</th>
+              <th>Nombre Usuario</th>
+              <th >Tipo Usuario</th>
+            </tr>
+
+          </thead>
+
+          <tbody>
+
+            <tr>
+              <td>1</td>
+              <td><a href="consultarUsuarios.html" style="text-decoration: none;">Admin</a></td>
+              <td>Administrador</td>
+              <td><a href="consultarUsuarios.html" style="text-decoration: none;"><button type="button" class="btn btn-default2" id="botonEliminar">Eliminar Usuario</button></a></td>
+              <td><a href="modificarUsuario.html" style="text-decoration: none;"><button type="button" class="btn btn-default3" id="botonModificar">Modificar Usuario</button></a></td>
+            </tr>
+
+            <tr>
+              <td>2</td>
+              <td><a href="consultarUsuarios.html" style="text-decoration: none;">drSelles</a></td>
+              <td>Entrenador</td>
+              <td><a href="consultarUsuarios.html" style="text-decoration: none;"><button type="button" class="btn btn-default2" id="botonEliminar">Eliminar Usuario</button></a></td>
+              <td><a href="modificarUsuario.html" style="text-decoration: none;"><button type="button" class="btn btn-default3" id="botonModificar">Modificar Usuario</button></a></td>
+            </tr>
+
+            <tr>
+              <td>3</td>
+              <td><a href="consultarUsuarios.html" style="text-decoration: none;">anafg</a></td>
+              <td>DeportistaPEF</td>
+              <td><a href="consultarUsuarios.html" style="text-decoration: none;"><button type="button" class="btn btn-default2" id="botonEliminar">Eliminar Usuario</button></a></td>
+              <td><a href="modificarUsuario.html" style="text-decoration: none;"><button type="button" class="btn btn-default3" id="botonModificar">Modificar Usuario</button></a></td>
+            </tr>
+
+            <tr>
+              <td>4</td>
+              <td><a href="consultarUsuarios.html" style="text-decoration: none;">xosegg</a></td>
+              <td>DeportistaTDU</td>
+              <td><a href="consultarUsuarios.html" style="text-decoration: none;"><button type="button" class="btn btn-default2" id="botonEliminar">Eliminar Usuario</button></a></td>
+              <td><a href="modificarUsuario.html" style="text-decoration: none;"><button type="button" class="btn btn-default3" id="botonModificar">Modificar Usuario</button></a></td>
+            </tr>
+
+          </tbody>
+
+        </table>
+
+        <div id= "paginacion">
+        <ul class="pagination">
+          <li><a href="#">«</a></li>
+          <li><a href="#">1</a></li>
+          <li><a href="#">2</a></li>
+          <li><a href="#">3</a></li>
+          <li><a href="#">»</a></li>
+        </ul>
+      </div>
       </div>
 
-
-    <div class="btn-group col-xs-6 col-sm-4 col-md-4 col-lg-2" role="group" style="margin-top: 10px;">
-     <a href="modificarUsuario.html" style="text-decoration: none;"><button type="button" class="btn btn-default2" id="botonModificar">Modificar Usuario</button></a>
-    </div>
-
-  </div><!-- FIN BOTONES -->
+  </div><!-- FIN ROW -->
 
 
 
-
+</div>
 
     <footer id="footer">
     <p style="text-align: center;"><img alt="Uvigo" class="responsive-image" style="max-width: 100%;" src="../../img/navBar/logoUvigo.png"></p>
