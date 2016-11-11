@@ -67,6 +67,12 @@ if(!isset($_SESSION)) session_start();
                <textarea class="form-control" rows="4" maxlength="500" name="descrAct" placeholder="Breve descripción de la actividad"></textarea>
            </div>
 
+           <!-- DIV IMAGEN-->
+          <div class="form-group col-xs-12 col-sm-4 col-md-4 col-lg-4" style="margin-top:30px;">
+              <label for="imgAct">Subir Imagen: </label>
+              <input type="file" name="imagen">
+          </div>
+
 					</div> <!-- FIN ROW -->
 
 					<p style="text-align:center">
@@ -80,7 +86,7 @@ if(!isset($_SESSION)) session_start();
 
 	</div>
 
-	?php include("../footer.php");  /*Cargamos el footer*/ ?>
+	<?php include("../footer.php");  /*Cargamos el footer*/ ?>
 
   </body>
 </html>

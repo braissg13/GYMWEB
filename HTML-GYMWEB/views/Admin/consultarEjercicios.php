@@ -79,7 +79,7 @@ mancuernas debiendo quedar enfrentadas arriba del pecho como se observa en la im
 			      	<a href="modificarEjercicios.php" style="text-decoration: none;"><button type="button" class="btn btn-default4" id="botonModificar">Modificar</button></a>
 			    </div>
 
-          <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
               <a href="gestionEjercicios.php"><button type="button" class="btn btn-default3">Atr&aacutes</button></a>
           </div>
 
