@@ -150,18 +150,48 @@
 		</div>
 		<!-- FIN DEL CAROUSEL -->
 
-		<div id="Servicios" class="Servicios">
+	<div class="row"><!--INICIO ROW -->
+		<div id="Servicios" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 			<h1><b> Servicios </b></h1>
 				<p>Ofrecemos distintos tipos de servicios, que diferenciamos como Actividades en Grupo y Actividades Individuales.</p>
-				<p>Actividades en Grupo: </p>
+		</div>		
+			<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">	
+				<h3><p><b>Actividades en Grupo: </b></p></h3>
 				<p>-Spinning.</p>
 				<p>-Iudo.</p>
 				<p>-Pilates.</p>
-				<p>Actividades Individuales: </p>
+				<p>-Aerobic.</p>
+				<p>-Zumba.</p>
+			</div>
+			<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+				<h3><p><b>Actividades Individuales: </b></p></h3>
 				<p>Sala de Cardio-Fitnesss,</p>
+			</div>
 
-		</div>
+			<!-- DIV HORARIO-->
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+				<h3><p><b>Horario: </b></p></h3>
+			</div>
+			<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+				<p><b>Septiembre a Junio: </b></p>
+				<p>Lunes a Viernes de 08:30 a 23:30</p>
+				<p>Sábados de 10:00 a 14:00 y de 16:00 a 21:00</p>
+				<p>Domingos de 10:00 a 14:00 e de 16:00 a 20:00</p>
+			</div>
+			<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+ 				<p><b>Julio, Semana Santa y Navidad: </b></p>
+ 				<p>Lunes a Viernes de 09:00 a 21:00</p>
+ 				<p>Sábados de 10:00 a 14:00 y de 16:00 a 21:00</p>
+				<p>Domingos de 10:00 a 14:00 e de 16:00 a 21:00</p>
+			</div>
+			<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+				<p><b>Agosto: </b></p>
+ 				<p>Lunes a Viernes de 09:00 a 20:30</p>
+ 				<p>Sábados Cerrado</p>
+				<p>Domingos Cerrado</p>
+			</div>
 
+	</div> <!-- FIN ROW-->
 		<div id="dondeEstamos" class="dondeEstamos">
 			<h1><b> &iquest D&oacutende estamos? </b></h1>
 			 <p style="text-align: center;"><b>Estamos en: </b></p>
