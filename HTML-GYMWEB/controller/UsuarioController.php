@@ -98,7 +98,7 @@ class UsuarioController{
 	  				$user->setNombre($nombre);
 	  				$user->setApellidos($apellidos);
 
-	  				Usuario::guardarUsuario($user);
+	  				$user->guardarUsuario($user);
 	  				header("Location: ../views/Admin/gestionUsuarios.php");
 	  			}else{
 	  				/*Si no le decimos cual es el error*/
