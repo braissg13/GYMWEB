@@ -1,5 +1,5 @@
 <?php
-require_once("/../conexion/bdConexion.php");
+include_once("/../conexion/bdConexion.php");
 
 class UsuarioMapper{
 
@@ -38,6 +38,20 @@ class UsuarioMapper{
         if( $busqueda > 0) {
             return true;
         }
+    }
+
+      /* Guardamos un Usuario en la BD*/
+    public static function guardarUsuario($user){  
+      global $connect;
+      $resultado = false;
+      
+        
+     $sqlcrear= "INSERT INTO usuario (nomUsuario,password,email,tipoUsuario,nombre, apellidos) VALUES ('";
+      $sqlcrear = $sqlcrear.$user->getNomUsuario()."','".md5($user->getPassword())."','".$user->getEmail()."','".$user->getTipoUsuario()."','".$user->getNombre()."','".$user->getApellidos()."')";
+
+        $resultado = mysqli_query($connect, $sqlcrear);
+       
+       return $resultado;
     }
 
     public static function update($nomUsuario,$password,$email, $tipoUsuario, $nombre, $apellidos)

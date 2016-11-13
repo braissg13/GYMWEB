@@ -97,13 +97,7 @@ class Usuario {
 
     /* Guardamos un Usuario en la BD*/
   public static function guardarUsuario($user){  
-
-      $sqlcrear= "INSERT INTO usuario (nomUsuario,password,email,tipoUsuario,nombre, apellidos) VALUES ('";
-      $sqlcrear = $sqlcrear2.$user->getNomUsuario()."','".md5($user->getPassword())."','".$user->getEmail()."','".$user->getTipoUsuario()."','".$user->getNombre()."','".$user->getApellidos()."')";
-
-      mysql_query($sqlcrear2);
-
-      return "Usuario Creado";
+    return UsuarioMapper::guardarUsuario($user);
   }
 
   /*Comprobacion existe Usuario... Si existe usuario devuelve true*/
@@ -126,22 +120,23 @@ class Usuario {
       $error = array();
       if (strlen($nomUsuario) < 3 || strlen($nomUsuario) > 30) {
 	     $error["nomUsuario"] = "El nombre de Usuario debe tener entre 3 y 15 caracteres.";
-	
       }
       if (strlen($password) < 5 || strlen($password) > 15) {
 	     $error["password"] = "La contraseña debe tener entre 5 y 15 caracteres.";	
       }
       if (strlen($email) < 5 || strlen($email) > 50) {
-       $error["password"] = "La contraseña debe tener entre 5 y 15 caracteres.";  
+       $error["email"] = "La contraseña debe tener entre 5 y 50 caracteres.";  
       }
       if (strlen($nombre) < 3 || strlen($nombre) > 20) {
         $error["nombre"] = "El Nombre debe tener entre 3 y 20 caracteres.";  
       }
       if (strlen($apellidos) < 3 || strlen($apellidos) > 40) {
-        $error["password"] = "EL apellido debe tener entre 3 y 50 caracteres.";  
+        $error["apellidos"] = "EL apellido debe tener entre 3 y 40 caracteres.";  
       }
       if (sizeof($error)>0){
-	     throw new Exception("No se puede resgistrar el Usuario.");
+	     echo "No se puede resgistrar el Usuario por los siguientes motivos: ";
+       print_r(array_values($error));
+
       }
       if (sizeof($error)==0){
        return true;
@@ -151,7 +146,7 @@ class Usuario {
 
   public static function update($nomUsuario,$password,$email, $tipoUsuario, $nombre, $apellidos)
   {
-      UserMapper::update($nomUsuario,$password,$email, $tipoUsuario, $nombre, $apellidos);
+      UsuarioMapper::update($nomUsuario,$password,$email, $tipoUsuario, $nombre, $apellidos);
   } 
 
 
