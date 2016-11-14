@@ -119,7 +119,7 @@ class Usuario {
  public static function registroValido($nomUsuario,$password,$email,$nombre, $apellidos){
       $error = array();
       if (strlen($nomUsuario) < 3 || strlen($nomUsuario) > 30) {
-	     $error["nomUsuario"] = "El nombre de Usuario debe tener entre 3 y 15 caracteres.";
+	     $error["nomUsuario"] = "El nombre de Usuario debe tener entre 3 y 30 caracteres.";
       }
       if (strlen($password) < 5 || strlen($password) > 15) {
 	     $error["password"] = "La contraseña debe tener entre 5 y 15 caracteres.";	
