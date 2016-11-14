@@ -92,7 +92,7 @@ class Usuario {
   /*Obtener Usuario por nombreUsuario*/
   public static function getByUserName($nomUsuario)
     {
-        return $resultado = UserMapper::findByUserName($nomUsuario);
+        return $resultado = UsuarioMapper::findByUserName($nomUsuario);
     }
 
     /* Guardamos un Usuario en la BD*/
