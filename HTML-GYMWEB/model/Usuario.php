@@ -113,7 +113,6 @@ class Usuario {
         }
   }
 
- 
 
   /*Comprobamos si se puede registrar el Usuario. Si se puede retornamos un TRUE*/  
  public static function registroValido($nomUsuario,$password,$email,$nombre, $apellidos){
@@ -125,7 +124,7 @@ class Usuario {
 	     $error["password"] = "La contraseña debe tener entre 5 y 15 caracteres.";	
       }
       if (strlen($email) < 5 || strlen($email) > 50) {
-       $error["email"] = "La contraseña debe tener entre 5 y 50 caracteres.";  
+       $error["email"] = "El email debe tener entre 5 y 50 caracteres.";  
       }
       if (strlen($nombre) < 3 || strlen($nombre) > 20) {
         $error["nombre"] = "El Nombre debe tener entre 3 y 20 caracteres.";  
