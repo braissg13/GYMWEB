@@ -100,7 +100,7 @@ class Usuario {
     return UsuarioMapper::guardarUsuario($user);
   }
 
-  /*Comprobacion existe Usuario... Si existe usuario devuelve true*/
+  /*Comprobacion existe Usuario... Si existe usuario devuelve un Objeto Usuario*/
   public static function obtenerDatos($nomUsuario, $password) {
     if ($nomUsuario && $password) {
         if ($res = UsuarioMapper::esValidoUsuario($nomUsuario, $password)) {
