@@ -73,7 +73,7 @@
                 ob_start();
                 if ($_SESSION['usuario']->getTipoUsuario()=="Administrador") {
                   header("refresh: 3; url = ../views/Admin/gestionActividades.php");
-                }}
+                }
 
                 $errors = array();
                 $errors["general"] = "ERROR. Formato de imagen no válido.";
