@@ -1,5 +1,5 @@
 <?php
-include_once("/../conexion/bdConexion.php");
+include_once __DIR__."/../conexion/bdConexion.php";
 
 class UsuarioMapper{
 

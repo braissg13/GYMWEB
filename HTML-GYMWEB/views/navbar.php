@@ -27,8 +27,8 @@
 	       		if($tipo == 'Entrenador'){ ?>
 	        <li><a id="Item1" href="#">Principal</a></li>
 	        <li><a id="Item2" href="#">Mis Actividades</a></li>
-	        <li><a id="Item3" href="gestionEjercicios.html">Gesti&oacuten de Ejercicios</a></li>
-	        <li><a id="Item4" href="#">Gesti&oacuten de Tablas de Ejercicios</a></li>
+	        <li><a id="Item3" href="gestionEjercicios.php">Gesti&oacuten de Ejercicios</a></li>
+	        <li><a id="Item4" href="gestionTablas.php">Gesti&oacuten de Tablas de Ejercicios</a></li>
 	       		<?php }else if($tipo == 'DeportistaPEF' || $tipo == 'DeportistaTDU'){ ?> 
 	       	<li><a id="Item1" href="plantilla-por-defecto.php">Principal</a></li>
 	        <li><a id="Item2" href="#">Mis Actividades</a></li>

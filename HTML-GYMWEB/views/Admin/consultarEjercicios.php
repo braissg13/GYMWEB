@@ -1,6 +1,6 @@
 <?php
- include_once "/../../model/model.php";
-	include_once "/../../controller/defaultController.php";
+ include_once __DIR__."/../../model/model.php";
+	include_once __DIR__."/../../controller/defaultController.php";
 
 	if(!isset($_SESSION)) session_start();
  		$user=$_SESSION["usuario"];

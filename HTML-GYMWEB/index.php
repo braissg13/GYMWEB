@@ -1,5 +1,5 @@
 <?php
-include_once "controller/defaultController.php";
+include_once __DIR__."/controller/defaultController.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">

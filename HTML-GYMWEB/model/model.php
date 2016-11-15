@@ -1,8 +1,8 @@
 <?php
 //Inclimos todos los modelos
 
-include_once "/Usuario.php";
-include_once "/UsuarioMapper.php";
-include_once "/Ejercicio.php";
-include_once "/EjercicioMapper.php";
+include_once __DIR__."/../model/Usuario.php";
+include_once __DIR__."/../model/UsuarioMapper.php";
+include_once __DIR__."/../model/Ejercicio.php";
+include_once __DIR__."/../model/EjercicioMapper.php";
 ?>
