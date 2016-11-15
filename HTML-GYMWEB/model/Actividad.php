@@ -124,7 +124,7 @@ class Actividad {
       }
       if (strlen($totalPlazas) < 1 || strlen($totalPlazas) > 2) {
        $error["totalPlazas"] = "El numero total de plazas de la Actividad debe tener entre 1 y 2 digitos.";
-
+      }
       if (strlen($descripAct) < 5 || strlen($descripAct) > 300) {
 	     $error["descripAct"] = "La descripcion de la Actividad debe tener entre 5 y 300 caracteres.";
       }
