@@ -9,7 +9,7 @@ $con = mysql_connect(DB_SERVER,DB_USER,DB_PASS);
 mysql_select_db(DB_NAME,$con);
 }
 */
-$connect = mysqli_connect("127.0.0.1", "root", "ziralla09", "gymweb");
+$connect = mysqli_connect("127.0.0.1", "usergymweb", "ziralla09", "gymweb");
 if (mysqli_connect_errno())
 {
 	unset($connect);
