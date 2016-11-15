@@ -15,10 +15,19 @@
           if(!isset($_SESSION)) session_start();
 
           if($_SESSION['usuario']->getTipoUsuario()=="Administrador" ){
-            $nombre = $_POST['nomAct'];
-            $plazas = $_POST['numPl'];
-            $fecha= $_POST['dateAct'];
-            $descrip = $_POST['descAct'];
+
+						if (isset($_REQUEST['nomAct'])) { $nombre = $_REQUEST['nomAct']; }
+						else { $nombre = ""; }
+
+						if (isset($_REQUEST['numPl'])) { $plazas = $_REQUEST['numPl']; }
+						else { $plazas = ""; }
+
+						if (isset($_REQUEST['dateAct'])) { $fecha = $_REQUEST['dateAct']; }
+						else { $fecha = ""; }
+
+						if (isset($_REQUEST['descAct'])) { $descrip = $_REQUEST['descAct']; }
+						else { $descrip = ""; }
+					
             $idAct = "NULL";
 
             //Comprobamos el tipo de la Imagen, SI es correcto, obtenemos los datos de la ruta y de la imagen

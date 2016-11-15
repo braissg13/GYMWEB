@@ -38,7 +38,7 @@ if(!isset($_SESSION)) session_start();
 
   		 <!-- DIV FORMULARIO -->
 		 <div id="container-actividades" style="background:#0275d8; border: solid;border-radius:5px; border-color: black;">
-		 	<form action="../../controller/defaultController.php?controlador=actividad&accion=crearActividad" method="post" style="margin:10px;">
+		 	<form action="../../controller/defaultController.php?controlador=actividad&accion=crearActividad" method="post" style="margin:10px;" enctype="multipart/form-data">
 		 		<!-- COMIENZO ROW-->
 		 		<div class="row">
 
