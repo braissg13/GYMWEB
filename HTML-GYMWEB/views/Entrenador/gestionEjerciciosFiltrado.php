@@ -2,10 +2,9 @@
 include_once "/../../model/model.php";
 include_once "/../../controller/defaultController.php";
 
-
 if(!isset($_SESSION)) session_start();
  $user=$_SESSION["usuario"];
- if ($_SESSION["usuario"]->getTipoUsuario() =='Administrador'){
+ if ($_SESSION["usuario"]->getTipoUsuario() =='Entrenador'){
 
   $row = EjercicioController::getAll();
 
@@ -59,11 +58,11 @@ if(!isset($_SESSION)) session_start();
     	 </div>
 
     	 <div class="btn-group col-xs-6 col-sm-3 col-md-3 col-lg-3" role="group" style="margin-top: 10px;">
-    		<a href="gestionEjercicios.php" style="text-decoration: none;"><button type="button" class="btn btn-default2" id="botonEliminar">Eliminar Ejercicio</button></a>
+    		<?php echo "<a href=\"gestionEjerciciosFiltrado.php?filtrado=$filtro\" style=\"text-decoration: none;\"><button type=\"button\" class=\"btn btn-default2\" id=\"botonEliminar\">Eliminar Ejercicio</button></a>"; ?>
     	 </div>
 
     	 <div class="btn-group col-xs-6 col-sm-3 col-md-3 col-lg-3" role="group" style="margin-top: 10px;">
-    		<a href="gestionEjercicios.php" style="text-decoration: none;"><button type="button" class="btn btn-default3" id="botonModificar">Modificar Ejercicio</button></a>
+    		<?php echo "<a href=\"gestionEjerciciosFiltrado.php?filtrado=$filtro\" style=\"text-decoration: none;\"><button type=\"button\" class=\"btn btn-default3\" id=\"botonModificar\">Modificar Ejercicio</button></a>";?>
     	 </div>
 
   		 </div><!-- FIN BOTONES -->
@@ -73,18 +72,10 @@ if(!isset($_SESSION)) session_start();
 
 			<div class="row" style="margin-top: 20px;">
           <?php 
-            while($ejercicio = mysqli_fetch_row($row)) {
-              if ($filtro == $ejercicio[3]) {
-            //En este while tenemos
-            //$ejercicio[0] es el Id Ejercicio
-            //$ejercicio[1] es el Nombre Ejercicio
-            //$ejercicio[2] es el Descripcion Ejercicio
-            //$ejercicio[3] es el tipo Ejercicio
-            //$ejercicio[4] es al repeticion Ejercicio
-            //$ejercicio[5] es la carga Ejercicio
-            //$ejercicio[6] es la Imagen Ejercicio
+           foreach ($row as $ejercicio) {
+              if ($filtro == $ejercicio['tipoEjerc']) {
           ?>
-  				<div class="col-xs-6 col-sm-4 col-md-4 col-lg-4"><a href="consultarEjercicios.php?id=<?php echo $ejercicio[0] ?>"><?php echo "<img alt=\"Imagen\" src=\""."../../img/ejercicios/".$ejercicio[6]."\" style=\"max-width: 100%;\">";?></a></div>
+  				<div class="col-xs-6 col-sm-4 col-md-4 col-lg-4"><a href="consultarEjercicios.php?id=<?php echo $ejercicio['idEjercicio']; ?>"><?php echo "<img alt=\"Imagen\" src=\""."../../img/ejercicios/".$ejercicio['imagen']."\" style=\"max-width: 100%;\">";?></a></div>
           <?php
               }
             }
@@ -117,8 +108,8 @@ if(!isset($_SESSION)) session_start();
          if (($_SESSION["usuario"]->getTipoUsuario()=='DeportistaPEF') || ($_SESSION["usuario"]->getTipoUsuario()=='DeportistaTDU')){
             header("refresh: 1; url = ../Deportista/plantilla-por-defecto.php");  
           }else{
-             if($_SESSION["usuario"]->getTipoUsuario()=='Entrenador'){
-                  header("Location: ../Entrenador/gestionEjercicios.php");  
+             if($_SESSION["usuario"]->getTipoUsuario()=='Administrador'){
+                  header("Location: ../Admin/gestionEjercicios.php");  
              }else{
                 header("Location: = /../index.php"); 
              }
