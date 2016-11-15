@@ -80,14 +80,14 @@
                 echo $errors["general"];
                 ob_end_flush();
               }
-            }else{
+          /*  }else{
               ob_start();
                 header("refresh: 3; url = ../views/Deportista/principal.php");
               $errors = array();
               $errors["general"] = "No tiene permiso para crear una Actividad";
               echo $errors["general"];
               ob_end_flush();
-            }
+            }*/
           } //FIN CREAR ACTIVIDAD
 
           public static function getActividad($idActividad){
