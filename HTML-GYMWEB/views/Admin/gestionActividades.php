@@ -61,25 +61,10 @@ if(!isset($_SESSION)) session_start();
               <td>1</td>
               <td><a href="consultarActividades.php" style="text-decoration: none;">Zumba</a></td>
               <td>15/11/2016 18:00</td>
-              <td><a href="consultarActividades.php" style="text-decoration: none;"><button type="button" class="btn btn-default2" id="botonEliminar">Eliminar Actividad</button></a></td>
               <td><a href="modificarActividad.php" style="text-decoration: none;"><button type="button" class="btn btn-default3" id="botonModificar">Modificar Actividad</button></a></td>
+                <td><a href="consultarActividades.php" style="text-decoration: none;"><button type="button" class="btn btn-default2" id="botonEliminar">Eliminar Actividad</button></a></td>
             </tr>
 
-            <tr>
-              <td>2</td>
-              <td><a href="#" style="text-decoration: none;">Aerobic</a></td>
-              <td>15/11/2016 20:00</td>
-              <td><a href="#" style="text-decoration: none;"><button type="button" class="btn btn-default2" id="botonEliminar">Eliminar Actividad</button></a></td>
-              <td><a href="#" style="text-decoration: none;"><button type="button" class="btn btn-default3" id="botonModificar">Modificar Actividad</button></a></td>
-            </tr>
-
-            <tr>
-              <td>3</td>
-              <td><a href="#" style="text-decoration: none;">Spinning</a></td>
-              <td>17/11/2016 18:00</td>
-              <td><a href="#" style="text-decoration: none;"><button type="button" class="btn btn-default2" id="botonEliminar">Eliminar Actividad</button></a></td>
-              <td><a href="#" style="text-decoration: none;"><button type="button" class="btn btn-default3" id="botonModificar">Modificar Actividad</button></a></td>
-            </tr>
 
           </tbody>
 

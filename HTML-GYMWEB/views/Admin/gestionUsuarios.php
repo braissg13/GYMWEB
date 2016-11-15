@@ -65,33 +65,10 @@ if(!isset($_SESSION)) session_start();
               <td>1</td>
               <td><a href="consultarUsuarios.php" style="text-decoration: none;">Admin</a></td>
               <td>Administrador</td>
-              <td><a href="consultarUsuarios.php" style="text-decoration: none;"><button type="button" class="btn btn-default2" id="botonEliminar">Eliminar Usuario</button></a></td>
               <td><a href="modificarUsuario.php" style="text-decoration: none;"><button type="button" class="btn btn-default3" id="botonModificar">Modificar Usuario</button></a></td>
+              <td><a href="consultarUsuarios.php" style="text-decoration: none;"><button type="button" class="btn btn-default2" id="botonEliminar">Eliminar Usuario</button></a></td>
             </tr>
 
-            <tr>
-              <td>2</td>
-              <td><a href="#" style="text-decoration: none;">drSelles</a></td>
-              <td>Entrenador</td>
-              <td><a href="#" style="text-decoration: none;"><button type="button" class="btn btn-default2" id="botonEliminar">Eliminar Usuario</button></a></td>
-              <td><a href="#" style="text-decoration: none;"><button type="button" class="btn btn-default3" id="botonModificar">Modificar Usuario</button></a></td>
-            </tr>
-
-            <tr>
-              <td>3</td>
-              <td><a href="#" style="text-decoration: none;">anafg</a></td>
-              <td>DeportistaPEF</td>
-              <td><a href="#" style="text-decoration: none;"><button type="button" class="btn btn-default2" id="botonEliminar">Eliminar Usuario</button></a></td>
-              <td><a href="#" style="text-decoration: none;"><button type="button" class="btn btn-default3" id="botonModificar">Modificar Usuario</button></a></td>
-            </tr>
-
-            <tr>
-              <td>4</td>
-              <td><a href="#" style="text-decoration: none;">xosegg</a></td>
-              <td>DeportistaTDU</td>
-              <td><a href="#" style="text-decoration: none;"><button type="button" class="btn btn-default2" id="botonEliminar">Eliminar Usuario</button></a></td>
-              <td><a href="#" style="text-decoration: none;"><button type="button" class="btn btn-default3" id="botonModificar">Modificar Usuario</button></a></td>
-            </tr>
 
           </tbody>
 
