@@ -3,7 +3,7 @@
 	class ActividadController{
 
 
-    		/*Obtenemos todos los EJERCICIOS*/
+    		/*Obtenemos todos las ACTIVIDADES*/
     		public static function getAll(){
     			if(!isset($_SESSION)) session_start();
     			$actividades = new Actividad();
