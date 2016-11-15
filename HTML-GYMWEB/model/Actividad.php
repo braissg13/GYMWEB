@@ -61,7 +61,7 @@ class Actividad {
     return $this->descripAct;
   }
 
-  public function setDescActividad($descAct) {
+  public function setDescripActividad($descAct) {
     $this->descAct = $descripAct;
   }
 
