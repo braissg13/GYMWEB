@@ -8,25 +8,28 @@ class Actividad {
 
   protected $idActividad;
 
-  protected $nomAct;
+  protected $nomActividad;
 
-  protected $numPl;
+  protected $totalPlazas;
 
-  protected $dateAct;
+  protected $descripAct;
 
-  protected $descAct;
+  protected $fecha;
+
+  protected $plazasOcupadas
 
   protected $imagen;
 
   /*
     Constructor de la Actividad
   */
-  public function __construct($idActividad=NULL,$nomAct=NULL, $numPl=NULL, $dateAct=NULL, $descAct=NULL, $imagen=NULL) {
+  public function __construct($idActividad=NULL,$nomActividad=NULL, $totalPlazas=NULL, $descripAct=NULL, $fecha=NULL,$plazasOcupadas=NULL, $imagen=NULL) {
     $this->idActividad = $idActividad;
-    $this->nomAct = $nomAct;
-    $this->numPl = $numPl;
-    $this->dateAct = $dateAct;
-    $this->descAct = $descAct;
+    $this->nomActividad = $nomActividad;
+    $this->totalPlazas = $totalPlazas;
+    $this->descripAct = $descripAct;
+    $this->fecha = $fecha;
+    $this->plazasOcupadas = $plazasOcupadas;
     $this->imagen = $imagen;
   }
 
@@ -39,35 +42,44 @@ class Actividad {
   }
 
   public function getNomActividad() {
-    return $this->nomAct;
+    return $this->nomActividad;
   }
 
-  public function setNomActividad($nomAct) {
-    $this->nomAct = $nomAct;
+  public function setNomActividad($nomActividad) {
+    $this->nomAct = $nomActividad;
   }
 
-  public function getDescActividad() {
-    return $this->descActividad;
+  public function getTotalPlazas() {
+    return $this->totalPlazas;
+  }
+
+  public function setTotalPlazas($totalPlazas) {
+    $this->numPl = $totalPlazas;
+  }
+
+  public function getDescripActividad() {
+    return $this->descripAct;
   }
 
   public function setDescActividad($descAct) {
-    $this->descAct = $descAct;
+    $this->descAct = $descripAct;
   }
 
-  public function getnumPlazas() {
-    return $this->numPl;
-  }
-
-  public function setNumPlazas($numPl) {
-    $this->numPl = $numPl;
-  }
 
   public function getFecha() {
-    return $this->dateAct;
+    return $this->fecha;
   }
 
-  public function setFecha($dateAct) {
-    $this->dateAct = $dateAct;
+  public function setFecha($fecha) {
+    $this->dateAct = $fecha;
+  }
+
+  public function getPlazasOcupadas() {
+    return $this->plazasOcupadas;
+  }
+
+  public function setPlazasOcupadas($plazasOcupadas) {
+    $this->dateAct = $plazasOcupadas;
   }
 
   public function getImagenActividad() {
@@ -105,16 +117,19 @@ class Actividad {
 
 
   /*Comprobamos si se puede registrar la Actividad. Si se puede retornamos un TRUE*/
- public static function registroValido($nomAct,$numPl,$dateAct,$descAct){
+ public static function registroValido($nomActividad,$totalPlazas,$descripAct,  $plazasOcupadas){
       $error = array();
-      if (strlen($nomAct) < 3 || strlen($nomAct) > 30) {
-	     $error["nomAct"] = "El nombre de la Actividad debe tener entre 3 y 30 caracteres.";
+      if (strlen($nomActividad) < 3 || strlen($nomActividad) > 30) {
+	     $error["nomActividad"] = "El nombre de la Actividad debe tener entre 3 y 30 caracteres.";
       }
-      if (strlen($descAct) < 5 || strlen($descAct) > 500) {
-	     $error["descAct"] = "La descripcion de la Actividad debe tener entre 5 y 300 caracteres.";
+      if (strlen($totalPlazas) < 1 || strlen($totalPlazas) > 2) {
+       $error["totalPlazas"] = "El numero total de plazas de la Actividad debe tener entre 1 y 2 digitos.";
+
+      if (strlen($descripAct) < 5 || strlen($descripAct) > 300) {
+	     $error["descripAct"] = "La descripcion de la Actividad debe tener entre 5 y 300 caracteres.";
       }
-      if (strlen($numPl) < 1 || strlen($numPl) > 15) {
-       $error["numPl"] = "El numero de plazas de la Actividad debe tener entre 1 y 2 digitos.";  
+      if (strlen($plazasOcupadas) < 1 || strlen($plazasOcupadas) > 2) {
+       $error["numPl"] = "El numero de plazas ocupadas de la Actividad debe tener entre 1 y 2 digitos.";
       }
       if (sizeof($error)>0){
 	     echo "No se puede resgistrar la Actividad por los siguientes motivos: ";
@@ -127,8 +142,8 @@ class Actividad {
 
   }
 
-  public static function update($idActividad,$nomAct,$numPl,$dateAct, $descAct, $imagen){
-      ActividadMapper::update($idActividad,$nomAct,$numPl,$dateAct, $descAct, $imagen);
+  public static function update($idActividad, $nomActividad,$totalPlazas,$descripAct,$fecha, $plazasOcupadas, $imagen){
+      ActividadMapper::update($idActividad, $nomActividad,$totalPlazas,$descripAct,$fecha, $plazasOcupadas, $imagen);
   }
 
   public static function delete($idActividad){
