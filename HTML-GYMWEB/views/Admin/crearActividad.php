@@ -38,7 +38,7 @@ if(!isset($_SESSION)) session_start();
 
   		 <!-- DIV FORMULARIO -->
 		 <div id="container-actividades" style="background:#0275d8; border: solid;border-radius:5px; border-color: black;">
-		 	<form action="#" method="post" style="margin:10px;">
+		 	<form action="../../controller/defaultController.php?controlador=actividad&accion=crearActividad" method="post" style="margin:10px;">
 		 		<!-- COMIENZO ROW-->
 		 		<div class="row">
 
@@ -93,17 +93,17 @@ if(!isset($_SESSION)) session_start();
 <?php
   /*Dependiendo que tipo de Usuario intente entrar donde no debe lo mandamosa su pagina principal.*/
   }else{
-        ob_start(); 
+        ob_start();
          if (($_SESSION["usuario"]->getTipoUsuario()=='DeportistaPEF') || ($_SESSION["usuario"]->getTipoUsuario()=='DeportistaTDU')){
-            header("refresh: 1; url = ../Deportista/plantilla-por-defecto.php");  
+            header("refresh: 1; url = ../Deportista/plantilla-por-defecto.php");
           }else{
              if($_SESSION["usuario"]->getTipoUsuario()=='Entrenador'){
-                  header("Location: ../Entrenador/gestionEjercicios.php");  
+                  header("Location: ../Entrenador/gestionEjercicios.php");
              }else{
-                header("Location: = /../index.php"); 
+                header("Location: = /../index.php");
              }
           }
-          
-        ob_end_flush();  
+
+        ob_end_flush();
   }
 ?>
