@@ -36,23 +36,23 @@ if(!isset($_SESSION)) session_start();
 
   		 <!-- DIV FORMULARIO -->
 		 <div id="container-ejercicios" style="background:#0275d8; border: solid;border-radius:5px; border-color: black;">
-		 		<form action="#" method="post" style="margin:10px;">
+		 		<form action="../../controller/defaultController.php?controlador=ejercicio&accion=crearEjercicio" method="POST" style="margin:10px;" enctype="multipart/form-data">
 		 		<!-- COMIENZO ROW-->	
 		 		<div class="row">	
 		 			<!-- DIV NOMBRE EJER -->
 					<div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-4">
 					    <label for="nomEjer">Nombre Ejercicio: </label>
-					    <input type="text" class="form-control" id="NomEjercicio" name="NomEjercicio" maxlength="30" placeholder="Nombre ejercicio">
+					    <input type="text" class="form-control" name="NomEjercicio" maxlength="30" placeholder="Nombre ejercicio" required="">
 					</div>
 					<!-- DIV DESCRIP EJER -->
 					<div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-8">
 					    <label for="descEjer">Descripci&oacuten Ejercicio: </label>
-					    <textarea class="form-control" name="DescripEjerc" rows="4" maxlength="500"></textarea>
+					    <textarea class="form-control" name="DescripEjerc" required="" rows="4" maxlength="500"></textarea>
 					</div>
 					<!-- DIV TIPO EJER -->
                    	<div class="form-group">
                         <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
-                            <select class="form-control" id="TipoEjerc" name="TipoEjerc">
+                            <select class="form-control" name="TipoEjerc">
                             	<option value="Brazos">Brazos</option>
 							    <option value="Espalda">Espalda</option>
 							    <option value="Pecho">Pecho</option>
@@ -63,17 +63,17 @@ if(!isset($_SESSION)) session_start();
 					<!-- DIV REPETICIONES -->
 					<div class="form-group col-xs-12 col-sm-4 col-md-4 col-lg-4">
 					    <label for="Repeticiones">Repeticiones: </label>
-					    <input type="text" class="form-control" id="Repeticiones" name="Repeticiones" maxlength="15" placeholder="xx-xx-xx-xx">
+					    <input type="text" class="form-control" required="" name="Repeticiones" maxlength="15" placeholder="xx-xx-xx-xx">
 					</div>
 					<!-- DIV CARGA -->
 					<div class="form-group col-xs-12 col-sm-4 col-md-4 col-lg-4">
 					    <label for="Carga">Peso: </label>
-					    <input type="number" min="0" class="form-control" name="carga" id="carga">
+					    <input type="number" min="0" class="form-control" name="carga">
 					</div>
 					<!-- DIV IMAGEN-->
 					<div class="form-group col-xs-12 col-sm-4 col-md-4 col-lg-4" style="margin-top:30px;">
 					    <label for="imgEjer">Subir Imagen: </label>
-					    <input type="file" id="imagen" name="imagen">
+					    <input type="file" required="" name="imagen">
 					</div>
 
 					  

@@ -143,9 +143,9 @@ class Usuario {
       
   }
 
-  public static function update($nomUsuario,$password,$email, $tipoUsuario, $nombre, $apellidos)
+  public static function update($idUsuario,$nomUsuario,$password,$email, $tipoUsuario, $nombre, $apellidos)
   {
-      UsuarioMapper::update($nomUsuario,$password,$email, $tipoUsuario, $nombre, $apellidos);
+      UsuarioMapper::update($idUsuario,$nomUsuario,$password,$email, $tipoUsuario, $nombre, $apellidos);
   } 
 
 

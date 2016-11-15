@@ -54,7 +54,7 @@ class UsuarioMapper{
        return $resultado;
     }
 
-    public static function update($nomUsuario,$password,$email, $tipoUsuario, $nombre, $apellidos)
+    public static function update($idUsuario,$nomUsuario,$password,$email, $tipoUsuario, $nombre, $apellidos)
     {
         global $connect;
         

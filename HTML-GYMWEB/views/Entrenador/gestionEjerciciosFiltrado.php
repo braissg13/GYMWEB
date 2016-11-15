@@ -9,6 +9,7 @@ if(!isset($_SESSION)) session_start();
 
   $row = EjercicioController::getAll();
 
+  $filtro = $_GET['filtrado'];
 ?>
 
 <!DOCTYPE html>
@@ -47,9 +48,9 @@ if(!isset($_SESSION)) session_start();
     			<li class="dropdown-header">Mostrar Ejercicios de:</li>
       			<li><a href="gestionEjercicios.php">Todos</a></li>
             <li><a href="gestionEjerciciosFiltrado.php?filtrado=Brazos">Brazos</a></li>
-            <li><a href="gestionEjerciciosFiltrado.php?filtrado=Espalda">Espalda</a></li>
-            <li><a href="gestionEjerciciosFiltrado.php?filtrado=Pecho">Pecho</a></li>
-            <li><a href="gestionEjerciciosFiltrado.php?filtrado=Piernas">Piernas</a></li>
+      			<li><a href="gestionEjerciciosFiltrado.php?filtrado=Espalda">Espalda</a></li>
+      			<li><a href="gestionEjerciciosFiltrado.php?filtrado=Pecho">Pecho</a></li>
+      			<li><a href="gestionEjerciciosFiltrado.php?filtrado=Piernas">Piernas</a></li>
     		</ul>
   		 </div>
 
@@ -73,6 +74,7 @@ if(!isset($_SESSION)) session_start();
 			<div class="row" style="margin-top: 20px;">
           <?php 
             while($ejercicio = mysqli_fetch_row($row)) {
+              if ($filtro == $ejercicio[3]) {
             //En este while tenemos
             //$ejercicio[0] es el Id Ejercicio
             //$ejercicio[1] es el Nombre Ejercicio
@@ -82,8 +84,9 @@ if(!isset($_SESSION)) session_start();
             //$ejercicio[5] es la carga Ejercicio
             //$ejercicio[6] es la Imagen Ejercicio
           ?>
-  				<div class="col-xs-6 col-sm-4 col-md-4 col-lg-4"><a href="consultarEjercicios.php?id=<?php echo $ejercicio[0]; ?>"><?php echo "<img alt=\"Imagen\" src=\""."../../img/ejercicios/".$ejercicio[6]."\" style=\"max-width: 100%;\">";?></a></div>
+  				<div class="col-xs-6 col-sm-4 col-md-4 col-lg-4"><a href="consultarEjercicios.php?id=<?php echo $ejercicio[0] ?>"><?php echo "<img alt=\"Imagen\" src=\""."../../img/ejercicios/".$ejercicio[6]."\" style=\"max-width: 100%;\">";?></a></div>
           <?php
+              }
             }
           ?>
 

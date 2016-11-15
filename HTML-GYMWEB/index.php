@@ -1,3 +1,6 @@
+<?php
+include_once "controller/defaultController.php";
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -7,6 +10,7 @@
 
     <!-- Bootstrap -->
     <link href="css/navbar.css" rel="stylesheet">
+    <link href="css/index.css" rel="stylesheet">
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -45,18 +49,17 @@
 	      </form>
 	      <ul class="nav navbar-nav navbar-right">
 
-	      <form class="navbar-form navbar-left">
+	      <form class="navbar-form navbar-left" action="controller/defaultController.php?controlador=usuario&accion=login" method="POST" class="text-left">
 	      <!-- COMIENZO MODAL -->
-	      	<!--<div class="form-group">
+	      	<div class="form-group">
 	      		<button id="botonLogin" type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">Login</button>
 	      		<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
   					<div class="modal-dialog modal-sm" role="document">
     					<div class="modal-content" id="modalLogin">
     					<!-- COMIENZO FOMRULARIO LOGIN -->
-      						<!--<div class="text-center" style="padding:50px 0">
+      						<div class="text-center" style="padding:50px 0">
 								<div class="logo"><img alt="Login" id="imagenLogin" src="img/navBar/login.png"></div>
 								<div class="login-form-1">
-								<form id="login-form" action="log.php" method="POST" class="text-left">
 										<div class="login-form-main-message"></div>
 										<div class="main-login-form">
 											<div class="login-group">
@@ -72,14 +75,14 @@
 											</div>
 											<button type="submit" class="btn btn-default" style="background-color: #7CFC00; border-color: black;">Acceder</button>
 										</div>
-									</form>->>
+									
 								</div>
 							</div>
 							<!-- FIN LOGIN -->
-    					<!--</div>
+    					</div>
   					</div>
 	      		</div>
-	      	</div> -->
+	      	</div> 
 	      	<!-- FIN MODAL -->
 	      </form>
 	      
@@ -92,24 +95,6 @@
 
   	<div class="container">
 
-
-  		<form id="login-form" action="controller/defaultController.php?controlador=usuario&accion=login" method="POST" class="text-left">
-										<div class="login-form-main-message"></div>
-										<div class="main-login-form">
-											<div class="login-group">
-												<div class="form-group" style="margin-bottom: 5%;">
-													<label for="lg_username">Usuario</label>
-													<input type="text" class="form-control" style="border-color: black;" name="username" placeholder="user">
-												</div>
-
-												<div class="form-group" style="margin-bottom: 5%;">
-													<label for="lg_password">Contraseña</label>
-													<input type="password" class="form-control" style="border-color: black;" name="password" placeholder="pass">
-												</div>
-											</div>
-											<input value="Acceder" type="submit" class="btn btn-default" style="background-color: #7CFC00; border-color: black;">
-										</div>
-									</form>
 		 <!-- COMIENZO DEL CAROUSEL -->
 		 <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
 			  <!-- Indicators -->
@@ -197,7 +182,7 @@
 			 <p style="text-align: center;"><b>Estamos en: </b></p>
 			 <p style="text-align: center;"><b>c/ Canella da Costa da Vela</b></p>
 			 <p style="text-align: center;"><b>OURENSE</b></p>
-			 <p style="text-align: center;"><a href="https://www.google.es/maps/place/R%C3%BAa+Canella+da+Costa+da+Vela,+32004+Ourense/@42.342982,-7.8512453,3a,75y,153.77h,83.49t/data=!3m7!1e1!3m5!1sTSb0yUr66FrflZvDV8hZbg!2e0!6s%2F%2Fgeo0.ggpht.com%2Fcbk%3Fpanoid%3DTSb0yUr66FrflZvDV8hZbg%26output%3Dthumbnail%26cb_client%3Dmaps_sv.tactile.gps%26thumb%3D2%26w%3D203%26h%3D100%26yaw%3D231.67125%26pitch%3D0%26thumbfov%3D100!7i13312!8i6656!4m13!1m7!3m6!1s0xd2ffebeb1308689:0x6bd355b5adb75fb9!2sCampus+de+Ourense!3b1!8m2!3d42.3440784!4d-7.8513082!3m4!1s0xd2ffebfc1c5e20f:0x246972c27b1d8d61!8m2!3d42.3422503!4d-7.8515335!6m1!1e1" target="_blank"><img src="img/visitantes/dondeEstamos.png" style="max-width: 100%;" alt="DondeEstamos"></a></p>
+			 <p style="text-align: center;"><a href="https://www.google.es/maps/place/R%C3%BAa+Canella+da+Costa+da+Vela,+32004+Ourense/@42.3429742,-7.8512489,15z/data=!4m13!1m7!3m6!1s0xd2ffebeb1308689:0x6bd355b5adb75fb9!2sCampus+de+Ourense!3b1!8m2!3d42.3440784!4d-7.8513082!3m4!1s0xd2ffebfc1c5e20f:0x246972c27b1d8d61!8m2!3d42.3422503!4d-7.8515335" target="_blank"><img src="img/visitantes/dondeEstamos.png" style="max-width: 100%;" alt="DondeEstamos"></a></p>
 
 		</div>
 

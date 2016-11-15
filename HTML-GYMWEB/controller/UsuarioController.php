@@ -14,7 +14,7 @@ class UsuarioController{
 				//User no existe
 				if ($usuario==NULL) {
 					ob_start(); 
-  					//header("refresh: 5; url = ../index.php"); 
+  					header("refresh: 3; url = ../index.php"); 
 					$errors = array();
 					$errors["general"] = "Nombre de Usuario no valido.";
 					echo $errors["general"]; 

@@ -5,6 +5,10 @@
 	if(!isset($_SESSION)) session_start();
  		$user=$_SESSION["usuario"];
  	if ($_SESSION["usuario"]->getTipoUsuario() =='Administrador'){
+
+    $idEjer = $_GET['id'];
+
+    $ejercicio = EjercicioController::getEjercicio($idEjer);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -33,25 +37,21 @@
 
   	<div class="container">
 		 
-		 <h1>Ejercicio: Aperturas Mancuernas</h1>
+		 <h1>Ejercicio: <?php echo $ejercicio->getNomEjercicio();?></h1>
 
   		 <!-- DIV MUESTRA EJERCICIO -->
 		 <div id="container-ejercicios">
 
 			<div class="row">
-  				<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4" style="border-style: solid;border-color: black;margin-bottom: 20px;"><img alt="AperMancuernas" src="../../img/ejercicios/aperturas-mancuernas.png" style="max-width: 100%;max-height: 100%;"></div>
-  				<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8"><!-- <textarea readonly maxlength="300" rows="20" cols="40">Para comenzar el ejercicio debemos tumbarnos de espalda sobre un banco plano y estrecho para que durante el movimiento no nos moleste en los hombros. Con mancuernas en ambas manos, al inspirar dejaremos que .</textarea> -->
+  				<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4" style="border-style: solid;border-color: black;margin-bottom: 20px;"><img alt="AperMancuernas" src="../../img/ejercicios/<?php echo $ejercicio->getImagenEjercicio(); ?>" style="max-width: 100%;max-height: 100%;"></div>
+  				<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
   					<pre style="background-color: transparent; border-color: black;">
-Para comenzar el ejercicio debemos tumbarnos de espalda sobre un banco plano y estrecho
-para que durante el movimiento no nos moleste en los hombros. Con mancuernas en ambas 
-manos, al inspirar bajaremos los brazos de manera perpendicular al banco, llegando con
-las mancuernas a la altura del pecho. Al espirar subiremos los brazos juntando las 
-mancuernas debiendo quedar enfrentadas arriba del pecho como se observa en la imagen.
+<?php echo $ejercicio->getDescripEjercicio(); ?>
 					</pre>	
 
   				</div>
-  				<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"><p><b>Peso: -</b></p></div>
-  				<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8"><p><b>Repeticiones: 10-10-10-8</b></p></div>
+  				<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"><p><b>Peso (Kg): <?php echo $ejercicio->getCarga(); ?></b></p></div>
+  				<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8"><p><b>Repeticiones: <?php echo $ejercicio->getRepeticiones(); ?></b></p></div>
   				<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
   					<!-- PRINCIPIO MODAL ELMINAR EJERCICIO -->
 		  			<div class="form-group">
@@ -61,11 +61,15 @@ mancuernas debiendo quedar enfrentadas arriba del pecho como se observa en la im
 		    					<div class="modal-content" id="modalLogin">
 		      						<div class="text-center" style="padding:50px 0">
 												
-									<h3><b>&iquest Desea eliminar este ejercicio?</b></h3>				
-									<button type="submit" class="btn btn-default2">
-										 <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-									</button>
-									<a href="gestionEjercicios.php"><button type="button" class="btn btn-default3">Atr&aacutes</button></a>			
+									<h3><b>&iquest Desea eliminar este ejercicio?</b></h3>
+                  <form action="../../controller/defaultController.php?controlador=ejercicio&accion=borrarEjercicio" method="POST">
+                      <input type="hidden" name="idEjercicio" value="<?php echo $ejercicio->getIdEjercicio();?>">
+                      <input type="hidden" name="NomEjercicio" value="<?php echo $ejercicio->getNomEjercicio();?>">
+									   <button type="submit" class="btn btn-default2">
+										  <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+									   </button>
+                  
+									<a href="gestionEjercicios.php"><button type="button" class="btn btn-default3">Atr&aacutes</button></a></form>	
 								
 									</div> 
 									
@@ -76,7 +80,7 @@ mancuernas debiendo quedar enfrentadas arriba del pecho como se observa en la im
 
   				</div>
   				<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
-			      	<a href="modificarEjercicios.php" style="text-decoration: none;"><button type="button" class="btn btn-default4" id="botonModificar">Modificar</button></a>
+			      	<a href="modificarEjercicios.php?id=<?php echo $idEjer ;?>" style="text-decoration: none;"><button type="button" class="btn btn-default4" id="botonModificar">Modificar</button></a>
 			    </div>
 
           <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
