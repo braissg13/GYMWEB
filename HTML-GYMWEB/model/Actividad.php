@@ -16,21 +16,21 @@ class Actividad {
 
   protected $fecha;
 
-  protected $plazasOcupadas
+  protected $plazasOcupadas;
 
-  protected $imagen;
+  protected $imagenAct;
 
   /*
     Constructor de la Actividad
   */
-  public function __construct($idActividad=NULL,$nomActividad=NULL, $totalPlazas=NULL, $descripAct=NULL, $fecha=NULL,$plazasOcupadas=NULL, $imagen=NULL) {
+  public function __construct($idActividad=NULL,$nomActividad=NULL, $totalPlazas=NULL, $descripAct=NULL, $fecha=NULL,$plazasOcupadas=NULL, $imagenAct=NULL) {
     $this->idActividad = $idActividad;
     $this->nomActividad = $nomActividad;
     $this->totalPlazas = $totalPlazas;
     $this->descripAct = $descripAct;
     $this->fecha = $fecha;
     $this->plazasOcupadas = $plazasOcupadas;
-    $this->imagen = $imagen;
+    $this->imagenAct = $imagenAct;
   }
 
   public function getIdActividad() {
@@ -83,11 +83,11 @@ class Actividad {
   }
 
   public function getImagenActividad() {
-    return $this->imagen;
+    return $this->imagenAct;
   }
 
-  public function setImagenActividad($imagen) {
-    $this->imagen = $imagen;
+  public function setImagenActividad($imagenAct) {
+    $this->imagen = $imagenAct;
   }
 
   /*Obtener todos las Actividades*/
@@ -142,8 +142,8 @@ class Actividad {
 
   }
 
-  public static function update($idActividad, $nomActividad,$totalPlazas,$descripAct,$fecha, $plazasOcupadas, $imagen){
-      ActividadMapper::update($idActividad, $nomActividad,$totalPlazas,$descripAct,$fecha, $plazasOcupadas, $imagen);
+  public static function update($idActividad, $nomActividad, $totalPlazas, $descripAct, $fecha, $plazasOcupadas, $imagenAct){
+      ActividadMapper::update($idActividad, $nomActividad,$totalPlazas,$descripAct,$fecha, $plazasOcupadas, $imagenAct);
   }
 
   public static function delete($idActividad){
