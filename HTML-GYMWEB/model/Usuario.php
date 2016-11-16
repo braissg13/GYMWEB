@@ -1,25 +1,14 @@
 <?php
-
-
 include_once __DIR__."/../conexion/bdConexion.php";
 include_once __DIR__."/../model/UsuarioMapper.php";
-
 class Usuario {
-
   protected $idUsuario;
-
   protected $nomUsuario;
-
   protected $password;
-
   protected $email;
-
   protected $tipoUsuario;
-
   protected $nombre;
-
   protected $apellidos;
-
   /*
     Constructor del usuario
   */
@@ -32,63 +21,48 @@ class Usuario {
     $this->nombre = $nombre;
     $this->apellidos = $apellidos;
   }
-
   public function getIdUsuario() {
     return $this->idUsuario;
   }
-
   public function setIdUsuario($idUsuario) {
     $this->$idUsuario = $idUsuario;
   }
-
   public function getPassword() {
     return $this->password;
   }
-
   public function setPassword($password) {
     $this->password = $password;
   }
-
    public function getNomUsuario() {
     return $this->nomUsuario;
   }
-
   public function setNomUsuario($nomUsuario) {
     $this->nomUsuario = $nomUsuario;
   }
-
   public function getEmail() {
     return $this->email;
   }
-
   public function setEmail($email) {
     $this->email = $email;
   }
-
    public function getTipoUsuario() {
     return $this->tipoUsuario;
   }
-
   public function setTipoUsuario($tipoUsuario) {
     $this->tipoUsuario = $tipoUsuario;
   }
-
   public function getNombre() {
     return $this->nombre;
   }
-
   public function setNombre($nombre) {
     $this->nombre = $nombre;
   }
-
   public function getApellidos() {
     return $this->apellidos;
   }
-
   public function setApellidos($apellidos) {
     $this->apellidos = $apellidos;
   }
-
   /*Obtener todos las Actividades*/
   public static function getAllUsuarios()
     {
@@ -99,13 +73,10 @@ class Usuario {
     {
         return $resultado = UsuarioMapper::findByUserName($nomUsuario);
     }
-
     /* Guardamos un Usuario en la BD*/
   public static function guardarUsuario($user){
     return UsuarioMapper::guardarUsuario($user);
   }
-
-
   /*Comprobacion existe Usuario... Si existe usuario devuelve un Objeto Usuario*/
   public static function obtenerDatos($nomUsuario, $password) {
     if ($nomUsuario && $password) {
@@ -118,28 +89,26 @@ class Usuario {
             return "ERROR, no existe el Ususario";
         }
   }
-  /*Comprobacion existe Usuario...(utilizando usuarioValido(nomUsu)) Si existe usuario devuelve un Objeto Usuario*/
-  public static function devolverDatos($nomUsuario) {
+  /*Comprobacion existe Usuario...(utilizando usuarioValido(idUsuario)) Si existe usuario devuelve un Objeto Usuario*/
+  public static function devolverDatos($idUsuario) {
   /*  if ($nomUsuario) {*/
-        if ($res = UsuarioMapper::usuarioValido($nomUsuario)) {
-                return UsuarioMapper::findByUserName($nomUsuario);
+        if ($res = UsuarioMapper::usuarioValido($idUsuario)) {
+                return UsuarioMapper::findByUserId($idUsuario);
         } else {
-                echo "ERROR: Usuario incorrectos.";
+                echo "ERROR: Usuario incorrecto.";
             }
       /*  } else {
             return "ERROR, no existe el Usuario";
         }*/
   }
-
-
   /*Comprobamos si se puede registrar el Usuario. Si se puede retornamos un TRUE*/
  public static function registroValido($nomUsuario,$password,$email,$nombre, $apellidos){
       $error = array();
       if (strlen($nomUsuario) < 3 || strlen($nomUsuario) > 30) {
-	     $error["nomUsuario"] = "El nombre de Usuario debe tener entre 3 y 30 caracteres.";
+       $error["nomUsuario"] = "El nombre de Usuario debe tener entre 3 y 30 caracteres.";
       }
       if (strlen($password) < 5 || strlen($password) > 15) {
-	     $error["password"] = "La contraseña debe tener entre 5 y 15 caracteres.";
+       $error["password"] = "La contraseña debe tener entre 5 y 15 caracteres.";
       }
       if (strlen($email) < 5 || strlen($email) > 50) {
        $error["email"] = "El email debe tener entre 5 y 50 caracteres.";
@@ -151,21 +120,16 @@ class Usuario {
         $error["apellidos"] = "EL apellido debe tener entre 3 y 40 caracteres.";
       }
       if (sizeof($error)>0){
-	     echo "No se puede resgistrar el Usuario por los siguientes motivos: ";
+       echo "No se puede resgistrar el Usuario por los siguientes motivos: ";
        print_r(array_values($error));
-
       }
       if (sizeof($error)==0){
        return true;
       }
-
   }
-
   public static function update($idUsuario,$nomUsuario,$password,$email, $tipoUsuario, $nombre, $apellidos)
   {
       UsuarioMapper::update($idUsuario,$nomUsuario,$password,$email, $tipoUsuario, $nombre, $apellidos);
   }
-
-
 }
 ?>
