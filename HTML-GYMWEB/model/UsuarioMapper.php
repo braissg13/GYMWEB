@@ -86,14 +86,11 @@ class UsuarioMapper{
     public static function update($idUsuario,$nomUsuario,$password,$email, $tipoUsuario, $nombre, $apellidos)
     {
         global $connect;
-        if(!empty($password)){
-            $password = md5($password);
-        } else {
-            $password = $_SESSION["usuario"]->getPassword();
-        }
-        $idUsuario = $_SESSION['usuario']->getIdUsuario();
+        
+        $password = md5($password);
+        
         $result = mysqli_query($connect, "UPDATE usuario SET nomUsuario=\"$nomUsuario\", password =\"$password\", email =\"$email\", tipoUsuario= \"$tipoUsuario\",nombre=\"$nombre\", apellidos=\"$apellidos\" WHERE idUsuario=\"$idUsuario\"");
-            break;
+        return $result;
     }
 }
 ?>

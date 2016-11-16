@@ -78,16 +78,27 @@ class UsuarioController{
 	if(!isset($_SESSION)) session_start();
 	if($_SESSION['usuario']->getTipoUsuario()=="Administrador"){
 		$idUsu = $_POST['idUsu'];
-		$nomUsuario = $_POST['nomUsu'];
-		$password = $_POST['pass'];
+		$nomUsuario = $_POST['nomUsuario'];
+		$password = $_POST['password'];
 		$nombre = $_POST['nombre'];
-		$apellidos = $_POST['apel'];
+		$apellidos = $_POST['apellidos'];
+		$email = $_POST['email'];
+		$tipoUsuario = $_POST['tipoUsuario'];
 				//Comprobamos si los datosintroducidos son Correctos
-			if(Actividad::registroValido($nombre,$descripcion)){
-				//Lamamos a la funcion que modifica la Actividad
-				Actividad::update($idUsu,$nomUsuario,$password,$nombre,$apellidos);
+			if(Usuario::registroValido($nomUsuario,$password,$email,$nombre,$apellidos)){
+				if(!UsuarioMapper::usuarioValido($nomUsuario)){
+				//Lamamos a la funcion que modifica al Usuario
+				Usuario::update($idUsu,$nomUsuario,$password,$email,$tipoUsuario,$nombre,$apellidos);
 				//Redireccionamos a vista
 				header("Location: ../views/Admin/consultarUsuarios.php?id=$idUsu");
+			    }else{
+			    	ob_start();
+					header("refresh: 3; url = ../views/Admin/modificarUsuario.php?id=$idUsu");
+					$errors = array();
+					$errors["general"] = "ERROR.El nombre de Usuario ya existe.";
+					echo $errors["general"];
+					ob_end_flush();
+			    }
 			}else{
 				ob_start();
 				header("refresh: 3; url = ../views/Admin/modificarUsuario.php?id=$idUsu");
