@@ -5,11 +5,11 @@ include_once __DIR__."/../conexion/bdConexion.php";
 include_once __DIR__."/../model/UsuarioMapper.php";
 
 class Usuario {
- 
+
   protected $idUsuario;
 
   protected $nomUsuario;
- 
+
   protected $password;
 
   protected $email;
@@ -19,7 +19,7 @@ class Usuario {
   protected $nombre;
 
   protected $apellidos;
-  
+
   /*
     Constructor del usuario
   */
@@ -27,12 +27,12 @@ class Usuario {
     $this->idUsuario = $idUsuario;
     $this->nomUsuario = $nomUsuario;
     $this->password = $password;
-    $this->email = $email; 
+    $this->email = $email;
     $this->tipoUsuario = $tipoUsuario;
     $this->nombre = $nombre;
-    $this->apellidos = $apellidos;   
+    $this->apellidos = $apellidos;
   }
-  
+
   public function getIdUsuario() {
     return $this->idUsuario;
   }
@@ -40,35 +40,35 @@ class Usuario {
   public function setIdUsuario($idUsuario) {
     $this->$idUsuario = $idUsuario;
   }
-    
+
   public function getPassword() {
     return $this->password;
-  }  
-       
+  }
+
   public function setPassword($password) {
     $this->password = $password;
   }
 
    public function getNomUsuario() {
     return $this->nomUsuario;
-  }  
-       
+  }
+
   public function setNomUsuario($nomUsuario) {
     $this->nomUsuario = $nomUsuario;
   }
 
   public function getEmail() {
     return $this->email;
-  }  
-       
+  }
+
   public function setEmail($email) {
     $this->email = $email;
   }
 
    public function getTipoUsuario() {
     return $this->tipoUsuario;
-  }  
-       
+  }
+
   public function setTipoUsuario($tipoUsuario) {
     $this->tipoUsuario = $tipoUsuario;
   }
@@ -79,16 +79,21 @@ class Usuario {
 
   public function setNombre($nombre) {
     $this->nombre = $nombre;
-  } 
+  }
 
   public function getApellidos() {
     return $this->apellidos;
-  } 
-       
+  }
+
   public function setApellidos($apellidos) {
     $this->apellidos = $apellidos;
   }
 
+  /*Obtener todos las Actividades*/
+  public static function getAllUsuarios()
+    {
+        return $resultado = UsuarioMapper::findAll();
+    }
   /*Obtener Usuario por nombreUsuario*/
   public static function getByUserName($nomUsuario)
     {
@@ -96,7 +101,7 @@ class Usuario {
     }
 
     /* Guardamos un Usuario en la BD*/
-  public static function guardarUsuario($user){  
+  public static function guardarUsuario($user){
     return UsuarioMapper::guardarUsuario($user);
   }
 
@@ -114,23 +119,23 @@ class Usuario {
   }
 
 
-  /*Comprobamos si se puede registrar el Usuario. Si se puede retornamos un TRUE*/  
+  /*Comprobamos si se puede registrar el Usuario. Si se puede retornamos un TRUE*/
  public static function registroValido($nomUsuario,$password,$email,$nombre, $apellidos){
       $error = array();
       if (strlen($nomUsuario) < 3 || strlen($nomUsuario) > 30) {
 	     $error["nomUsuario"] = "El nombre de Usuario debe tener entre 3 y 30 caracteres.";
       }
       if (strlen($password) < 5 || strlen($password) > 15) {
-	     $error["password"] = "La contraseña debe tener entre 5 y 15 caracteres.";	
+	     $error["password"] = "La contraseña debe tener entre 5 y 15 caracteres.";
       }
       if (strlen($email) < 5 || strlen($email) > 50) {
-       $error["email"] = "El email debe tener entre 5 y 50 caracteres.";  
+       $error["email"] = "El email debe tener entre 5 y 50 caracteres.";
       }
       if (strlen($nombre) < 3 || strlen($nombre) > 20) {
-        $error["nombre"] = "El Nombre debe tener entre 3 y 20 caracteres.";  
+        $error["nombre"] = "El Nombre debe tener entre 3 y 20 caracteres.";
       }
       if (strlen($apellidos) < 3 || strlen($apellidos) > 40) {
-        $error["apellidos"] = "EL apellido debe tener entre 3 y 40 caracteres.";  
+        $error["apellidos"] = "EL apellido debe tener entre 3 y 40 caracteres.";
       }
       if (sizeof($error)>0){
 	     echo "No se puede resgistrar el Usuario por los siguientes motivos: ";
@@ -140,13 +145,13 @@ class Usuario {
       if (sizeof($error)==0){
        return true;
       }
-      
+
   }
 
   public static function update($idUsuario,$nomUsuario,$password,$email, $tipoUsuario, $nombre, $apellidos)
   {
       UsuarioMapper::update($idUsuario,$nomUsuario,$password,$email, $tipoUsuario, $nombre, $apellidos);
-  } 
+  }
 
 
 }
