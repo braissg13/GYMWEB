@@ -105,6 +105,7 @@ class Usuario {
     return UsuarioMapper::guardarUsuario($user);
   }
 
+
   /*Comprobacion existe Usuario... Si existe usuario devuelve un Objeto Usuario*/
   public static function obtenerDatos($nomUsuario, $password) {
     if ($nomUsuario && $password) {
@@ -116,6 +117,18 @@ class Usuario {
         } else {
             return "ERROR, no existe el Ususario";
         }
+  }
+  /*Comprobacion existe Usuario...(utilizando usuarioValido(nomUsu)) Si existe usuario devuelve un Objeto Usuario*/
+  public static function devolverDatos($nomUsuario) {
+  /*  if ($nomUsuario) {*/
+        if ($res = UsuarioMapper::usuarioValido($nomUsuario)) {
+                return UsuarioMapper::findByUserName($nomUsuario);
+        } else {
+                echo "ERROR: Usuario incorrectos.";
+            }
+      /*  } else {
+            return "ERROR, no existe el Usuario";
+        }*/
   }
 
 
