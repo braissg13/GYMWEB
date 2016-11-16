@@ -1,11 +1,13 @@
 <?php
 include_once __DIR__."/../../model/model.php";
 include_once __DIR__."/../../controller/defaultController.php";
-
 if(!isset($_SESSION)) session_start();
  $user=$_SESSION["usuario"];
  /*Aqui comprobamos que no intenten entrar otros Usuarios que no sean Administradores*/
  if ($_SESSION["usuario"]->getTipoUsuario() =='Administrador'){
+
+  $idUsu = $_GET['id'];
+  $usuario = UsuarioController::getUsuario($idUsu);
 ?>
 
 <!DOCTYPE html>
@@ -31,7 +33,7 @@ if(!isset($_SESSION)) session_start();
       <?php include("../navbar.php");  /*Cargamos la barra de navegación*/ ?>
   </header>
 
-  	<div class="container">
+    <div class="container">
 
 
         <h1>Usuario: <?php echo $usuario->getNomUsuario();?></h1>
@@ -75,15 +77,11 @@ if(!isset($_SESSION)) session_start();
                  </div>
                </div>
                </div>
-             </div>	<!-- FIN MODAL -->
+             </div> <!-- FIN MODAL -->
 
            </div>
 
            <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
-               <a href="modificarUsuario.php?id=<?php echo $idUsuario ;?>" style="text-decoration: none;"><button type="button" class="btn btn-default4" id="botonModificar">Modificar</button></a>
-           </div>
-
-           <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                <a href="gestionUsuarios.php"><button type="button" class="btn btn-default3">Atr&aacutes</button></a>
            </div>
 
@@ -91,7 +89,7 @@ if(!isset($_SESSION)) session_start();
 
      </div> <!-- FIN CONTAINER USUARIOS -->
 
-	</div>
+  </div>
     <?php include("../footer.php");  /*Cargamos el footer*/ ?>
 
   </body>
@@ -110,7 +108,6 @@ if(!isset($_SESSION)) session_start();
                 header("Location: = /../index.php");
              }
           }
-
         ob_end_flush();
   }
 ?>
