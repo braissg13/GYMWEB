@@ -59,7 +59,7 @@ if(!isset($_SESSION)) session_start();
               <label for="dateAct">Fecha: </label>
               <input type="date" required="" class="form-control" name="fecha">
           </div>
-
+          <!-- DIV HORA ACT -->
           <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-4">
               <label for="timeAct">Hora: </label>
               <input type="time" required="" class="form-control" name="hora">

@@ -6,6 +6,22 @@ if(!isset($_SESSION)) session_start();
  $user=$_SESSION["usuario"];
  /*Aqui comprobamos que no intenten entrar otros Usuarios que no sean Administradores*/
  if ($_SESSION["usuario"]->getTipoUsuario() =='Administrador'){
+
+   $idActividad = $_GET['id'];
+
+    $actividad = ActividadController::getActividad($idActividad);
+
+
+  //La fecha que nos devuleve la BD es de forma Año-Mes-Dia Hora:Min:Seg
+  //Entonces hay cambiarla a Dia-Mes-Año Hora:Min y lo hacemos de 
+  //La siguiente manera: $format especificamos la manera en la que viene
+  //La fecha de la bd, createfromformat() crea un Objeto de tipo DateTime 
+  //con elformato anterior y nuestra fecha de la bd.
+  // $dateobj->format("d-m-Y H:i") Convierte la Fecha en el formato que queremos.
+  // Este ultimo lo pondermos solo donde queremos mostrarlo que es en la tabla.
+    $fecha = $actividad->getFecha();
+    $format = "Y-m-d H:i:s";
+    $dateobj = DateTime::createFromFormat($format, $fecha);
 ?>
 
 
@@ -35,25 +51,21 @@ if(!isset($_SESSION)) session_start();
   	<div class="container">
 
 
-        <h1>Actividad: Zumba</h1>
+        <h1>Actividad: <?php echo $actividad->getNomActividad();?></h1>
         <!-- DIV MUESTRA ACTIVIDAD-->
       <div id="container-acts">
       <!-- COMIENZO ROW -->
        <div class="row">
-          <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4" style="border-style: solid;border-color: black;margin-bottom: 20px;"><img alt="Zumba" src="../../img/actividades/zumba.jpg" style="max-width: 100%;max-height: 100%;"></div>
-          <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8"><!-- <textarea readonly maxlength="300" rows="20" cols="40">Para comenzar el ejercicio debemos tumbarnos de espalda sobre un banco plano y estrecho para que durante el movimiento no nos moleste en los hombros. Con mancuernas en ambas manos, al inspirar dejaremos que .</textarea> -->
+          <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4" style="border-style: solid;border-color: black;margin-bottom: 20px;"><img alt="Zumba" src="../../img/actividades/<?php echo $actividad->getImagenActividad();?>" style="max-width: 100%;max-height: 100%;"></div>
+          <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
             <pre style="background-color: transparent; border-color: black;">
-Zumba es una disciplina fitness enfocada por una parte a mantener
-un cuerpo saludable y por otra a desarrollar,fortalecer y dar 
-flexibilidad al cuerpo mediante movimientos de baile combinados
-con una serie de rutinas aeróbicas.
-Esta Actividad durará aproximadamente 50 minutos.
+<?php echo $actividad->getDescripActividad();?>
           </pre>  
 
           </div>
-          <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"><p><b>Plazas: 50</b></p></div>
-          <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"><p><b>Plazas Ocupadas: 30</b></p></div>
-          <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"><p><b>Fecha: 15/11/2016 18:00</b></p></div>
+          <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"><p><b>Plazas: <?php echo $actividad->getTotalPlazas();?></b></p></div>
+          <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"><p><b>Plazas Ocupadas: <?php echo $actividad->getPlazasOcupadas();?></b></p></div>
+          <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"><p><b>Fecha: <?php echo $dateobj->format("d-m-Y H:i");?></b></p></div>
 
 	<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
            <!-- PRINCIPIO MODAL ELMINAR Act -->
@@ -67,10 +79,15 @@ Esta Actividad durará aproximadamente 50 minutos.
                   <div class="text-center" style="padding:50px 0">
 
                  <h3><b>&iquest Desea eliminar esta actividad?</b></h3>
-                 <button type="submit" class="btn btn-default2">
-                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-                 </button>
-                 <a href="gestionActividades.php"><button type="button" class="btn btn-default3">Atr&aacutes</button></a>
+                 <form action="../../controller/defaultController.php?controlador=actividad&accion=borrarActividad" method="POST">
+                      <input type="hidden" name="idActividad" value="<?php echo $actividad->getIdActividad();?>">
+                      <input type="hidden" name="NomActividad" value="<?php echo $actividad->getNomActividad();?>">
+                     <button type="submit" class="btn btn-default2">
+                      <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                     </button>
+                  
+                  <a href="gestionActividades.php"><button type="button" class="btn btn-default3">Atr&aacutes</button></a>
+                </form>  
 
                  </div>
 
