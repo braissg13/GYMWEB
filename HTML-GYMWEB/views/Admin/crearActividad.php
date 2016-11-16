@@ -38,7 +38,7 @@ if(!isset($_SESSION)) session_start();
 
   		 <!-- DIV FORMULARIO -->
 		 <div id="container-actividades" style="background:#0275d8; border: solid;border-radius:5px; border-color: black;">
-		 	<form action="../../controller/defaultController.php?controlador=actividad&accion=crearActividad" method="post" style="margin:10px;">
+		 	<form action="../../controller/defaultController.php?controlador=actividad&accion=crearActividad" method="post" style="margin:10px;" enctype="multipart/form-data">
 		 		<!-- COMIENZO ROW-->
 		 		<div class="row">
 
@@ -57,9 +57,13 @@ if(!isset($_SESSION)) session_start();
           <!-- DIV FECHA ACT -->
           <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-4">
               <label for="dateAct">Fecha: </label>
-              <input type="datetime-local" required="" class="form-control" name="fecha">
+              <input type="date" required="" class="form-control" name="fecha">
           </div>
 
+          <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-4">
+              <label for="timeAct">Hora: </label>
+              <input type="time" required="" class="form-control" name="hora">
+          </div>
 
             <!-- DIV DESCRIP ACT -->
            <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-8">
