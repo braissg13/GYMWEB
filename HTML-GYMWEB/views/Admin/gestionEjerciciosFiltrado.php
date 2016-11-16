@@ -73,7 +73,7 @@ if(!isset($_SESSION)) session_start();
 
 			<div class="row" style="margin-top: 20px;">
           <?php 
-            foreach ($row as $resultado) {
+            foreach ($row as $ejercicio) {
 
               if ($filtro == $ejercicio['tipoEjerc']) {
 
