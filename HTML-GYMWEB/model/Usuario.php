@@ -92,7 +92,7 @@ class Usuario {
   /*Comprobacion existe Usuario...(utilizando usuarioValido(idUsuario)) Si existe usuario devuelve un Objeto Usuario*/
   public static function devolverDatos($idUsuario) {
   /*  if ($nomUsuario) {*/
-        if ($res = UsuarioMapper::usuarioValido($idUsuario)) {
+        if ($res = UsuarioMapper::usuarioValidoId($idUsuario)) {
                 return UsuarioMapper::findByUserId($idUsuario);
         } else {
                 echo "ERROR: Usuario incorrecto.";

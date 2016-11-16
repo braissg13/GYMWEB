@@ -65,7 +65,7 @@ class UsuarioMapper{
    }
     
     /*Mira si el Usuario es valido (solo comprobando el nombre) y devuelve true.*/
-   public static function usuarioValido($idUsuario) {
+   public static function usuarioValidoId($idUsuario) {
        global $connect;
        $resultado = mysqli_query($connect, "SELECT * FROM usuario WHERE idUsuario=\"$idUsuario\"");
        $busqueda = mysqli_num_rows($resultado);
