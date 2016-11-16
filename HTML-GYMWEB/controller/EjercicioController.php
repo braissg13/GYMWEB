@@ -212,7 +212,7 @@
 								header("refresh: 3; url = ../views/Entrenador/gestionEjercicios.php"); 
 								} 
 								$errors = array();
-								$errors["general"] = "ERROR.El ejercicio ya existe.";
+								$errors["general"] = "ERROR.El ejercicio no existe.";
 								echo $errors["general"]; 
 								ob_end_flush();
 							}
@@ -224,6 +224,6 @@
 						echo $errors["general"]; 
 						ob_end_flush();
 					}
-			}
+			}//FIN BORRAR EJERCICIO
 	}
 ?>
