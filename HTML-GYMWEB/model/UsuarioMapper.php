@@ -2,15 +2,21 @@
 include_once __DIR__."/../conexion/bdConexion.php";
 
 class UsuarioMapper{
-
-    /*Buscamos Usuario por su nombreUsusario*/   
+  /*Buscamos todos las Actividades*/
+  public static function findAll()
+  {
+      global $connect;
+      $resultado = mysqli_query($connect, 'SELECT * FROM usuario');
+      return $resultado;
+  }
+    /*Buscamos Usuario por su nombreUsusario*/
     public static function findByUserName($nomUsuario)
     {
         global $connect;
         $resultado = mysqli_query($connect, 'SELECT * FROM usuario WHERE nomUsuario ="'.$nomUsuario.'"');
         if (mysqli_num_rows($resultado) > 0) {
             $row = mysqli_fetch_assoc($resultado);
-            
+
             $usuario= new Usuario($row['idUsuario'],$row['nomUsuario'],$row['password'],$row['email'],$row['tipoUsuario'],$row['nombre'],$row['apellidos']);
 
             return $usuario;
@@ -41,23 +47,23 @@ class UsuarioMapper{
     }
 
       /* Guardamos un Usuario en la BD*/
-    public static function guardarUsuario($user){  
+    public static function guardarUsuario($user){
       global $connect;
       $resultado = false;
-      
-        
+
+
      $sqlcrear= "INSERT INTO usuario (nomUsuario,password,email,tipoUsuario,nombre, apellidos) VALUES ('";
       $sqlcrear = $sqlcrear.$user->getNomUsuario()."','".md5($user->getPassword())."','".$user->getEmail()."','".$user->getTipoUsuario()."','".$user->getNombre()."','".$user->getApellidos()."')";
 
         $resultado = mysqli_query($connect, $sqlcrear);
-       
+
        return $resultado;
     }
 
     public static function update($idUsuario,$nomUsuario,$password,$email, $tipoUsuario, $nombre, $apellidos)
     {
         global $connect;
-        
+
         if(!empty($password)){
             $password = md5($password);
         } else {
@@ -69,8 +75,8 @@ class UsuarioMapper{
 
         $result = mysqli_query($connect, "UPDATE usuario SET nomUsuario=\"$nomUsuario\", password =\"$password\", email =\"$email\", tipoUsuario= \"$tipoUsuario\",nombre=\"$nombre\", apellidos=\"$apellidos\" WHERE idUsuario=\"$idUsuario\"");
             break;
-            
+
     }
-    
+
 }
 ?>
