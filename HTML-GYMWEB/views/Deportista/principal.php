@@ -1,10 +1,10 @@
 <?php
-include_once __DIR__."/../../model/model.php";
-include_once __DIR__."/../../controller/defaultController.php";
+  include_once __DIR__."/../../model/model.php";
+  include_once __DIR__."/../../controller/defaultController.php";
 
 if(!isset($_SESSION)) session_start();
  $user=$_SESSION["usuario"];
- if ($_SESSION["usuario"]->getTipoUsuario() =='Entrenador'){
+ if ($_SESSION["usuario"]->getTipoUsuario() =='DeportistaPEF' || $_SESSION["usuario"]->getTipoUsuario() =='DeportistaTDU' ){
 
   $row = ActividadController::getAll();
 ?>
@@ -51,7 +51,7 @@ if(!isset($_SESSION)) session_start();
 
             <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8" style="margin-bottom: 10px;border-color: #d0cccc;border-style: ridge; background-color: #0275d8;">
                 <h3><b><a href="#" style="color: white;"><?php echo $actividad['nomActividad'];?></a></b></h3>
-                <h5><b><?php echo $dateobj->format("d-m-Y H:i");?></b></h5>
+                <h5><b><?php echo $dateobj->format("d-M-Y H:i");?></b></h5>
                 <img alt="imgActividad" src="../../img/actividades/<?php echo $actividad['imagenAct'];?>" style="max-width: 100%;max-height: 100%;">
             </div>
         <?php } ?>
@@ -72,11 +72,11 @@ if(!isset($_SESSION)) session_start();
 <?php
   }else{
         ob_start(); 
-         if (($_SESSION["usuario"]->getTipoUsuario()=='DeportistaPEF') || ($_SESSION["usuario"]->getTipoUsuario()=='DeportistaTDU')){
-            header("refresh: 1; url = ../Deportista/principal.php");  
+         if (($_SESSION["usuario"]->getTipoUsuario()=='Administrador')){
+            header("Location: ../Admin/principal.php");  
           }else{
-             if($_SESSION["usuario"]->getTipoUsuario()=='Administrador'){
-                  header("Location: ../Admin/principal.php");  
+             if($_SESSION["usuario"]->getTipoUsuario()=='Entrenador'){
+                  header("Location: ../Entrenador/principal.php");  
              }else{
                 header("Location: = /../index.php"); 
              }

@@ -131,7 +131,8 @@ class Usuario {
   {
       UsuarioMapper::update($idUsuario,$nomUsuario,$password,$email, $tipoUsuario, $nombre, $apellidos);
   }
-  public static function delete($idUsuario){
+
+   public static function delete($idUsuario){
       UsuarioMapper::delete($idUsuario);
   }
 }

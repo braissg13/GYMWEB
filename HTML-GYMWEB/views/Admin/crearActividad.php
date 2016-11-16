@@ -99,10 +99,10 @@ if(!isset($_SESSION)) session_start();
   }else{
         ob_start();
          if (($_SESSION["usuario"]->getTipoUsuario()=='DeportistaPEF') || ($_SESSION["usuario"]->getTipoUsuario()=='DeportistaTDU')){
-            header("refresh: 1; url = ../Deportista/plantilla-por-defecto.php");
+            header("refresh: 1; url = ../Deportista/principal.php");
           }else{
              if($_SESSION["usuario"]->getTipoUsuario()=='Entrenador'){
-                  header("Location: ../Entrenador/gestionEjercicios.php");
+                  header("Location: ../Entrenador/principal.php");
              }else{
                 header("Location: = /../index.php");
              }

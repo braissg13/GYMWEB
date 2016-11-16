@@ -1,6 +1,5 @@
 <?php
 class UsuarioController{
-
 	/*Obtenemos todos los Usuarios*/
 	public static function getAll(){
 		if(!isset($_SESSION)) session_start();
@@ -23,7 +22,6 @@ class UsuarioController{
 		return $usuario;
 	}
 } // FIN GET USUARIO
-
 	public static function login() {
 		/*Comprobamos si nos pasan un Usuario por metodo POST*/
 		if(!isset($_SESSION)) session_start();
@@ -40,19 +38,18 @@ class UsuarioController{
 					ob_end_flush();
 				}else{
 					$_SESSION["usuario"] = $usuario;
-					header("Location: ../views/Admin/gestionEjercicios.php");
 				// Si login correcto direcionamos a una vista
-				/*if($this->Usuario->getTipoUsuario()=="Administrador"){
-					header("Location:../views/Admin/principal.php'");
+				if($usuario->getTipoUsuario() =="Administrador"){
+					header("Location:../views/Admin/principal.php");
 				}
 				else{
-					if($this->Usuario->getTipoUsuario()=="Entrenador"){
-						header("Location:../views/Entrenador/principal.php'");
+					if($usuario->getTipoUsuario()=="Entrenador"){
+						header("Location:../views/Entrenador/principal.php");
 					}else{
-						header("Location:../views/Deportista/principal.php'");
+						header("Location:../views/Deportista/principal.php");
 					}
-				}*/
 				}
+			  }
 	      	}else{
 	      		$error = array();
 				$error= "Nombre de Usuario no valido";
@@ -158,7 +155,6 @@ class UsuarioController{
 				ob_end_flush();
 			}
 	}//FIN BORRAR USUARIO
-
   	public static function crearUsuario(){
   		if(!isset($_SESSION)) session_start();
   		if($_SESSION["usuario"]->getTipoUsuario() == 'Administrador'){
@@ -203,6 +199,17 @@ class UsuarioController{
 					echo $errors["general"];
 					ob_end_flush();
   		  	}
+  		}else{
+  			ob_start();
+  			if($_SESSION["usuario"]->getTipoUsuario() == 'DeportistaTDU' || $_SESSION["usuario"]->getTipoUsuario() == 'DeportistaPEF') {
+	  				header("refresh: 3; url = ../views/Deportista/principal.php"); 
+	  			}else{
+	  				header("refresh: 3; url = ../views/Entrenador/principal.php"); 
+	  			}
+			$errors = array();
+			$errors["general"] = "No tiene permiso para crear un Usuario";
+			echo $errors["general"]; 
+			ob_end_flush();
   		}
   	}
 }
