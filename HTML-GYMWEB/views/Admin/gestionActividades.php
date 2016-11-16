@@ -5,6 +5,8 @@ include_once __DIR__."/../../controller/defaultController.php";
 if(!isset($_SESSION)) session_start();
  $user=$_SESSION["usuario"];
  if ($_SESSION["usuario"]->getTipoUsuario() =='Administrador'){
+
+  $row = ActividadController::getAll();
 ?>
 
 <!DOCTYPE html>
@@ -56,15 +58,30 @@ if(!isset($_SESSION)) session_start();
           </thead>
 
           <tbody>
-            
-            <tr>
-              <td>1</td>
-              <td><a href="consultarActividades.php" style="text-decoration: none;">Zumba</a></td>
-              <td>15/11/2016 18:00</td>
-              <td><a href="modificarActividad.php" style="text-decoration: none;"><button type="button" class="btn btn-default3" id="botonModificar">Modificar Actividad</button></a></td>
-                <td><a href="consultarActividades.php" style="text-decoration: none;"><button type="button" class="btn btn-default2" id="botonEliminar">Eliminar Actividad</button></a></td>
-            </tr>
+            <?php 
+              foreach ($row as $actividad) {
+                //La fecha que nos devuleve la BD es de forma Año-Mes-Dia Hora:Min:Seg
+                //Entonces hay cambiarla a Dia-Mes-Año Hora:Min y lo hacemos de 
+                //La siguiente manera: $format especificamos la manera en la que viene
+                //La fecha de la bd, createfromformat() crea un Objeto de tipo DateTime 
+                //con elformato anterior y nuestra fecha de la bd.
+                // $dateobj->format("d-m-Y H:i") Convierte la Fecha en el formato que queremos.
+                // Este ultimo lo pondermos solo donde queremos mostrarlo que es en la tabla.
+                $fecha = $actividad['fecha'];
+                $format = "Y-m-d H:i:s";
+                $dateobj = DateTime::createFromFormat($format, $fecha);
 
+            ?>
+            <tr>
+              <td><?php echo $actividad['idActividad']; ?></td>
+              <td><a href="consultarActividades.php?id=<?php echo $actividad['idActividad']; ?>" style="text-decoration: none;"><?php echo $actividad['nomActividad']; ?></a></td>
+              <td><?php   echo $dateobj->format("d-m-Y H:i");?></td>
+              <td><a href="modificarActividad.php?id=<?php echo $actividad['idActividad']; ?>" style="text-decoration: none;"><button type="button" class="btn btn-default3" id="botonModificar">Modificar Actividad</button></a></td>
+                <td><a href="consultarActividades.php?id=<?php echo $actividad['idActividad']; ?>" style="text-decoration: none;"><button type="button" class="btn btn-default2" id="botonEliminar">Eliminar Actividad</button></a></td>
+            </tr>
+            <?php 
+              }
+            ?>
 
           </tbody>
 
