@@ -43,37 +43,37 @@ if(!isset($_SESSION)) session_start();
               <!-- DIV Nombre Usuario USU -->
               <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-4">
                            <label for="nomUser">Nombre Usuario: </label>
-                           <input type="text" class="form-control" name="nomUsuario" maxlength="30" placeholder="Nombre Usuario">
+                           <input type="text" class="form-control" required="" name="nomUsuario" maxlength="30" placeholder="Nombre Usuario">
               </div>
 
               <!-- DIV password USU -->
               <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-4">
                            <label for="passUsu">Password: </label>
-                           <input type="password" class="form-control" name="password" maxlength="20" placeholder="password">
+                           <input type="password" class="form-control" required="" name="password" maxlength="20" placeholder="password">
               </div>
 
              <!-- DIV NOMBRE  -->
              <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-4">
                  <label for="nomUsu">Nombre: </label>
-                 <input type="text" class="form-control" name="nombre" maxlength="30" placeholder="Nombre">
+                 <input type="text" class="form-control" name="nombre" required="" maxlength="30" placeholder="Nombre">
              </div>
              <!-- DIV APELLIDOS -->
              <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-4">
                  <label for="apellidoUser">Apellidos: </label>
-                 <input type="text" class="form-control" name="apellidos" maxlength="30" placeholder="Apellidos">
+                 <input type="text" class="form-control" name="apellidos" required="" maxlength="30" placeholder="Apellidos">
              </div>
 
 
                <!-- DIV EMAIL USU -->
                <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-4">
                            <label for="emailUsu">Email: </label>
-                           <input type="email" class="form-control" name="email" maxlength="50" placeholder="email">
+                           <input type="email" class="form-control" name="email" required="" maxlength="50" placeholder="email">
                </div>
                <!-- DIV TIPO USU -->
                          <div class="form-group">
                              <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
                                <label for="tipoUsu">TipoUsuario: </label>
-                                 <select class="form-control" name="tipoUsuario">
+                                 <select class="form-control" name="tipoUsuario" required="">
                                       <option value="Administrador">Administrador</option>
                                        <option value="Entrenador">Entrenador</option>
                                        <option value="DeportistaPEF">DeportistaPEF</option>
