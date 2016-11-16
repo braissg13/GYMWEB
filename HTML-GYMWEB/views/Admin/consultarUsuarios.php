@@ -34,20 +34,20 @@ if(!isset($_SESSION)) session_start();
   	<div class="container">
 
 
-        <h1>Usuario: anafg</h1>
+        <h1>Usuario: <?php echo $usuario->getNomUsuario();?></h1>
         <!-- DIV MUESTRA USUARIO -->
       <div id="container-usuarios">
       <!-- COMIENZO ROW -->
        <div class="row">
 
             <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4" style="border-style: solid;border-color: black; margin-bottom: 10px;">
-            <p><b>Nombre Usuario: anafg</b></p>
-            <p><b>Nombre: Ana</b></p>
-            <p><b>Apellidos: Fernandez Gomez</b></p>
-            <p><b>Email: anafg@gmail.com</b></p>
-            <p><b>Tipo Usuario: DeportistaPEF</b></p>
+            <p><b>Nombre Usuario:  <?php echo $usuario->getNomUsuario(); ?></b></p>
+            <p><b>Nombre: <?php echo $usuario->getNombre(); ?></b></p>
+            <p><b>Apellidos:  <?php echo $usuario->getApellidos(); ?></b></p>
+            <p><b>Email: <?php echo $usuario->getEmail(); ?></b></p>
+            <p><b>Tipo Usuario:  <?php echo $usuario->getTipoUsuario(); ?></b></p>
             </div>
-           
+
 
   <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
            <!-- PRINCIPIO MODAL ELMINAR Usuario -->
@@ -61,8 +61,12 @@ if(!isset($_SESSION)) session_start();
                      <div class="text-center" style="padding:50px 0">
 
                  <h3><b>&iquest Desea eliminar este usuario?</b></h3>
-                 <button type="submit" class="btn btn-default2">
-                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+
+                 <form action="../../controller/defaultController.php?controlador=usuario&accion=borrarUsuario" method="POST">
+                   <input type="hidden" name="idUsuario" value="<?php echo $usuario->getIdUsuario();?>">
+                   <input type="hidden" name="nomUsuario" value="<?php echo $usuario->getNomUsuario();?>">
+                  <button type="submit" class="btn btn-default2">
+                   <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                  </button>
                  <a href="gestionUsuarios.php"><button type="button" class="btn btn-default3">Atr&aacutes</button></a>
 
@@ -72,10 +76,17 @@ if(!isset($_SESSION)) session_start();
                </div>
                </div>
              </div>	<!-- FIN MODAL -->
+
            </div>
-           <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-            <a href="gestionUsuarios.php"><button type="button" class="btn btn-default3">Atr&aacutes</button></a>
-            </div>
+
+           <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+               <a href="modificarUsuario.php?id=<?php echo $idUsuario ;?>" style="text-decoration: none;"><button type="button" class="btn btn-default4" id="botonModificar">Modificar</button></a>
+           </div>
+
+           <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+               <a href="gestionUsuarios.php"><button type="button" class="btn btn-default3">Atr&aacutes</button></a>
+           </div>
+
        </div><!-- FIN ROW -->
 
      </div> <!-- FIN CONTAINER USUARIOS -->
@@ -89,17 +100,17 @@ if(!isset($_SESSION)) session_start();
 <?php
   /*Dependiendo que tipo de Usuario intente entrar donde no debe lo mandamosa su pagina principal.*/
   }else{
-        ob_start(); 
+        ob_start();
          if (($_SESSION["usuario"]->getTipoUsuario()=='DeportistaPEF') || ($_SESSION["usuario"]->getTipoUsuario()=='DeportistaTDU')){
-            header("refresh: 1; url = ../Deportista/plantilla-por-defecto.php");  
+            header("refresh: 1; url = ../Deportista/plantilla-por-defecto.php");
           }else{
              if($_SESSION["usuario"]->getTipoUsuario()=='Entrenador'){
-                  header("Location: ../Entrenador/gestionEjercicios.php");  
+                  header("Location: ../Entrenador/gestionEjercicios.php");
              }else{
-                header("Location: = /../index.php"); 
+                header("Location: = /../index.php");
              }
           }
-          
-        ob_end_flush();  
+
+        ob_end_flush();
   }
 ?>
