@@ -6,6 +6,8 @@ if(!isset($_SESSION)) session_start();
  $user=$_SESSION["usuario"];
  /*Aqui comprobamos que no intenten entrar otros Usuarios que no sean Administradores*/
  if ($_SESSION["usuario"]->getTipoUsuario() =='Administrador'){
+   $idUsu = $_GET['id'];
+   $usuario = UsuarioController::getUsuario($idUsu);
 ?>
 
 <!DOCTYPE html>
@@ -31,22 +33,22 @@ if(!isset($_SESSION)) session_start();
   </header>
 
   	<div class="container">
-	
 
-     <h1>Modificar usuario: anafg</h1>
+
+     <h1>Modificar usuario: <?php echo $usuario->getNombre();?></h1>
      <!-- DIV MUESTRA USUARIO -->
            <div id="container-usuarios">
            <!-- COMIENZO ROW -->
             <div class="row row1">
-              
+
               <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                <p><b>Nombre Usuario: anafg</b></p>
-                <p><b>Nombre: Ana</b></p>
-                <p><b>Apellidos: Fernandez Gomez</b></p>
-                <p><b>Email: anafg@gmail.com</b></p>
-                <p><b>Tipo Usuario: DeportistaPEF</b></p>
+                <p><b>Nombre Usuario: <?php echo $usuario->getNomUsuario();?></b></p>
+                <p><b>Nombre: <?php echo $usuario->getNombre();?></b></p>
+                <p><b>Apellidos: <?php echo $usuario->getApellidos();?></b></p>
+                <p><b>Email: <?php echo $usuario->getEmail();?></b></p>
+                <p><b>Tipo Usuario: <?php echo $usuario->getTipoUsuario();?></b></p>
               </div>
-            
+
             </div><!-- FIN ROW -->
 
           </div> <!-- FIN CONTAINER USUARIOS -->
@@ -56,7 +58,7 @@ if(!isset($_SESSION)) session_start();
 
                   <!-- DIV FORMULARIO -->
                 <div id="container-usuarios" style="background:#0275d8; border: solid;border-radius:5px; border-color: black;">
-                   <form action="#" method="post" style="margin:10px;">
+                   <form action="../../controller/defaultController.php?controlador=usuario&accion=modificarUsuario" method="post" style="margin:10px;" enctype="multipart/form-data">
                    <!-- COMIENZO ROW-->
                        <div class="row" style="margin-bottom: 10px;">
 
@@ -88,7 +90,7 @@ if(!isset($_SESSION)) session_start();
                                      <label for="emailUsu">Email: </label>
                                      <input type="email" class="form-control" name="email" id="email" maxlength="50" placeholder="email usuario">
                          </div>
-     
+
 
                       <!-- DIV TIPO USU -->
                              <div class="form-group">
@@ -105,10 +107,12 @@ if(!isset($_SESSION)) session_start();
 
                     </div> <!-- FIN ROW -->
 
-                      <p style="text-align:center">
-                        <button type="submit" class="btn btn-default1" style="margin-right: 10px;">
-                         <span class="glyphicon glyphicon-floppy-saved" aria-hidden="true"></span>
-                        </button>
+                    <input type="hidden" name="idUsu" value="<?php echo $usuario->getIdUsuario();?>">
+
+                    <p style="text-align:center">
+                    <button type="submit" class="btn btn-default1" style="margin-right: 10px;">
+                      <span class="glyphicon glyphicon-floppy-saved" aria-hidden="true"></span>
+                    </button>
 
                       <a href="gestionUsuarios.php"><button type="button" class="btn btn-default2">Atr&aacutes</button></a></p>
                </form>
@@ -124,17 +128,17 @@ if(!isset($_SESSION)) session_start();
 <?php
   /*Dependiendo que tipo de Usuario intente entrar donde no debe lo mandamosa su pagina principal.*/
   }else{
-        ob_start(); 
+        ob_start();
          if (($_SESSION["usuario"]->getTipoUsuario()=='DeportistaPEF') || ($_SESSION["usuario"]->getTipoUsuario()=='DeportistaTDU')){
-            header("refresh: 1; url = ../Deportista/plantilla-por-defecto.php");  
+            header("refresh: 1; url = ../Deportista/plantilla-por-defecto.php");
           }else{
              if($_SESSION["usuario"]->getTipoUsuario()=='Entrenador'){
-                  header("Location: ../Entrenador/gestionEjercicios.php");  
+                  header("Location: ../Entrenador/gestionEjercicios.php");
              }else{
-                header("Location: = /../index.php"); 
+                header("Location: = /../index.php");
              }
           }
-          
-        ob_end_flush();  
+
+        ob_end_flush();
   }
 ?>
