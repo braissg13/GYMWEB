@@ -6,6 +6,7 @@ if(!isset($_SESSION)) session_start();
  $user=$_SESSION["usuario"];
  /*Aqui comprobamos que no intenten entrar otros Usuarios que no sean Administradores*/
  if ($_SESSION["usuario"]->getTipoUsuario() =='Administrador'){
+   $row = UsuarioController::getAll();
 ?>
 
 <!DOCTYPE html>
@@ -33,8 +34,6 @@ if(!isset($_SESSION)) session_start();
   	<div class="container">
 
 
-
-
     <h1>Usuarios</h1>
     <!-- BOTON MOSTRAR USUARIOS CREAR USUARIOS ELIMINAR USUARIOS-->
 
@@ -48,7 +47,7 @@ if(!isset($_SESSION)) session_start();
       <!-- COMIENZO DIV TABLA -->
       <div class="table-responsive col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <table class="table table-striped">
-         
+
          <thead>
 
             <tr>
@@ -60,15 +59,14 @@ if(!isset($_SESSION)) session_start();
           </thead>
 
           <tbody>
-            
-            <tr>
-              <td>1</td>
-              <td><a href="consultarUsuarios.php" style="text-decoration: none;">Admin</a></td>
-              <td>Administrador</td>
-              <td><a href="modificarUsuario.php" style="text-decoration: none;"><button type="button" class="btn btn-default3" id="botonModificar">Modificar Usuario</button></a></td>
-              <td><a href="consultarUsuarios.php" style="text-decoration: none;"><button type="button" class="btn btn-default2" id="botonEliminar">Eliminar Usuario</button></a></td>
-            </tr>
 
+            <tr>
+              <td><?php echo $usuario['idUsuario']; ?></td>
+              <td><a href="consultarUsuarios.php?id=<?php echo $usuario['idUsuario']; ?>" style="text-decoration: none;"><?php echo $usuario['nomUsuario']; ?></a></td>
+              <td><a href="modificarUsuario.php?id=<?php echo $usuario['idUsuario']; ?>" style="text-decoration: none;"><button type="button" class="btn btn-default3" id="botonModificar">Modificar usuario</button></a></td>
+                <td><a href="consultarUsuarios.php?id=<?php echo $usuario['idUsuario']; ?>" style="text-decoration: none;"><button type="button" class="btn btn-default2" id="botonEliminar">Eliminar Usuario</button></a></td>
+            </tr>
+      
 
           </tbody>
 
@@ -97,17 +95,17 @@ if(!isset($_SESSION)) session_start();
 <?php
   /*Dependiendo que tipo de Usuario intente entrar donde no debe lo mandamosa su pagina principal.*/
   }else{
-        ob_start(); 
+        ob_start();
          if (($_SESSION["usuario"]->getTipoUsuario()=='DeportistaPEF') || ($_SESSION["usuario"]->getTipoUsuario()=='DeportistaTDU')){
-            header("refresh: 1; url = ../Deportista/plantilla-por-defecto.php");  
+            header("refresh: 1; url = ../Deportista/plantilla-por-defecto.php");
           }else{
              if($_SESSION["usuario"]->getTipoUsuario()=='Entrenador'){
-                  header("Location: ../Entrenador/gestionEjercicios.php");  
+                  header("Location: ../Entrenador/gestionEjercicios.php");
              }else{
-                header("Location: = /../index.php"); 
+                header("Location: = /../index.php");
              }
           }
-          
-        ob_end_flush();  
+
+        ob_end_flush();
   }
 ?>
