@@ -45,6 +45,15 @@ class UsuarioMapper{
             return true;
         }
     }
+    /*Mira si el Usuario es valido (solo comprobando el nombre) y devuelve true.*/
+   public static function usuarioValido($nomUsuario) {
+       global $connect;
+       $resultado = mysqli_query($connect, "SELECT * FROM usuario WHERE nomUsuario=\"$nomUsuario\"");
+       $busqueda = mysqli_num_rows($resultado);
+       if( $busqueda > 0) {
+           return true;
+       }
+   }
 
       /* Guardamos un Usuario en la BD*/
     public static function guardarUsuario($user){
