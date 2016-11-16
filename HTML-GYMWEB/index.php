@@ -41,14 +41,8 @@ include_once __DIR__."/controller/defaultController.php";
 	        <li><a id="Item2" href="#Servicios">Servicios</a></li>
 	        <li><a id="Item3" href="#dondeEstamos">&iquest D&oacutende estamos?</a></li>
 	      </ul>
-	      <form class="navbar-form navbar-left">
-	        <div class="form-group">
-	          <input type="text" class="form-control" placeholder="Buscar...">
-	        </div>
-	        <button type="submit" id="botonBuscar" class="btn btn-default">Buscar</button>
-	      </form>
+	      
 	      <ul class="nav navbar-nav navbar-right">
-
 	      <form class="navbar-form navbar-left" action="controller/defaultController.php?controlador=usuario&accion=login" method="POST" class="text-left">
 	      <!-- COMIENZO MODAL -->
 	      	<div class="form-group">
