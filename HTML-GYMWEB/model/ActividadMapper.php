@@ -48,10 +48,10 @@ class ActividadMapper{
             return true;
         }
     }
-    public static function update($idActividad,$nomActividad,$totalPlazas,$descripAct, $fecha, $plazasOcupadas, $imagenAct)
+    public static function update($idActividad,$nomActividad,$totalPlazas,$descripAct,$fecha,$plazasOcupadas,$imagenAct)
     {
         global $connect;
-        $resultado = mysqli_query($connect, "UPDATE actividad SET nomActividad=\"$nomActividad\", totalPlazas =\"$totalPlazas\", descripAct =\"$descripAct\",fecha=\"$fecha\", plazasOcupadas= \"$plazasOcupadas\", imagen=\"$imagenAct\" WHERE idActividad=\"$idActividad\"");
+        $resultado = mysqli_query($connect, "UPDATE actividad SET nomActividad=\"$nomActividad\", totalPlazas =\"$totalPlazas\", descripAct =\"$descripAct\",fecha=\"$fecha\", plazasOcupadas= \"$plazasOcupadas\", imagenAct=\"$imagenAct\" WHERE idActividad=\"$idActividad\"");
            return $resultado;
     }
     public static function delete($idActividad){
