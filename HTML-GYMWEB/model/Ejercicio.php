@@ -38,7 +38,7 @@ class Ejercicio {
   }
 
   public function setIdEjercicio($idEjercicio) {
-    $this->$idEjercicio = $idEjercicio;
+    $this->idEjercicio = $idEjercicio;
   }
 
   public function getNomEjercicio() {
