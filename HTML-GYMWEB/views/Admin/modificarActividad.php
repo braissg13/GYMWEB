@@ -60,7 +60,7 @@ Esta Actividad durará aproximadamente 50 minutos.
 
        <!-- DIV FORMULARIO -->
      <div id="container-formulario2" style="background:#0275d8; border: solid;border-radius:5px; border-color: black;">
-        <form action="#" method="post" style="margin:10px;">
+        <form action="#" method="post" style="margin:10px;" enctype="multipart/form-data">
         <!-- COMIENZO ROW 2-->  
         <div class="row"> 
         <!-- DIV NOMBRE ACTIVIDAD -->
@@ -73,15 +73,20 @@ Esta Actividad durará aproximadamente 50 minutos.
                    <label for="nomAct">Plazas: </label>
                    <input type="number" min="0" class="form-control" name="numPl" maxlength="3" placeholder="Plazas actividad">
                </div>
-         <!-- DIV FECHA ACTIVIDAD -->
-               <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-4">
-                   <label for="dateAct">Fecha: </label>
-                   <input type="datetime-local" class="form-control" name="fecha" placeholder="Fecha actividad">
-               </div>
+         <!-- DIV FECHA ACT -->
+          <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-4">
+              <label for="dateAct">Fecha: </label>
+              <input type="date" required="" class="form-control" name="fecha">
+          </div>
+          <!-- DIV HORA ACT -->
+          <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-4">
+              <label for="timeAct">Hora: </label>
+              <input type="time" required="" class="form-control" name="hora">
+          </div>
         <!-- DIV DESCRIPCION ACTIVIDAD -->
                 <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-8">
                     <label for="descAct">Descripci&oacuten Actividad: </label>
-                    <textarea class="form-control" name="descripAct" rows="4" maxlength="500" placeholder="Breve descripción de la actividad"></textarea>
+                    <textarea class="form-control" name="descrAct" rows="4" maxlength="500" placeholder="Breve descripción de la actividad"></textarea>
                 </div>
       <!-- DIV IMAGEN ACTIVIDAD -->
                 <div class="form-group col-xs-12 col-sm-4 col-md-4 col-lg-4" style="margin-top:30px;">
