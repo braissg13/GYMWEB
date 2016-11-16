@@ -56,7 +56,7 @@ if(!isset($_SESSION)) session_start();
       <div id="container-acts">
       <!-- COMIENZO ROW -->
        <div class="row">
-          <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4" style="border-style: solid;border-color: black;margin-bottom: 20px;"><img alt="Zumba" src="../../img/actividades/<?php echo $actividad->getImagenActividad();?>" style="max-width: 100%;max-height: 100%;"></div>
+          <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4" style="border-style: solid;border-color: black;margin-bottom: 20px;"><img alt="imgAct" src="../../img/actividades/<?php echo $actividad->getImagenActividad();?>" style="max-width: 100%;max-height: 100%;"></div>
           <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
             <pre style="background-color: transparent; border-color: black;">
 <?php echo $actividad->getDescripActividad();?>
