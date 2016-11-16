@@ -35,7 +35,7 @@ if(!isset($_SESSION)) session_start();
   	<div class="container">
 
 
-     <h1>Modificar usuario: <?php echo $usuario->getNombre();?></h1>
+ <h1>Modificar Actividad: <?php echo $usuario->getNomUsuario();?></h1>
      <!-- DIV MUESTRA USUARIO -->
            <div id="container-usuarios">
            <!-- COMIENZO ROW -->
