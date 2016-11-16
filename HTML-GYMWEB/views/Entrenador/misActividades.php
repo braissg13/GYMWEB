@@ -39,7 +39,7 @@ if(!isset($_SESSION)) session_start();
      <div class="row" style="margin-top: 20px; margin-bottom: 10px;">
 
 
-    
+
 
       <!-- COMIENZO DIV TABLA -->
       <div class="table-responsive col-xs-12 col-sm-12 col-md-12 col-lg-12">
