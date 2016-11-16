@@ -1,5 +1,6 @@
 <?php
 class UsuarioController{
+
 	/*Obtenemos todos los Usuarios*/
 	public static function getAll(){
 		if(!isset($_SESSION)) session_start();
@@ -22,6 +23,7 @@ class UsuarioController{
 		return $usuario;
 	}
 } // FIN GET USUARIO
+
 	public static function login() {
 		/*Comprobamos si nos pasan un Usuario por metodo POST*/
 		if(!isset($_SESSION)) session_start();
@@ -121,6 +123,42 @@ class UsuarioController{
 			ob_end_flush();
 		}
 	} //FIN MODIFICAR Usuario
+
+	/* BORRAR Usuario*/
+	public static function borrarUsuario(){
+		if(!isset($_SESSION)) session_start();
+			if($_SESSION['usuario']->getTipoUsuario()=="Administrador"){
+					$idUsuario = $_POST['idUsuario'];
+					$nomUsuario = $_POST['nomUsuario'];
+					//Comprobamos si existe el usuario para poder borrarlo
+					if(UsuarioMapper::existeUsuario($nomUsuario)){
+						//Lamamos a la funcion que elimina el Usuario
+						Usuario::delete($idUsuario);
+						//Redireccionamos a vista
+						header("Location: ../views/Admin/gestionUsuarios.php");
+					}else{
+						ob_start();
+						header("refresh: 3; url = ../views/Admin/gestionUsuarios.php");
+						$errors = array();
+						$errors["general"] = "ERROR.El usuario no existe.";
+						echo $errors["general"];
+						ob_end_flush();
+					}
+			}else{
+				ob_start();
+				if ($_SESSION['usuario']->getTipoUsuario()=="DeportistaPEF" || $_SESSION['usuario']->getTipoUsuario()=="DeportistaTDU") {
+					header("refresh: 3; url = ../views/Deportista/principal.php");
+				}
+				else{
+					header("refresh: 3; url = ../views/Entrenador/principal.php");
+				}
+				$errors = array();
+				$errors["general"] = "No tiene permiso para modificar un usuario";
+				echo $errors["general"];
+				ob_end_flush();
+			}
+	}//FIN BORRAR USUARIO
+
   	public static function crearUsuario(){
   		if(!isset($_SESSION)) session_start();
   		if($_SESSION["usuario"]->getTipoUsuario() == 'Administrador'){
