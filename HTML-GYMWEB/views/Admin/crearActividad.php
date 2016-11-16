@@ -38,7 +38,7 @@ if(!isset($_SESSION)) session_start();
 
   		 <!-- DIV FORMULARIO -->
 		 <div id="container-actividades" style="background:#0275d8; border: solid;border-radius:5px; border-color: black;">
-		 	<form action="../../controller/defaultController.php?controlador=actividad&accion=crearActividad" method="post" style="margin:10px;" enctype="multipart/form-data">
+		 	<form action="../../controller/defaultController.php?controlador=actividad&accion=crearActividad" method="post" style="margin:10px;">
 		 		<!-- COMIENZO ROW-->
 		 		<div class="row">
 
@@ -50,7 +50,7 @@ if(!isset($_SESSION)) session_start();
 
           <!-- DIV PLAZAS ACT -->
           <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-4">
-              <label for="nomAct">Plazas: </label>
+              <label for="numPl">Plazas: </label>
               <input type="number" class="form-control" name="numPl" maxlength="3" placeholder="Plazas actividad">
           </div>
 
