@@ -45,32 +45,32 @@ if(!isset($_SESSION)) session_start();
           <!-- DIV NOMBRE ACT -->
           <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-4">
               <label for="nomAct">Nombre: </label>
-              <input type="text" class="form-control" name="nomAct" maxlength="30" placeholder="Nombre actividad">
+              <input type="text" required="" class="form-control" name="nomAct" maxlength="30" placeholder="Nombre actividad">
           </div>
 
           <!-- DIV PLAZAS ACT -->
           <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-4">
               <label for="numPl">Plazas: </label>
-              <input type="number" class="form-control" name="numPl" maxlength="3" placeholder="Plazas actividad">
+              <input type="number" required="" class="form-control" name="numPl" maxlength="3" placeholder="Plazas actividad">
           </div>
 
           <!-- DIV FECHA ACT -->
           <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-4">
               <label for="dateAct">Fecha: </label>
-              <input type="datetime-local" class="form-control" name="fecha">
+              <input type="datetime-local" required="" class="form-control" name="fecha">
           </div>
 
 
             <!-- DIV DESCRIP ACT -->
            <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-8">
                <label for="descAct">Descripci&oacuten Actividad: </label>
-               <textarea class="form-control" rows="4" maxlength="500" name="descrAct" placeholder="Breve descripción de la actividad"></textarea>
+               <textarea class="form-control" required="" rows="4" maxlength="500" name="descrAct" placeholder="Breve descripción de la actividad"></textarea>
            </div>
 
            <!-- DIV IMAGEN-->
           <div class="form-group col-xs-12 col-sm-4 col-md-4 col-lg-4" style="margin-top:30px;">
               <label for="imgAct">Subir Imagen: </label>
-              <input type="file" name="imagen">
+              <input type="file" required="" name="imagen">
           </div>
 
 					</div> <!-- FIN ROW -->
