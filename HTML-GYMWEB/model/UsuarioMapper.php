@@ -9,6 +9,20 @@ class UsuarioMapper{
       return $resultado;
   }
     /*Buscamos Usuario por su nombreUsusario*/
+    public static function findByUserName($nomUsuario)
+    {
+        global $connect;
+        $resultado = mysqli_query($connect, 'SELECT * FROM usuario WHERE nomUsuario ="'.$nomUsuario.'"');
+        if (mysqli_num_rows($resultado) > 0) {
+            $row = mysqli_fetch_assoc($resultado);
+            $usuario= new Usuario($row['idUsuario'],$row['nomUsuario'],$row['password'],$row['email'],$row['tipoUsuario'],$row['nombre'],$row['apellidos']);
+            return $usuario;
+        } else {
+            return NULL;
+        }
+    }
+
+    /*Buscamos Usuario por su nombreUsusario*/
     public static function findByUserId($idUsuario)
     {
         global $connect;
@@ -21,6 +35,7 @@ class UsuarioMapper{
             return NULL;
         }
     }
+
     /*Buscamos si existe un User por su Nombre de Usuario, devolvemos true si existe*/
     public static function existeUsuario($nomUsuario) {
         global $connect;
@@ -40,6 +55,16 @@ class UsuarioMapper{
         }
     }
     /*Mira si el Usuario es valido (solo comprobando el nombre) y devuelve true.*/
+   public static function usuarioValido($nomUsuario) {
+       global $connect;
+       $resultado = mysqli_query($connect, "SELECT * FROM usuario WHERE nomUsuario=\"$nomUsuario\"");
+       $busqueda = mysqli_num_rows($resultado);
+       if( $busqueda > 0) {
+           return true;
+       }
+   }
+    
+    /*Mira si el Usuario es valido (solo comprobando el nombre) y devuelve true.*/
    public static function usuarioValido($idUsuario) {
        global $connect;
        $resultado = mysqli_query($connect, "SELECT * FROM usuario WHERE idUsuario=\"$idUsuario\"");
@@ -48,6 +73,7 @@ class UsuarioMapper{
            return true;
        }
    }
+
       /* Guardamos un Usuario en la BD*/
     public static function guardarUsuario($user){
       global $connect;

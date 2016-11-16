@@ -25,7 +25,7 @@
 	        <li><a id="Item4" href="gestionEjercicios.php">Gesti&oacuten de Ejercicios</a></li>
 	       <?php }else{
 	       		if($tipo == 'Entrenador'){ ?>
-	        <li><a id="Item1" href="#">Principal</a></li>
+	        <li><a id="Item1" href="principal.php">Principal</a></li>
 	        <li><a id="Item2" href="#">Mis Actividades</a></li>
 	        <li><a id="Item3" href="gestionEjercicios.php">Gesti&oacuten de Ejercicios</a></li>
 	        <li><a id="Item4" href="gestionTablas.php">Gesti&oacuten de Tablas de Ejercicios</a></li>

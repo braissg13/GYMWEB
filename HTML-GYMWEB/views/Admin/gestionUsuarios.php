@@ -1,7 +1,6 @@
 <?php
 include_once __DIR__."/../../model/model.php";
 include_once __DIR__."/../../controller/defaultController.php";
-
 if(!isset($_SESSION)) session_start();
  $user=$_SESSION["usuario"];
  /*Aqui comprobamos que no intenten entrar otros Usuarios que no sean Administradores*/
@@ -31,7 +30,7 @@ if(!isset($_SESSION)) session_start();
     <?php include("../navbar.php");  /*Cargamos la barra de navegación*/ ?>
   </header>
 
-  	<div class="container">
+    <div class="container">
 
 
     <h1>Usuarios</h1>
@@ -109,7 +108,6 @@ if(!isset($_SESSION)) session_start();
                 header("Location: = /../index.php");
              }
           }
-
         ob_end_flush();
   }
 ?>
