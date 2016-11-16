@@ -63,7 +63,7 @@ class UsuarioMapper{
            return true;
        }
    }
-    
+
     /*Mira si el Usuario es valido (solo comprobando el nombre) y devuelve true.*/
    public static function usuarioValidoId($idUsuario) {
        global $connect;
@@ -86,11 +86,16 @@ class UsuarioMapper{
     public static function update($idUsuario,$nomUsuario,$password,$email, $tipoUsuario, $nombre, $apellidos)
     {
         global $connect;
-        
+
         $password = md5($password);
-        
+
         $result = mysqli_query($connect, "UPDATE usuario SET nomUsuario=\"$nomUsuario\", password =\"$password\", email =\"$email\", tipoUsuario= \"$tipoUsuario\",nombre=\"$nombre\", apellidos=\"$apellidos\" WHERE idUsuario=\"$idUsuario\"");
         return $result;
+    }
+    public static function delete($idUsuario){
+        global $connect;
+        $resultado = mysqli_query($connect, "DELETE FROM usuario WHERE idUsuario=\"$idUsuario\"");
+        return $resultado;
     }
 }
 ?>
