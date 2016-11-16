@@ -7,6 +7,23 @@ class UsuarioController{
 		$usuarios = new Usuario();
 		return $usuarios->getAllUsuarios();
 	}
+	/* GET USUARIO*/
+	public static function getUsuario($idUsuario){
+	if(!isset($_SESSION)) session_start();
+
+	$usuario = NULL;
+	$usuario = Usuario::devolverDatos($idUsuario);
+	if ($usuario == NULL){
+		ob_start();
+		header("refresh: 3; url = ../views/Admin/gestionUsuarios.php");
+		$errors = array();
+		$errors["general"] = "El formulario no fue completado.";
+		echo $errors["general"];
+		ob_end_flush();
+	}else{
+		return $usuario;
+	}
+} // FIN GET USUARIO
 	public static function login() {
 		/*Comprobamos si nos pasan un Usuario por metodo POST*/
 		if(!isset($_SESSION)) session_start();
@@ -74,6 +91,49 @@ class UsuarioController{
 		die();
 
   	}
+		/*MODIFICAR Usuario*/
+			public static function modificarUsuario(){
+			if(!isset($_SESSION)) session_start();
+
+			if($_SESSION['usuario']->getTipoUsuario()=="Administrador"){
+				$idUsu = $_POST['idUsu'];
+				$nomUsuario = $_POST['nomUsu'];
+				$password = $_POST['pass'];
+				$nombre = $_POST['nombre'];
+				$apellidos = $_POST['apel'];
+
+							//Comprobamos si los datosintroducidos son Correctos
+							if(Actividad::registroValido($nombre,$descripcion)){
+
+								//Lamamos a la funcion que modifica la Actividad
+								Actividad::update($idUsu,$nomUsuario,$password,$nombre,$apellidos);
+
+								//Redireccionamos a vista
+								header("Location: ../views/Admin/consultarUsuarios.php?id=$idUsu");
+
+								}else{
+								ob_start();
+								header("refresh: 3; url = ../views/Admin/modificarUsuario.php?id=$idUsu");
+								$errors = array();
+								$errors["general"] = "ERROR.El formulario no fue bien completado.";
+								echo $errors["general"];
+								ob_end_flush();
+							}
+
+				}else{
+					ob_start();
+					 if ($_SESSION['usuario']->getTipoUsuario()=="DeportistaPEF" || $_SESSION['usuario']->getTipoUsuario()=="DeportistaTDU") {
+							header("refresh: 3; url = ../views/Deportista/principal.php");
+						}
+						else{
+							header("refresh: 3; url = ../views/Entrenador/principal.php");
+						}
+					$errors = array();
+					$errors["general"] = "No tiene permiso para modificar una Usuario";
+					echo $errors["general"];
+					ob_end_flush();
+				}
+			} //FIN MODIFICAR Usuario
 
   	public static function crearUsuario(){
   		if(!isset($_SESSION)) session_start();
