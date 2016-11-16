@@ -56,13 +56,13 @@ if(!isset($_SESSION)) session_start();
 
           <!-- DIV FECHA ACT -->
           <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-4">
-              <label for="dateAct">Fecha: </label>
-              <input type="date" required="" class="form-control" name="fecha">
+              <label for="dateAct">Fecha (dd/mm/aaaa): </label>
+              <input type="date" placeholder="dd/mm/aaaa" required="" class="form-control" name="fecha">
           </div>
           <!-- DIV HORA ACT -->
           <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-4">
-              <label for="timeAct">Hora: </label>
-              <input type="time" required="" class="form-control" name="hora">
+              <label for="timeAct">Hora (HH:MM): </label>
+              <input type="time" placeholder="HH:MM" required="" class="form-control" name="hora">
           </div>
 
             <!-- DIV DESCRIP ACT -->
