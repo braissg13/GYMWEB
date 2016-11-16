@@ -68,6 +68,7 @@ class Actividad {
     {
         return $resultado = ActividadMapper::findAll();
     }
+
     /* Guardamos una Actividad en la BD*/
   public static function guardarActividad($actividad){
     return ActividadMapper::guardarActividad($actividad);
