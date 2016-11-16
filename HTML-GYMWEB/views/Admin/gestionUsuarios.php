@@ -59,14 +59,18 @@ if(!isset($_SESSION)) session_start();
           </thead>
 
           <tbody>
-
+            <?php
+              foreach ($row as $usuario) {
+                ?>
             <tr>
               <td><?php echo $usuario['idUsuario']; ?></td>
               <td><a href="consultarUsuarios.php?id=<?php echo $usuario['idUsuario']; ?>" style="text-decoration: none;"><?php echo $usuario['nomUsuario']; ?></a></td>
               <td><a href="modificarUsuario.php?id=<?php echo $usuario['idUsuario']; ?>" style="text-decoration: none;"><button type="button" class="btn btn-default3" id="botonModificar">Modificar usuario</button></a></td>
                 <td><a href="consultarUsuarios.php?id=<?php echo $usuario['idUsuario']; ?>" style="text-decoration: none;"><button type="button" class="btn btn-default2" id="botonEliminar">Eliminar Usuario</button></a></td>
             </tr>
-      
+            <?php
+              }
+            ?>
 
           </tbody>
 
