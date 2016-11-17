@@ -13,9 +13,9 @@ if(!isset($_SESSION)) session_start();
     $row = ActividadController::getEntrenador($idActividad);
 
   //La fecha que nos devuleve la BD es de forma Año-Mes-Dia Hora:Min:Seg
-  //Entonces hay cambiarla a Dia-Mes-Año Hora:Min y lo hacemos de 
+  //Entonces hay cambiarla a Dia-Mes-Año Hora:Min y lo hacemos de
   //La siguiente manera: $format especificamos la manera en la que viene
-  //La fecha de la bd, createfromformat() crea un Objeto de tipo DateTime 
+  //La fecha de la bd, createfromformat() crea un Objeto de tipo DateTime
   //con elformato anterior y nuestra fecha de la bd.
   // $dateobj->format("d-m-Y H:i") Convierte la Fecha en el formato que queremos.
   // Este ultimo lo pondermos solo donde queremos mostrarlo que es en la tabla.
@@ -60,7 +60,7 @@ if(!isset($_SESSION)) session_start();
           <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
             <pre style="background-color: transparent; border-color: black;">
 <?php echo $actividad->getDescripActividad();?>
-          </pre>  
+          </pre>
 
           </div>
           <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"><p><b>Plazas: <?php echo $actividad->getTotalPlazas();?></b></p></div>
@@ -69,11 +69,15 @@ if(!isset($_SESSION)) session_start();
           <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"><p><b>Entrenador: <?php foreach($row as $entrenador){
              echo $entrenador['nomUsuario'];
             }?></b></p></div>
-           <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-            <a href="misActividades.php"><button type="button" class="btn btn-default3">Atr&aacutes</button></a>
-            </div>
+            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                <a href="controlReserva.php?id=<?php echo $actividad->getidActividad(); ?>" style="text-decoration: none;">
+                  <button type="button" class="btn btn-default3" id="botonVerReserva">ver Reserva</button></a>
+                <a href="misActividades.php"><button type="button" class="btn btn-default3">Atr&aacutes</button></a>
+              </div>
+
 
        </div><!-- FIN ROW -->
+
 
      </div> <!-- FIN CONTAINER ACTIVIDADES -->
 
@@ -84,17 +88,17 @@ if(!isset($_SESSION)) session_start();
 <?php
   /*Dependiendo que tipo de Usuario intente entrar donde no debe lo mandamosa su pagina principal.*/
   }else{
-        ob_start(); 
+        ob_start();
          if (($_SESSION["usuario"]->getTipoUsuario()=='DeportistaPEF') || ($_SESSION["usuario"]->getTipoUsuario()=='DeportistaTDU')){
-            header("refresh: 1; url = ../Deportista/principal.php");  
+            header("refresh: 1; url = ../Deportista/principal.php");
           }else{
              if($_SESSION["usuario"]->getTipoUsuario()=='Administrador'){
-                  header("Location: ../Administrador/principal.php");  
+                  header("Location: ../Administrador/principal.php");
              }else{
-                header("Location: = /../index.php"); 
+                header("Location: = /../index.php");
              }
           }
-          
-        ob_end_flush();  
+
+        ob_end_flush();
   }
 ?>
