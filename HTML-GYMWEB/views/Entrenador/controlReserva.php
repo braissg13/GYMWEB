@@ -4,9 +4,8 @@ include_once __DIR__."/../../controller/defaultController.php";
 if(!isset($_SESSION)) session_start();
  $user=$_SESSION["usuario"];
  if ($_SESSION["usuario"]->getTipoUsuario() =='Entrenador'){
-
   $idActividad = $_GET['id'];
-  $row = UsuarioController::getUsuariosEntrenador($idActividad);
+  $row = ActividadController::getUsuariosEntrenador($idActividad);
 ?>
 
 <!DOCTYPE html>
@@ -19,7 +18,7 @@ if(!isset($_SESSION)) session_start();
     <!-- Bootstrap -->
     <link href="../../css/navbar.css" rel="stylesheet">
     <link href="../../css/bootstrap.min.css" rel="stylesheet">
-     <link href="../../css/gestionUsuarios.css" rel="stylesheet">
+     <link href="../../css/controlReserva.css" rel="stylesheet">
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
@@ -56,7 +55,6 @@ if(!isset($_SESSION)) session_start();
             <tbody>
               <?php
               if ($row!=NULL) {
-
                 foreach ($row as $usuario) {
                   ?>
               <tr>
@@ -75,15 +73,10 @@ if(!isset($_SESSION)) session_start();
 
           </table>
 
-          <div id= "paginacion">
-          <ul class="pagination">
-            <li><a href="#">«</a></li>
-            <li><a href="#">1</a></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">»</a></li>
-          </ul>
         </div>
+
+        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+            <a href="consultarActividades.php?id=<?php echo $idActividad;?>"><button type="button" class="btn btn-default">Atr&aacutes</button></a>
         </div>
 
     </div><!-- FIN ROW -->
@@ -108,7 +101,6 @@ if(!isset($_SESSION)) session_start();
                 header("Location: = /../index.php");
              }
           }
-
         ob_end_flush();
   }
 ?>

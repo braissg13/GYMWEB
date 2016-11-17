@@ -63,7 +63,7 @@ class UsuarioMapper{
            return true;
        }
    }
-
+    
     /*Mira si el Usuario es valido (solo comprobando el nombre) y devuelve true.*/
    public static function usuarioValidoId($idUsuario) {
        global $connect;
@@ -86,9 +86,9 @@ class UsuarioMapper{
     public static function update($idUsuario,$nomUsuario,$password,$email, $tipoUsuario, $nombre, $apellidos)
     {
         global $connect;
-
+        
         $password = md5($password);
-
+        
         $result = mysqli_query($connect, "UPDATE usuario SET nomUsuario=\"$nomUsuario\", password =\"$password\", email =\"$email\", tipoUsuario= \"$tipoUsuario\",nombre=\"$nombre\", apellidos=\"$apellidos\" WHERE idUsuario=\"$idUsuario\"");
         return $result;
     }
@@ -107,23 +107,9 @@ class UsuarioMapper{
 
     public static function getActividadesAsignadas($idUsuario){
       global $connect;
-        $resultado = mysqli_query($connect, 'SELECT * FROM usuario_actividad WHERE Usuario_idUsuario ="'.$idUsuario.'"');
+        $resultado = mysqli_query($connect, 'SELECT * FROM actividad A, usuario_actividad U WHERE U.Usuario_idUsuario= "'.$idUsuario.'" AND U.Actividad_idActividad = A.idActividad ');
         if (mysqli_num_rows($resultado) > 0) {
-            $row = mysqli_fetch_assoc($resultado);
-            $resultado2 = mysqli_query($connect, 'SELECT * FROM actividad WHERE idActividad ="'.$row['Actividad_idActividad'].'"');
-            return $resultado2;
-        } else {
-            return NULL;
-        }
-    }
-    /*devolver los usuarios que estan apuntados en una actividad*/
-    public static function getUsuariosAsignados($idActividad){
-      global $connect;
-        $resultado = mysqli_query($connect, 'SELECT * FROM reserva WHERE Actividad_idActividad ="'.$idActividad.'"');
-        if (mysqli_num_rows($resultado) > 0) {
-            $row = mysqli_fetch_assoc($resultado);
-            $resultado2 = mysqli_query($connect, 'SELECT * FROM usuario WHERE idUsuario ="'.$row['Usuario_idUsuario'].'"');
-            return $resultado2;
+            return $resultado;
         } else {
             return NULL;
         }

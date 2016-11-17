@@ -141,10 +141,7 @@ class Usuario {
   }
 
   public static function getActividadesAsignadas($idUsuario){
-    return UsuarioMapper::getActividadesAsignadas($idUsuario);
-  }
-  public static function getUsuariosAsignados($idActividad){
-    return UsuarioMapper::getUsuariosAsignados($idActividad);
+    return $resultado = UsuarioMapper::getActividadesAsignadas($idUsuario);
   }
 }
 ?>

@@ -104,5 +104,16 @@ class ActividadMapper{
         $resultado = mysqli_query($connect, "UPDATE usuario_actividad SET Usuario_idUsuario=\"$entrenador\" WHERE Actividad_idActividad=\"$idActividad\"");
         return $resultado;
      }
+
+     /*devolver los usuarios que ehan hecho una reserva a una actividad*/
+    public static function getUsuariosAsignados($idActividad){
+      global $connect;
+        $resultado = mysqli_query($connect, 'SELECT * FROM usuario U, reserva R WHERE R.Actividad_idActividad="'.$idActividad.'"  AND U.idUsuario = R.Usuario_idUsuario ');
+        if (mysqli_num_rows($resultado) > 0) {
+            return $resultado;
+        } else {
+            return NULL;
+        }
+    }
 }
 ?>

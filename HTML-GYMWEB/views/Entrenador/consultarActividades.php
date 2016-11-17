@@ -1,17 +1,13 @@
 <?php
 include_once __DIR__."/../../model/model.php";
 include_once __DIR__."/../../controller/defaultController.php";
-
 if(!isset($_SESSION)) session_start();
  $user=$_SESSION["usuario"];
  /*Aqui comprobamos que no intenten entrar otros Usuarios que no sean Administradores*/
  if ($_SESSION["usuario"]->getTipoUsuario() =='Entrenador'){
-
    $idActividad = $_GET['id'];
-
     $actividad = ActividadController::getActividad($idActividad);
     $row = ActividadController::getEntrenador($idActividad);
-
   //La fecha que nos devuleve la BD es de forma Año-Mes-Dia Hora:Min:Seg
   //Entonces hay cambiarla a Dia-Mes-Año Hora:Min y lo hacemos de
   //La siguiente manera: $format especificamos la manera en la que viene
@@ -48,7 +44,7 @@ if(!isset($_SESSION)) session_start();
     <?php include("../navbar.php");  /*Cargamos la barra de navegación*/ ?>
   </header>
 
-  	<div class="container">
+    <div class="container">
 
 
         <h1>Actividad: <?php echo $actividad->getNomActividad();?></h1>
@@ -71,7 +67,7 @@ if(!isset($_SESSION)) session_start();
             }?></b></p></div>
             <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
                 <a href="controlReserva.php?id=<?php echo $actividad->getidActividad(); ?>" style="text-decoration: none;">
-                  <button type="button" class="btn btn-default3" id="botonVerReserva">ver Reserva</button></a>
+                  <button type="button" class="btn btn-default4" id="botonVerReserva">ver Reserva</button></a>
                 <a href="misActividades.php"><button type="button" class="btn btn-default3">Atr&aacutes</button></a>
               </div>
 
@@ -81,7 +77,7 @@ if(!isset($_SESSION)) session_start();
 
      </div> <!-- FIN CONTAINER ACTIVIDADES -->
 
-	</div>
+  </div>
   <?php include("../footer.php");  /*Cargamos el footer*/ ?>
   </body>
 </html>
@@ -98,7 +94,6 @@ if(!isset($_SESSION)) session_start();
                 header("Location: = /../index.php");
              }
           }
-
         ob_end_flush();
   }
 ?>

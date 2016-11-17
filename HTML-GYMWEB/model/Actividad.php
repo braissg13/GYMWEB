@@ -134,5 +134,9 @@ class Actividad {
   public static function updateAsignarEntrenador($entrenador,$idActividad){
     ActividadMapper::updateAsignarEntrenador($entrenador,$idActividad);
   }
+
+  public static function getUsuariosAsignados($idActividad){
+    return ActividadMapper::getUsuariosAsignados($idActividad);
+  }
 }
 ?>

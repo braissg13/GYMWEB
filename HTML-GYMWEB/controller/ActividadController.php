@@ -17,6 +17,13 @@
           return $entrenadorActividad;
         }
 
+        /*Obtenemos todos los usuarios que Pertenecen a una Reserva en concreto*/
+        public static function getUsuariosEntrenador($idActividad){
+          if(!isset($_SESSION)) session_start();
+         $usuario = Actividad::getUsuariosAsignados($idActividad);
+         return $usuario;
+        }
+
         /*CREAR ACTIVIDAD*/
         public static function crearActividad(){
         if(!isset($_SESSION)) session_start();
