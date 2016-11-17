@@ -83,9 +83,16 @@ if(!isset($_SESSION)) session_start();
              <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
                <label for="tipoUsu">Asignar entrenador: </label>
                  <select class="form-control" name="entrenador" required="">
-                 <?php foreach($row as $entrenador){ ?>
+                 <?php
+                  if($row!=NULL){
+                  foreach($row as $entrenador){ ?>
                       <option value="<?php echo $entrenador['idUsuario'];?>"><?php echo $entrenador['nomUsuario'];?></option>
-                  <?php } ?>
+                  <?php } 
+                    }else{ ?>
+                      <option>Crea Un Entrenador</option>
+                  <?php
+                    }
+                  ?>
                  </select>
              </div>
          </div>
