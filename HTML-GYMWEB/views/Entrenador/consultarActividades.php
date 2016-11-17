@@ -67,7 +67,7 @@ if(!isset($_SESSION)) session_start();
             }?></b></p></div>
             <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
                 <a href="controlReserva.php?id=<?php echo $actividad->getidActividad(); ?>" style="text-decoration: none;">
-                  <button type="button" class="btn btn-default4" id="botonVerReserva">ver Reserva</button></a>
+                  <button type="button" style="background-color: slateblue;color: white;" class="btn btn-default4" id="botonVerReserva">ver Reserva</button></a>
                 <a href="misActividades.php"><button type="button" class="btn btn-default3">Atr&aacutes</button></a>
               </div>
 
