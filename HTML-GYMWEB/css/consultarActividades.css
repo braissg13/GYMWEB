@@ -34,13 +34,14 @@ button.btn.btn-default3:hover{
     box-shadow: inset 0 0 0 3px black;
 }
 
-#botonVerReserva{
-    background-color: #0886C4; 
+button.btn.btn-default4{
+    background-color: black; 
     border-radius: 5px;
     color: white;
 }
-#botonVerReserva:hover{
+button.btn.btn-default4:hover{
     background-color: transparent;
-    color: #0886C4;
-    box-shadow: inset 0 0 0 3px #0886C4;
+    color: black;
+    box-shadow: inset 0 0 0 3px black;
 }
+
