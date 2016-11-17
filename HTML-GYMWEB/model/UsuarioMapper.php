@@ -98,5 +98,23 @@ class UsuarioMapper{
         $resultado = mysqli_query($connect, "DELETE FROM usuario WHERE idUsuario=\"$idUsuario\"");
         return $resultado;
     }
+
+    public static function findAllEntrenadores(){
+      global $connect;
+      $resultado = mysqli_query($connect, 'SELECT * FROM usuario WHERE tipoUsuario="Entrenador"');
+      return $resultado;
+    }
+
+    public static function getActividadesAsignadas($idUsuario){
+      global $connect;
+        $resultado = mysqli_query($connect, 'SELECT * FROM usuario_actividad WHERE Usuario_idUsuario ="'.$idUsuario.'"');
+        if (mysqli_num_rows($resultado) > 0) {
+            $row = mysqli_fetch_assoc($resultado);
+            $resultado2 = mysqli_query($connect, 'SELECT * FROM actividad WHERE idActividad ="'.$row['Actividad_idActividad'].'"');
+            return $resultado2;
+        } else {
+            return NULL;
+        }
+    }
 }
 ?>

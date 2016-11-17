@@ -135,5 +135,13 @@ class Usuario {
    public static function delete($idUsuario){
       UsuarioMapper::delete($idUsuario);
   }
+
+  public static function getAllEntrenadores(){
+    return $resultado = UsuarioMapper::findAllEntrenadores();
+  }
+
+  public static function getActividadesAsignadas($idUsuario){
+    return UsuarioMapper::getActividadesAsignadas($idUsuario);
+  }
 }
 ?>

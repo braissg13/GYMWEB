@@ -6,6 +6,7 @@ if(!isset($_SESSION)) session_start();
  $user=$_SESSION["usuario"];
  /*Aqui comprobamos que no intenten entrar otros Usuarios que no sean Administradores*/
  if ($_SESSION["usuario"]->getTipoUsuario() =='Administrador'){
+   $row = UsuarioController::getAllEntrenadores();
 ?>
 
 
@@ -76,6 +77,19 @@ if(!isset($_SESSION)) session_start();
               <label for="imgAct">Subir Imagen: </label>
               <input type="file" required="" name="imagen">
           </div>
+
+          <!-- DIV ASIGNAR ENTRENADOR -->
+         <div class="form-group">
+             <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+               <label for="tipoUsu">Asignar entrenador: </label>
+                 <select class="form-control" name="entrenador" required="">
+                 <?php foreach($row as $entrenador){ ?>
+                      <option value="<?php echo $entrenador['idUsuario'];?>"><?php echo $entrenador['nomUsuario'];?></option>
+                  <?php } ?>
+                 </select>
+             </div>
+         </div>
+
 
 					</div> <!-- FIN ROW -->
 

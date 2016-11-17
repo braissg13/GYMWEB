@@ -8,7 +8,8 @@ if(!isset($_SESSION)) session_start();
  if ($_SESSION["usuario"]->getTipoUsuario() =='Administrador'){
   $idAct = $_GET['id'];
   $actividad = ActividadController::getActividad($idAct);
-
+   $row = UsuarioController::getAllEntrenadores();
+  $row2 = ActividadController::getEntrenador($idAct);
   //La fecha que nos devuleve la BD es de forma Año-Mes-Dia Hora:Min:Seg
   //Entonces hay cambiarla a Dia-Mes-Año Hora:Min y lo hacemos de 
   //La siguiente manera: $format especificamos la manera en la que viene
@@ -60,6 +61,9 @@ if(!isset($_SESSION)) session_start();
           <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"><p><b>Plazas: <?php echo $actividad->getTotalPlazas();?></b></p></div>
           <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"><p><b>Plazas Ocupadas: <?php echo $actividad->getPlazasOcupadas();?></b></p></div>
           <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"><p><b>Fecha: <?php echo $dateobj->format("d-m-Y H:i");?></b></p></div>
+          <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"><p><b>Entrenador: <?php foreach($row2 as $entr){
+             echo $entr['nomUsuario'];
+            }?></b></p></div>
       </div><!-- FIN ROW -->
 
      </div> <!-- FIN CONTAINER ACTIVIDAD -->
@@ -102,6 +106,17 @@ if(!isset($_SESSION)) session_start();
                   <label for="imgAct">Subir Imagen: </label>
                   <input type="file" name="imagen">
                 </div>
+       <!-- DIV ASIGNAR ENTRENADOR-->         
+                <div class="form-group">
+                   <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                     <label for="tipoUsu">Asignar entrenador: </label>
+                       <select class="form-control" name="entrenador" required="">
+                       <?php foreach($row as $entrenador){ ?>
+                            <option value="<?php echo $entrenador['idUsuario'];?>"><?php echo $entrenador['nomUsuario'];?></option>
+                        <?php } ?>
+                       </select>
+                   </div>
+               </div>
 
             
           </div> <!-- FIN ROW 2-->

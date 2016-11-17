@@ -10,6 +10,12 @@
     			return $actividades->getAllActividades();
     		}
 
+        /*Obtenemos a un Entrenador determinado*/
+        public static function getEntrenador($idActividad){
+          if(!isset($_SESSION)) session_start();
+          $entrenadorActividad = Actividad::getEntrenadorAsignado($idActividad);
+          return $entrenadorActividad;
+        }
 
         /*CREAR ACTIVIDAD*/
         public static function crearActividad(){
@@ -25,8 +31,9 @@
           //Juntamos Fecha y Hora en $fecha y el :00 es para añadirle los segundos
           $fecha= "$date $tiempo:00";
           $plazasOcupadas="0";
-          $idEjer = "NULL";
-
+          $idAct = "NULL";
+          // Recogemos el ID del entrenador a asignar
+          $entrenador = $_POST['entrenador'];
           /*$format = "Y-m-d H:i:s";
           $dateobj = DateTime::createFromFormat($format, $fecha);*/
 
@@ -34,7 +41,7 @@
           if($_FILES['imagen']['type']=="image/jpeg" || $_FILES['imagen']['type']=="image/png" || $_FILES['imagen']['type']=="image/jpg"){
                 //Comprobamos si los datosintroducidos son Correctos
                 if(Actividad::registroValido($nombre,$descripcion)){
-                  //Creamos ruta donde guardamos la imagen yle damos nombre
+                  //Creamos ruta donde guardamos la imagen yle damos nombre 
                   $ruta = "../img/actividades";
                   $archivo = $_FILES['imagen']['tmp-name'];
                   $nombreArchivo = $_FILES['imagen']['name'];
@@ -42,7 +49,7 @@
                   //Creamos el Ejercicio
                   $actividad = new Actividad();
 
-                  $actividad->setIdActividad($idEjer);
+                  $actividad->setIdActividad($idAct);
                   $actividad->setNomActividad($nombre);
                   $actividad->setTotalPlazas($totalPlazas);
                   $actividad->setDescripActividad($descripcion);
@@ -51,35 +58,39 @@
                   $actividad->setImagenActividad($nombreArchivo);
 
                   $actividad->guardarActividad($actividad);
-                  header("Location: ../views/Admin/gestionActividades.php");
-
+                  //recogemos los datos de la actividad guardada para asignar el entrenador
+                  $act = Actividad::datosActividad($nombre,$fecha);
+                  $idActividad = $act->getIdActividad();
+                  $asignarEntr = Actividad::asignarEntrenador($entrenador,$idActividad);
+                  header("Location: ../views/Admin/gestionActividades.php"); 
+                
                   }else{
-                  ob_start();
-                  header("refresh: 3; url = ../views/Admin/gestionActividades.php");
+                  ob_start(); 
+                  header("refresh: 3; url = ../views/Admin/gestionActividades.php"); 
                   $errors = array();
                   $errors["general"] = "ERROR.El formulario no fue bien completado.";
-                  echo $errors["general"];
+                  echo $errors["general"]; 
                   ob_end_flush();
                 }
             }else{
-              ob_start();
-              header("refresh: 3; url = ../views/Admin/gestionActividades.php");
+              ob_start(); 
+              header("refresh: 3; url = ../views/Admin/gestionActividades.php"); 
               $errors = array();
               $errors["general"] = "ERROR. Formato de imagen no válido.";
-              echo $errors["general"];
+              echo $errors["general"]; 
               ob_end_flush();
             }
           }else{
-            ob_start();
+            ob_start(); 
              if ($_SESSION['usuario']->getTipoUsuario()=="DeportistaPEF" || $_SESSION['usuario']->getTipoUsuario()=="DeportistaTDU") {
-                header("refresh: 3; url = ../views/Deportista/principal.php");
+                header("refresh: 3; url = ../views/Deportista/principal.php"); 
               }
               else{
-                header("refresh: 3; url = ../views/Entrenador/principal.php");
-              }
+                header("refresh: 3; url = ../views/Entrenador/principal.php"); 
+              } 
             $errors = array();
             $errors["general"] = "No tiene permiso para crear una Actividad";
-            echo $errors["general"];
+            echo $errors["general"]; 
             ob_end_flush();
           }
         } //FIN CREAR Actividad
@@ -91,11 +102,11 @@
         $actividad = NULL;
         $actividad = Actividad::obtenerDatos($idActividad);
         if ($actividad == NULL){
-          ob_start();
-          header("refresh: 3; url = ../views/Admin/gestionEjercicios.php");
+          ob_start(); 
+          header("refresh: 3; url = ../views/Admin/gestionEjercicios.php"); 
           $errors = array();
           $errors["general"] = "El formulario no fue completado.";
-          echo $errors["general"];
+          echo $errors["general"]; 
           ob_end_flush();
         }else{
           return $actividad;
@@ -118,49 +129,53 @@
           $fecha= "$date $tiempo:00";
           $plazasOcupadas=$_POST['plazasOc'];
 
+          // Recogemos el ID del entrenador a asignar
+          $entrenador = $_POST['entrenador'];
+
           //Comprobamos el tipo de la Imagen, SI es correcto, obtenemos los datos de la ruta y de la imagen
           if($_FILES['imagen']['type']=="image/jpeg" || $_FILES['imagen']['type']=="image/png" || $_FILES['imagen']['type']=="image/jpg"){
                 //Comprobamos si los datosintroducidos son Correctos
                 if(Actividad::registroValido($nombre,$descripcion)){
-                  //Creamos ruta donde guardamos la imagen yle damos nombre
+                  //Creamos ruta donde guardamos la imagen yle damos nombre 
                   $ruta = "../img/actividades";
                   $archivo = $_FILES['imagen']['tmp-name'];
                   $nombreArchivo = $_FILES['imagen']['name'];
                   move_uploaded_file($archivo, $ruta."/".$nombreArchivo);
-
-                  //Lamamos a la funcion que modifica la Actividad
-                  Actividad::update($idAct,$nombre,$totalPlazas,$descripcion,$fecha,$plazasOcupadas,$nombreArchivo);
-
-                  //Redireccionamos a vista
-                  header("Location: ../views/Admin/consultarActividades.php?id=$idAct");
-
+                  
+                  //Llamamos a la funcion que modifica la Actividad
+                  $actividad = Actividad::update($idAct,$nombre,$totalPlazas,$descripcion,$fecha,$plazasOcupadas,$nombreArchivo);
+                  //Llamamos a la funcion que modifica Al entrenador Asignado
+                   $asignarEntr = Actividad::updateAsignarEntrenador($entrenador,$idAct);
+                  //Redireccionamos a vista 
+                  header("Location: ../views/Admin/consultarActividades.php?id=$idAct"); 
+                
                   }else{
-                  ob_start();
-                  header("refresh: 3; url = ../views/Admin/modificarActividad.php?id=$idAct");
+                  ob_start(); 
+                  header("refresh: 3; url = ../views/Admin/modificarActividad.php?id=$idAct"); 
                   $errors = array();
                   $errors["general"] = "ERROR.El formulario no fue bien completado.";
-                  echo $errors["general"];
+                  echo $errors["general"]; 
                   ob_end_flush();
                 }
             }else{
-              ob_start();
-              header("refresh: 3; url = ../views/Admin/modificarActividad.php?id=$idAct");
+              ob_start(); 
+              header("refresh: 3; url = ../views/Admin/modificarActividad.php?id=$idAct"); 
               $errors = array();
               $errors["general"] = "ERROR. Formato de imagen no válido.";
-              echo $errors["general"];
+              echo $errors["general"]; 
               ob_end_flush();
             }
           }else{
-            ob_start();
+            ob_start(); 
              if ($_SESSION['usuario']->getTipoUsuario()=="DeportistaPEF" || $_SESSION['usuario']->getTipoUsuario()=="DeportistaTDU") {
-                header("refresh: 3; url = ../views/Deportista/principal.php");
+                header("refresh: 3; url = ../views/Deportista/principal.php"); 
               }
               else{
-                header("refresh: 3; url = ../views/Entrenador/principal.php");
-              }
+                header("refresh: 3; url = ../views/Entrenador/principal.php"); 
+              } 
             $errors = array();
             $errors["general"] = "No tiene permiso para modificar una Actividad";
-            echo $errors["general"];
+            echo $errors["general"]; 
             ob_end_flush();
           }
         } //FIN MODIFICAR Actividad
@@ -173,32 +188,34 @@
                 $nombre = $_POST['NomActividad'];
                 //Comprobamos si existe la actividad para poder borrarlo
                 if(ActividadMapper::existeActividad($nombre)){
+                  //Lamamos a la funcion que elimina la Relacion Entrenador-Actividad
+                  Actividad::deleteEntrenadorActividad($idActividad);
                   //Lamamos a la funcion que elimina la Actividad
                   Actividad::delete($idActividad);
                   //Redireccionamos a vista
-                  header("Location: ../views/Admin/gestionActividades.php");
+                  header("Location: ../views/Admin/gestionActividades.php"); 
                 }else{
-                  ob_start();
-                  header("refresh: 3; url = ../views/Admin/gestionActividades.php");
+                  ob_start();  
+                  header("refresh: 3; url = ../views/Admin/gestionActividades.php");   
                   $errors = array();
                   $errors["general"] = "ERROR.La Actividad no existe.";
-                  echo $errors["general"];
+                  echo $errors["general"]; 
                   ob_end_flush();
                 }
             }else{
-              ob_start();
+              ob_start(); 
               if ($_SESSION['usuario']->getTipoUsuario()=="DeportistaPEF" || $_SESSION['usuario']->getTipoUsuario()=="DeportistaTDU") {
-                header("refresh: 3; url = ../views/Deportista/principal.php");
+                header("refresh: 3; url = ../views/Deportista/principal.php"); 
               }
               else{
-                header("refresh: 3; url = ../views/Entrenador/principal.php");
-              }
+                header("refresh: 3; url = ../views/Entrenador/principal.php"); 
+              }  
               $errors = array();
               $errors["general"] = "No tiene permiso para modificar un Ejercicio";
-              echo $errors["general"];
+              echo $errors["general"]; 
               ob_end_flush();
             }
         }//FIN BORRAR ACTIVIDAD
 
-  }
+  }  
 ?>

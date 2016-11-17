@@ -1,6 +1,7 @@
 <?php
 include_once __DIR__."/../conexion/bdConexion.php";
-
+include_once __DIR__."/../model/Usuario.php";
+include_once __DIR__."/../model/UsuarioMapper.php";
 class ActividadMapper{
     /*Buscamos todos las Actividades*/
     public static function findAll()
@@ -39,6 +40,18 @@ class ActividadMapper{
             return NULL;
         }
     }
+    /*Cogemos todos los datos de una Actividad buscandolo por su Nombre y devolvemos un objeto Actividad*/
+    public static function findByNomActividad($nomActividad,$fecha){
+        global $connect;
+        $resultado = mysqli_query($connect, 'SELECT * FROM actividad WHERE nomActividad ="'.$nomActividad.'" AND fecha ="'.$fecha.'"');
+        if (mysqli_num_rows($resultado) > 0) {
+            $row = mysqli_fetch_assoc($resultado);
+            $actividad= new Actividad($row['idActividad'],$row['nomActividad'],$row['totalPlazas'],$row['descripAct'],$row['fecha'],$row['plazasOcupadas'],$row['imagenAct']);
+            return $actividad;
+        } else {
+            return NULL;
+        }
+    }
      /*Mira si la Actividad es valido y devuelve true.*/
     public static function esValidoActividad($idActividad) {
         global $connect;
@@ -59,5 +72,37 @@ class ActividadMapper{
         $resultado = mysqli_query($connect, "DELETE FROM actividad WHERE idActividad=\"$idActividad\"");
         return $resultado;
     }
+    public static function asignarEntrenador($idUsuario,$idActividad){
+        global $connect;
+        $resultado = false;
+        $sqlcrear= "INSERT INTO usuario_actividad (Usuario_idUsuario,Actividad_idActividad)VALUES ('";
+        $sqlcrear = $sqlcrear.$idUsuario."','".$idActividad."')";
+        $resultado = mysqli_query($connect, $sqlcrear);
+       return $resultado;
+    }
+
+    public static function getEntrenadorAsignado($idActividad){
+        global $connect;
+        $resultado = mysqli_query($connect, 'SELECT * FROM usuario_actividad WHERE Actividad_idActividad ="'.$idActividad.'"');
+        if (mysqli_num_rows($resultado) > 0) {
+            $row = mysqli_fetch_assoc($resultado);
+            $resultado2 = mysqli_query($connect, 'SELECT nomUsuario FROM usuario WHERE idUsuario ="'.$row['Usuario_idUsuario'].'"');
+            return $resultado2;
+        } else {
+            return NULL;
+        }
+    }
+
+     public static function deleteEntrenadorActividad($idActividad){
+        global $connect;
+        $resultado = mysqli_query($connect, "DELETE FROM usuario_actividad WHERE Actividad_idActividad=\"$idActividad\"");
+        return $resultado;
+     }
+
+     public static function updateAsignarEntrenador($entrenador,$idActividad){
+        global $connect;
+        $resultado = mysqli_query($connect, "UPDATE usuario_actividad SET Usuario_idUsuario=\"$entrenador\" WHERE Actividad_idActividad=\"$idActividad\"");
+        return $resultado;
+     }
 }
 ?>

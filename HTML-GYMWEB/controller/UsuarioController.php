@@ -6,6 +6,21 @@ class UsuarioController{
 		$usuarios = new Usuario();
 		return $usuarios->getAllUsuarios();
 	}
+
+	/*Obtenemos todos los Entrenadores*/
+	public static function getAllEntrenadores(){
+		if(!isset($_SESSION)) session_start();
+		$entrenador = new Usuario();
+		return $entrenador->getAllEntrenadores();
+	}
+
+	/*Obtenemos todos las Actividades que Pertenecen a un entrenador*/
+	public static function getActividadesEntrenador($idUsuario){
+		if(!isset($_SESSION)) session_start();
+         $actividad = Usuario::getActividadesAsignadas($idUsuario);
+         return $actividad;
+	}
+
 	/* GET USUARIO*/
 	public static function getUsuario($idUsuario){
 	if(!isset($_SESSION)) session_start();

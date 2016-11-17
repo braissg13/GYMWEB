@@ -10,7 +10,7 @@ if(!isset($_SESSION)) session_start();
    $idActividad = $_GET['id'];
 
     $actividad = ActividadController::getActividad($idActividad);
-
+    $row = ActividadController::getEntrenador($idActividad);
 
   //La fecha que nos devuleve la BD es de forma Año-Mes-Dia Hora:Min:Seg
   //Entonces hay cambiarla a Dia-Mes-Año Hora:Min y lo hacemos de 
@@ -66,7 +66,9 @@ if(!isset($_SESSION)) session_start();
           <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"><p><b>Plazas: <?php echo $actividad->getTotalPlazas();?></b></p></div>
           <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"><p><b>Plazas Ocupadas: <?php echo $actividad->getPlazasOcupadas();?></b></p></div>
           <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"><p><b>Fecha: <?php echo $dateobj->format("d-m-Y H:i");?></b></p></div>
-
+          <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"><p><b>Entrenador: <?php foreach($row as $entrenador){
+             echo $entrenador['nomUsuario'];
+            }?></b></p></div>
 	<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
            <!-- PRINCIPIO MODAL ELMINAR Act -->
            <div class="form-group">

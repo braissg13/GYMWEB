@@ -1,6 +1,9 @@
 <?php
 include_once __DIR__."/../conexion/bdConexion.php";
 include_once __DIR__."/../model/ActividadMapper.php";
+include_once __DIR__."/../model/Usuario.php";
+include_once __DIR__."/../model/UsuarioMapper.php";
+
 class Actividad {
   protected $idActividad;
   protected $nomActividad;
@@ -68,10 +71,17 @@ class Actividad {
     {
         return $resultado = ActividadMapper::findAll();
     }
-
     /* Guardamos una Actividad en la BD*/
   public static function guardarActividad($actividad){
     return ActividadMapper::guardarActividad($actividad);
+  }
+  /*Obtenemos datos de la actividad por su nombre y fecha*/
+  public static function datosActividad($nomActividad,$fecha) {
+    if ($nomActividad) {
+            return ActividadMapper::findByNomActividad($nomActividad,$fecha);
+        } else {
+            return "ERROR, no existe la actividad";
+        }
   }
   /*Comprobacion existe Actividad... Si existe actividad devuelve Objeto Actividad*/
   public static function obtenerDatos($idActividad) {
@@ -103,10 +113,26 @@ class Actividad {
       }
   }
   public static function update($idActividad, $nomActividad, $totalPlazas, $descripAct, $fecha, $plazasOcupadas, $imagenAct){
-      ActividadMapper::update($idActividad, $nomActividad,$totalPlazas,$descripAct,$fecha, $plazasOcupadas, $imagenAct);
+     return ActividadMapper::update($idActividad, $nomActividad,$totalPlazas,$descripAct,$fecha, $plazasOcupadas, $imagenAct);
   }
   public static function delete($idActividad){
       ActividadMapper::delete($idActividad);
+  }
+
+  public static function asignarEntrenador($idUsuario,$idActividad){
+     return ActividadMapper::asignarEntrenador($idUsuario,$idActividad);
+  }
+
+  public static function getEntrenadorAsignado($idActividad){
+     return ActividadMapper::getEntrenadorAsignado($idActividad);
+  }
+
+  public static function deleteEntrenadorActividad($idActividad){
+      ActividadMapper::deleteEntrenadorActividad($idActividad);
+  }
+
+  public static function updateAsignarEntrenador($entrenador,$idActividad){
+    ActividadMapper::updateAsignarEntrenador($entrenador,$idActividad);
   }
 }
 ?>

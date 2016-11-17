@@ -1,12 +1,11 @@
 <?php
 include_once __DIR__."/../../model/model.php";
 include_once __DIR__."/../../controller/defaultController.php";
-
 if(!isset($_SESSION)) session_start();
  $user=$_SESSION["usuario"];
- if ($_SESSION["usuario"]->getTipoUsuario() =='Administrador'){
-
-  $row = ActividadController::getAll();
+ if ($_SESSION["usuario"]->getTipoUsuario() =='Entrenador'){
+  $idUsuario = $_SESSION["usuario"]->getIdUsuario();
+  $row = UsuarioController::getActividadesEntrenador($idUsuario);
 ?>
 
 <!DOCTYPE html>
@@ -57,6 +56,7 @@ if(!isset($_SESSION)) session_start();
 
           <tbody>
             <?php
+            if($row!=NULL){
               foreach ($row as $actividad) {
                 //La fecha que nos devuleve la BD es de forma Año-Mes-Dia Hora:Min:Seg
                 //Entonces hay cambiarla a Dia-Mes-Año Hora:Min y lo hacemos de
@@ -68,7 +68,7 @@ if(!isset($_SESSION)) session_start();
                 $fecha = $actividad['fecha'];
                 $format = "Y-m-d H:i:s";
                 $dateobj = DateTime::createFromFormat($format, $fecha);
-
+            
             ?>
             <tr>
               <td><?php echo $actividad['idActividad']; ?></td>
@@ -77,6 +77,7 @@ if(!isset($_SESSION)) session_start();
 
             </tr>
             <?php
+                }
               }
             ?>
 
@@ -101,12 +102,20 @@ if(!isset($_SESSION)) session_start();
   </body>
 </html>
 <?php
+  /*Dependiendo que tipo de Usuario intente entrar donde no debe lo mandamosa su pagina principal.*/
   }else{
-        ob_start();
+        ob_start(); 
          if (($_SESSION["usuario"]->getTipoUsuario()=='DeportistaPEF') || ($_SESSION["usuario"]->getTipoUsuario()=='DeportistaTDU')){
-            header("refresh: 1; url = ../Deportista/principal.php");
+            header("refresh: 1; url = ../Deportista/principal.php");  
+          }else{
+             if($_SESSION["usuario"]->getTipoUsuario()=='Administrador'){
+                  header("Location: ../Administrador/principal.php");  
+             }else{
+                header("Location: = /../index.php"); 
+             }
           }
-
-        ob_end_flush();
+          
+        ob_end_flush();  
   }
+?>
 ?>
