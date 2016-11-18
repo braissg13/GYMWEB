@@ -63,7 +63,7 @@ class UsuarioMapper{
            return true;
        }
    }
-    
+
     /*Mira si el Usuario es valido (solo comprobando el nombre) y devuelve true.*/
    public static function usuarioValidoId($idUsuario) {
        global $connect;
@@ -86,9 +86,9 @@ class UsuarioMapper{
     public static function update($idUsuario,$nomUsuario,$password,$email, $tipoUsuario, $nombre, $apellidos)
     {
         global $connect;
-        
+
         $password = md5($password);
-        
+
         $result = mysqli_query($connect, "UPDATE usuario SET nomUsuario=\"$nomUsuario\", password =\"$password\", email =\"$email\", tipoUsuario= \"$tipoUsuario\",nombre=\"$nombre\", apellidos=\"$apellidos\" WHERE idUsuario=\"$idUsuario\"");
         return $result;
     }
@@ -113,6 +113,16 @@ class UsuarioMapper{
         } else {
             return NULL;
         }
+    }
+
+    public static function getTablasEntrenamientos($idUsuario){
+      global $connect;
+      $resultado = mysqli_query($connect, 'SELECT * FROM tablaejercicios T, tablaejercicios_has_usuario U WHERE U.Usuario_idUsuario= "'.$idUsuario.'" AND U.TablaEjercicios_idTablaEjercicios = T.idTablaEjercicios ');
+      if (mysqli_num_rows($resultado) > 0) {
+        return $resultado;
+      } else {
+          return NULL;
+      }
     }
 }
 ?>

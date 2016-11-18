@@ -21,6 +21,12 @@ class UsuarioController{
          return $actividad;
 	}
 
+	public static function getTablasDeportista($idUsuario){
+		if(!isset($_SESSION)) session_start();
+				$tablaejercicios = Usuario::getTablasEntrenamientos($idUsuario);
+				return $tablaejercicios;
+	}
+
 	/* GET USUARIO*/
 	public static function getUsuario($idUsuario){
 	if(!isset($_SESSION)) session_start();
@@ -217,13 +223,13 @@ class UsuarioController{
   		}else{
   			ob_start();
   			if($_SESSION["usuario"]->getTipoUsuario() == 'DeportistaTDU' || $_SESSION["usuario"]->getTipoUsuario() == 'DeportistaPEF') {
-	  				header("refresh: 3; url = ../views/Deportista/principal.php"); 
+	  				header("refresh: 3; url = ../views/Deportista/principal.php");
 	  			}else{
-	  				header("refresh: 3; url = ../views/Entrenador/principal.php"); 
+	  				header("refresh: 3; url = ../views/Entrenador/principal.php");
 	  			}
 			$errors = array();
 			$errors["general"] = "No tiene permiso para crear un Usuario";
-			echo $errors["general"]; 
+			echo $errors["general"];
 			ob_end_flush();
   		}
   	}

@@ -143,5 +143,9 @@ class Usuario {
   public static function getActividadesAsignadas($idUsuario){
     return $resultado = UsuarioMapper::getActividadesAsignadas($idUsuario);
   }
+
+  public static function getTablasEntrenamientos($idUsuario){
+    return $resultado = UsuarioMapper::getTablasEntrenamientos($idUsuario);
+  }
 }
 ?>
