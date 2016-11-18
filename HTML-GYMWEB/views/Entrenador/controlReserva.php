@@ -59,8 +59,8 @@ if(!isset($_SESSION)) session_start();
                   ?>
               <tr>
                 <td><?php echo $usuario['idUsuario']; ?></td>
-                <td><a href="consultarUsuarios.php?id=<?php echo $usuario['idUsuario']; ?>" style="text-decoration: none;"><?php echo $usuario['nombre']; ?></a></td>
-                <td><a href="consultarUsuarios.php?id=<?php echo $usuario['idUsuario']; ?>" style="text-decoration: none;"><?php echo $usuario['apellidos']; ?></a></td>
+                <td><?php echo $usuario['nombre']; ?></td>
+                <td><?php echo $usuario['apellidos']; ?></td>
 
               </tr>
               
