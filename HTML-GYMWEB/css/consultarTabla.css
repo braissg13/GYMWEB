@@ -1,0 +1,34 @@
+/*BOTON ELIMINAR HOVER*/
+
+button.btn.btn-default1{
+	background-color: #00CF2C; 
+	border-radius: 5px;
+	color: black;
+}
+button.btn.btn-default1:hover{
+	background-color: transparent;
+ 	color: #00CF2C;
+ 	box-shadow: inset 0 0 0 3px #00CF2C;
+}
+
+button.btn.btn-default2{
+    background-color: #C20900; 
+    border-radius: 5px;
+    color: black;
+}
+button.btn.btn-default2:hover{
+    background-color: transparent;
+    color: #C20900;
+    box-shadow: inset 0 0 0 3px #C20900;
+}
+
+button.btn.btn-default3{
+    background-color: black; 
+    border-radius: 5px;
+    color: white;
+}
+button.btn.btn-default3:hover{
+    background-color: transparent;
+    color: black;
+    box-shadow: inset 0 0 0 3px black;
+}
