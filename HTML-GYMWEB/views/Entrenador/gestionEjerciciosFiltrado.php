@@ -72,6 +72,7 @@ if(!isset($_SESSION)) session_start();
 
 			<div class="row" style="margin-top: 20px;">
           <?php 
+          if($row!=null){
            foreach ($row as $ejercicio) {
               if ($filtro == $ejercicio['tipoEjerc']) {
           ?>
@@ -79,6 +80,7 @@ if(!isset($_SESSION)) session_start();
           <?php
               }
             }
+          }
           ?>
 
 			</div>

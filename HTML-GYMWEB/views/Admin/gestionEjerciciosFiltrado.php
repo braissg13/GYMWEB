@@ -73,15 +73,16 @@ if(!isset($_SESSION)) session_start();
 
 			<div class="row" style="margin-top: 20px;">
           <?php 
+          if($row!=null){
             foreach ($row as $ejercicio) {
 
               if ($filtro == $ejercicio['tipoEjerc']) {
-
           ?>
   				<div class="col-xs-6 col-sm-4 col-md-4 col-lg-4"><a href="consultarEjercicios.php?id=<?php echo $ejercicio['idEjercicio']; ?>"><?php echo "<img alt=\"Imagen\" src=\""."../../img/ejercicios/".$ejercicio['imagen']."\" style=\"max-width: 100%;\">";?></a></div>
           <?php
               }
             }
+          }
           ?>
 
 			</div>

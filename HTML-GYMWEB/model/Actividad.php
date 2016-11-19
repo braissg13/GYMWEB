@@ -1,8 +1,6 @@
 <?php
 include_once __DIR__."/../conexion/bdConexion.php";
 include_once __DIR__."/../model/ActividadMapper.php";
-include_once __DIR__."/../model/Usuario.php";
-include_once __DIR__."/../model/UsuarioMapper.php";
 
 class Actividad {
   protected $idActividad;
@@ -131,8 +129,12 @@ class Actividad {
       ActividadMapper::deleteEntrenadorActividad($idActividad);
   }
 
-  public static function updateAsignarEntrenador($entrenador,$idActividad){
-    ActividadMapper::updateAsignarEntrenador($entrenador,$idActividad);
+  public static function deleteReservaActividad($idActividad){
+      ActividadMapper::deleteReservaActividad($idActividad);
+  }
+
+  public static function updateAsignarEntrenador($idUsuario,$idActividad){
+    ActividadMapper::updateAsignarEntrenador($idUsuario,$idActividad);
   }
 
   public static function getUsuariosAsignados($idActividad){

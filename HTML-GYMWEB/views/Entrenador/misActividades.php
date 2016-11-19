@@ -85,18 +85,11 @@ if(!isset($_SESSION)) session_start();
 
         </table>
 
-	        <div id= "paginacion">
-	        <ul class="pagination">
-	          <li><a href="#">«</a></li>
-	          <li><a href="#">1</a></li>
-	          <li><a href="#">2</a></li>
-	          <li><a href="#">3</a></li>
-	          <li><a href="#">»</a></li>
-	        </ul>
-	      </div>
+	        
 	      </div>
 
 	  </div><!-- FIN ROW -->
+  </div>
    <?php include("../footer.php");  /*Cargamos el footer*/ ?>
 
   </body>

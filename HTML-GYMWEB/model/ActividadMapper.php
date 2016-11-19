@@ -1,7 +1,5 @@
 <?php
 include_once __DIR__."/../conexion/bdConexion.php";
-include_once __DIR__."/../model/Usuario.php";
-include_once __DIR__."/../model/UsuarioMapper.php";
 class ActividadMapper{
     /*Buscamos todos las Actividades*/
     public static function findAll()
@@ -93,19 +91,25 @@ class ActividadMapper{
         }
     }
 
-     public static function deleteEntrenadorActividad($idActividad){
+    public static function deleteEntrenadorActividad($idActividad){
         global $connect;
         $resultado = mysqli_query($connect, "DELETE FROM usuario_actividad WHERE Actividad_idActividad=\"$idActividad\"");
         return $resultado;
-     }
+    }
 
-     public static function updateAsignarEntrenador($entrenador,$idActividad){
+    public static function deleteReservaActividad($idActividad){
         global $connect;
-        $resultado = mysqli_query($connect, "UPDATE usuario_actividad SET Usuario_idUsuario=\"$entrenador\" WHERE Actividad_idActividad=\"$idActividad\"");
+        $resultado = mysqli_query($connect, "DELETE FROM reserva WHERE Actividad_idActividad=\"$idActividad\"");
         return $resultado;
-     }
+    }
 
-     /*devolver los usuarios que ehan hecho una reserva a una actividad*/
+    public static function updateAsignarEntrenador($idUsuario,$idActividad){
+        global $connect;
+        $resultado = mysqli_query($connect, "UPDATE usuario_actividad SET Usuario_idUsuario=\"$idUsuario\" WHERE Actividad_idActividad=\"$idActividad\"");
+        return $resultado;
+    }
+
+     /*devolver los usuarios que han hecho una reserva a una actividad*/
     public static function getUsuariosAsignados($idActividad){
       global $connect;
         $resultado = mysqli_query($connect, 'SELECT * FROM usuario U, reserva R WHERE R.Actividad_idActividad="'.$idActividad.'"  AND U.idUsuario = R.Usuario_idUsuario ');

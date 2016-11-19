@@ -6,6 +6,8 @@ if(!isset($_SESSION)) session_start();
  $user=$_SESSION["usuario"];
  /*Aqui comprobamos que no intenten entrar otros Usuarios que no sean Administradores*/
  if ($_SESSION["usuario"]->getTipoUsuario() =='Entrenador'){
+
+  $row = TablaController::getAll();
 ?>
 
 <!DOCTYPE html>
@@ -36,7 +38,6 @@ if(!isset($_SESSION)) session_start();
 
 
     <h1>Tablas de Ejercicios</h1>
-    <!-- BOTON MOSTRAR USUARIOS CREAR USUARIOS ELIMINAR USUARIOS-->
 
     <div class="row" style="margin-top: 20px; margin-bottom: 10px;">
 
@@ -54,19 +55,41 @@ if(!isset($_SESSION)) session_start();
             <tr>
               <th>#</th>
               <th>Nombre Tabla</th>
+              <th>Tipo Tabla</th>
             </tr>
 
           </thead>
 
           <tbody>
-            
+            <?php 
+            if ($row!=null) {
+              foreach ($row as $tabla) {
+             ?>
             <tr>
-              <td>1</td>
-              <td><a href="consultarTabla.php?id=" style="text-decoration: none;">Tabla Ejercicio Genérica 1</a></td>
-              <td><a href="modificarTabla.php?id=" style="text-decoration: none;"><button type="button" class="btn btn-default3" id="botonModificar">Modificar Tabla</button></a></td>
-              <td><a href="asignarTabla.php?id=" style="text-decoration: none;"><button type="button" class="btn btn-default4" id="botonAsignar">Asignar Tabla</button></a></td>
-              <td><a href="consultarTabla.php?id=" style="text-decoration: none;"><button type="button" class="btn btn-default2" id="botonEliminar">Eliminar Tabla</button></a></td>
+              <td><?php echo $tabla['idTablaEjercicios']; ?></td>
+              <td><a href="consultarTabla.php?id=<?php echo $tabla['idTablaEjercicios']; ?>" style="text-decoration: none;"><?php echo $tabla['nomTabla']; ?></a></td>
+              <td><?php echo $tabla['tipoTabla']; ?></td>
+              <td><a href="modificarTabla.php?id=<?php echo $tabla['idTablaEjercicios']; ?>" style="text-decoration: none;"><button type="button" class="btn btn-default3" id="botonModificar">Modificar Tabla</button></a></td>
+               <?php if ($tabla['tipoTabla'] == "TablaGeneral" ) {
+                
+              ?>
+              <td><a href="asignarTabla.php?id=<?php echo $tabla['idTablaEjercicios']; ?>" style="text-decoration: none;"><button type="button" class="btn btn-default4" id="botonAsignar">Asignar Deportista</button></a></td>
+              <?php 
+                }
+              ?>
+              <?php if ($tabla['tipoTabla'] == "TablaPEF" ) {
+                
+              ?>
+              <td><a href="asignarTablaPEF.php?id=<?php echo $tabla['idTablaEjercicios']; ?>" style="text-decoration: none;"><button type="button" class="btn btn-default4" id="botonAsignar">Asignar DeportistaPEF</button></a></td>
+              <?php 
+                }
+              ?>  
+              <td><a href="consultarTabla.php?id=<?php echo $tabla['idTablaEjercicios']; ?>" style="text-decoration: none;"><button type="button" class="btn btn-default2" id="botonEliminar">Eliminar Tabla</button></a></td>
             </tr>
+            <?php
+              }
+            }
+            ?>
 
           </tbody>
 

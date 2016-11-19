@@ -74,6 +74,12 @@ class EjercicioMapper{
         $resultado = mysqli_query($connect, "DELETE FROM ejercicio WHERE idEjercicio=\"$idEjercicio\"");
         return $resultado;
     }
+
+    public static function deleteEjercicioTabla($idEjercicio){
+        global $connect;
+        $resultado = mysqli_query($connect, "DELETE FROM ejercicio_tablaejercicios WHERE Ejercicio_idEjercicio=\"$idEjercicio\"");
+        return $resultado;
+    }
     
 }
 ?>

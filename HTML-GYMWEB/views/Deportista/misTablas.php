@@ -18,7 +18,7 @@ if(!isset($_SESSION)) session_start();
     <!-- Bootstrap -->
     <link href="../../css/navbar.css" rel="stylesheet">
     <link href="../../css/bootstrap.min.css" rel="stylesheet">
-    <link href="../../css/gestionActividades.css" rel="stylesheet">
+  
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
@@ -47,9 +47,7 @@ if(!isset($_SESSION)) session_start();
          <thead>
 
             <tr>
-              <th>#</th>
               <th>Nombre Tabla</th>
-              
             </tr>
 
           </thead>
@@ -58,12 +56,9 @@ if(!isset($_SESSION)) session_start();
             <?php
             if($row!=NULL){
               foreach ($row as $tablaejercicios) {
-
-
             ?>
             <tr>
-              <td><?php echo $tablaejercicios['idTablaEjercicios']; ?></td>
-              <td><a href="consultarActivi.php?id=<?php echo $tablatablaejercicios['idTablaEjercicios']; ?>" style="text-decoration: none;"><?php echo $tablaejercicios['nomTabla']; ?></a></td>
+              <td><a href="consultarTabla.php?id=<?php echo $tablaejercicios['idTablaEjercicios']; ?>" style="text-decoration: none;"><?php echo $tablaejercicios['nomTabla']; ?></a></td>
 
 
             </tr>
@@ -80,6 +75,7 @@ if(!isset($_SESSION)) session_start();
 	      </div>
 
 	  </div><!-- FIN ROW -->
+  </div><!-- FIN CONTAINER -->
    <?php include("../footer.php");  /*Cargamos el footer*/ ?>
 
   </body>
@@ -97,7 +93,6 @@ if(!isset($_SESSION)) session_start();
                 header("Location: = /../index.php");
              }
           }
-
         ob_end_flush();
   }
 ?>

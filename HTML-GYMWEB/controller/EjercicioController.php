@@ -113,7 +113,7 @@
 						header("refresh: 3; url = ../views/Entrenador/gestionEjercicios.php"); 
 					} 
 					$errors = array();
-					$errors["general"] = "El formulario no fue completado.";
+					$errors["general"] = "El ejercicio no existe";
 					echo $errors["general"]; 
 					ob_end_flush();
 				}else{
@@ -194,7 +194,9 @@
 							$nombre = $_POST['NomEjercicio'];
 							//Comprobamos si existe el ejercicio para poder borrarlo
 							if(EjercicioMapper::existeEjercicio($nombre)){
-								//Lamamos a la funcion que elimina el Ejercicio
+								//Llamamos a la funcion que elimina la relacion Ejercicio-Tabla
+								Ejercicio::deleteEjercicioTabla($idEjercicio);
+								//LLamamos a la funcion que elimina el Ejercicio
 								Ejercicio::delete($idEjercicio);
 								//Redireccionamos a vista dependiendo del Usuario que modifico el Ejercicio
 								if ($_SESSION['usuario']->getTipoUsuario()=="Administrador") {

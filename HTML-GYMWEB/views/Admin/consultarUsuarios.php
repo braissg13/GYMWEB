@@ -67,6 +67,7 @@ if(!isset($_SESSION)) session_start();
                  <form action="../../controller/defaultController.php?controlador=usuario&accion=borrarUsuario" method="POST">
                    <input type="hidden" name="idUsuario" value="<?php echo $usuario->getIdUsuario();?>">
                    <input type="hidden" name="nomUsuario" value="<?php echo $usuario->getNomUsuario();?>">
+                   <input type="hidden" name="tipoUsuario" value="<?php echo $usuario->getTipoUsuario();?>">
                   <button type="submit" class="btn btn-default2">
                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                  </button>

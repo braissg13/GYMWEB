@@ -14,6 +14,20 @@ class UsuarioController{
 		return $entrenador->getAllEntrenadores();
 	}
 
+	/*Obtenemos todos los Deportistas TDU*/
+	public static function getAllDeportistasTDU(){
+		if(!isset($_SESSION)) session_start();
+		$deportista = new Usuario();
+		return $deportista->getAllDeportistasTDU();
+	}
+
+	/*Obtenemos todos los Deportistas PEF*/
+	public static function getAllDeportistasPEF(){
+		if(!isset($_SESSION)) session_start();
+		$deportista = new Usuario();
+		return $deportista->getAllDeportistasPEF();
+	}
+
 	/*Obtenemos todos las Actividades que Pertenecen a un entrenador*/
 	public static function getActividadesEntrenador($idUsuario){
 		if(!isset($_SESSION)) session_start();
@@ -21,10 +35,48 @@ class UsuarioController{
          return $actividad;
 	}
 
+	/*Obtenemos todos las Tablas que Pertenecen a un Deportista*/
 	public static function getTablasDeportista($idUsuario){
 		if(!isset($_SESSION)) session_start();
 				$tablaejercicios = Usuario::getTablasEntrenamientos($idUsuario);
 				return $tablaejercicios;
+	}
+
+	/*Añadimos un Comentario*/
+	public static function addComentarioTabla(){
+		if(!isset($_SESSION)) session_start();
+		if($_SESSION['usuario']->getTipoUsuario()=="DeportistaTDU" || $_SESSION['usuario']->getTipoUsuario()=="DeportistaPEF"){
+			$idTabla = $_POST['idTabla'];
+			$idUsuario = $_POST['idUsuario'];
+			$completado = $_POST['completado'];
+			$comentario = $_POST['comentario'];
+			//Obtenemos fecha segun se pulsa el submit de addComentario
+			$date = getdate();
+			$fecha= $date['year']."-".$date['mon']."-".$date['mday']." ".$date['hours'].":".$date['minutes'].":00";
+			//Llamamos a la funcion que crea el comentario
+			Usuario::addComentario($comentario,$fecha,$completado,$idTabla,$idUsuario);
+			//Redireccionamos a la vista
+			header("Location:../views/Deportista/consultarTabla.php?id=$idTabla");
+		}else{
+			ob_start();
+			 if ($_SESSION['usuario']->getTipoUsuario()=="Administrador"){
+					header("refresh: 3; url = ../views/Admin/principal.php");
+				}
+				else{
+					header("refresh: 3; url = ../views/Entrenador/principal.php");
+				}
+			$errors = array();
+			$errors["general"] = "No tiene permiso para añadir un Comentario";
+			echo $errors["general"];
+			ob_end_flush();
+		}
+	}
+
+	/*OBTENEMOS TODOS LOS COMENTARIOS DE UN USUARIO EN UNA DETERMINA TABLA*/
+	public static function getComentarios($idTablaEjercicios,$idUsuario){
+		if(!isset($_SESSION)) session_start();
+        $comentarioTablaUsuario = Usuario::getComentariosTabla($idTablaEjercicios,$idUsuario);
+        return $comentarioTablaUsuario;
 	}
 
 	/* GET USUARIO*/
@@ -148,10 +200,28 @@ class UsuarioController{
 			if($_SESSION['usuario']->getTipoUsuario()=="Administrador"){
 					$idUsuario = $_POST['idUsuario'];
 					$nomUsuario = $_POST['nomUsuario'];
+					$tipoUsuario = $_POST['tipoUsuario'];
 					//Comprobamos si existe el usuario para poder borrarlo
 					if(UsuarioMapper::existeUsuario($nomUsuario)){
-						//Lamamos a la funcion que elimina el Usuario
-						Usuario::delete($idUsuario);
+						//Comprobamos que tipo de Usuario es para eliminar las relaciones de este
+						if($tipoUsuario=="Entrenador"){
+							//Si es entrenador hay que eliminar las siguientes relaciones
+							//Llamamos a la funcion que elimina la relacion Entrenador-Actividad
+							Usuario::deleteEntrenadorActividad($idUsuario);
+							//Lamamos a la funcion que elimina el Usuario
+							Usuario::delete($idUsuario);
+						}
+						if($tipoUsuario=="DeportistaTDU" || $tipoUsuario=="DeportistaPEF"){
+							//Si es Deportista hay que eliminar las siguientes relaciones
+							//Llamamos a la funcion que elimina la relacion Deportista-Reserva
+							Usuario::deleteDeportistaReserva($idUsuario);
+							//Llamamos a la funcion que elimina la relacion Deportista-Tabla
+							Usuario::deleteDeportistaTabla($idUsuario);
+							//Llamamos a la funcion que elimina la relacion Deportista-Comentario
+							Usuario::deleteDeportistaComentario($idUsuario);
+							//Lamamos a la funcion que elimina el Usuario
+							Usuario::delete($idUsuario);
+						}
 						//Redireccionamos a vista
 						header("Location: ../views/Admin/gestionUsuarios.php");
 					}else{
@@ -223,13 +293,13 @@ class UsuarioController{
   		}else{
   			ob_start();
   			if($_SESSION["usuario"]->getTipoUsuario() == 'DeportistaTDU' || $_SESSION["usuario"]->getTipoUsuario() == 'DeportistaPEF') {
-	  				header("refresh: 3; url = ../views/Deportista/principal.php");
+	  				header("refresh: 3; url = ../views/Deportista/principal.php"); 
 	  			}else{
-	  				header("refresh: 3; url = ../views/Entrenador/principal.php");
+	  				header("refresh: 3; url = ../views/Entrenador/principal.php"); 
 	  			}
 			$errors = array();
 			$errors["general"] = "No tiene permiso para crear un Usuario";
-			echo $errors["general"];
+			echo $errors["general"]; 
 			ob_end_flush();
   		}
   	}

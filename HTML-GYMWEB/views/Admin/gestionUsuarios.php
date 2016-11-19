@@ -59,8 +59,10 @@ if(!isset($_SESSION)) session_start();
 
           <tbody>
             <?php
+            if($row!=null){
               foreach ($row as $usuario) {
                 ?>
+            
             <tr>
               <td><?php echo $usuario['idUsuario']; ?></td>
               <td><a href="consultarUsuarios.php?id=<?php echo $usuario['idUsuario']; ?>" style="text-decoration: none;"><?php echo $usuario['nomUsuario']; ?></a></td>
@@ -69,6 +71,7 @@ if(!isset($_SESSION)) session_start();
             </tr>
             <?php
               }
+            }
             ?>
 
           </tbody>

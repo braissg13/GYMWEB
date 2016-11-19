@@ -139,6 +139,15 @@ class Usuario {
   public static function getAllEntrenadores(){
     return $resultado = UsuarioMapper::findAllEntrenadores();
   }
+  //Obtenemos los deportistas que son TDU
+  public static function getAllDeportistasTDU(){
+    return $resultado = UsuarioMapper::findAllDeportistasTDU();
+  }
+
+  //Obtenemos los deportistas que son PEF
+  public static function getAllDeportistasPEF(){
+    return $resultado = UsuarioMapper::findAllDeportistasPEF();
+  }
 
   public static function getActividadesAsignadas($idUsuario){
     return $resultado = UsuarioMapper::getActividadesAsignadas($idUsuario);
@@ -146,6 +155,30 @@ class Usuario {
 
   public static function getTablasEntrenamientos($idUsuario){
     return $resultado = UsuarioMapper::getTablasEntrenamientos($idUsuario);
+  }
+
+  public static function deleteEntrenadorActividad($idUsuario){
+    UsuarioMapper::deleteEntrenadorActividad($idUsuario);
+  }
+
+  public static function deleteDeportistaReserva($idUsuario){
+    UsuarioMapper::deleteDeportistaReserva($idUsuario);
+  }
+
+  public static function deleteDeportistaTabla($idUsuario){
+    UsuarioMapper::deleteDeportistaTabla($idUsuario);
+  }
+
+  public static function deleteDeportistaComentario($idUsuario){
+    UsuarioMapper::deleteDeportistaComentario($idUsuario);
+  }
+
+  public static function addComentario($texto,$fecha,$completado,$idTablaEjercicios,$idUsuario){
+    UsuarioMapper::addComentario($texto,$fecha,$completado,$idTablaEjercicios,$idUsuario);
+  }
+
+  public static function getComentariosTabla($idTablaEjercicios,$idUsuario){
+    return UsuarioMapper::getComentariosTabla($idTablaEjercicios,$idUsuario);
   }
 }
 ?>

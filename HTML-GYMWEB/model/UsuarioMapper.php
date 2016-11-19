@@ -63,7 +63,7 @@ class UsuarioMapper{
            return true;
        }
    }
-
+    
     /*Mira si el Usuario es valido (solo comprobando el nombre) y devuelve true.*/
    public static function usuarioValidoId($idUsuario) {
        global $connect;
@@ -86,9 +86,9 @@ class UsuarioMapper{
     public static function update($idUsuario,$nomUsuario,$password,$email, $tipoUsuario, $nombre, $apellidos)
     {
         global $connect;
-
+        
         $password = md5($password);
-
+        
         $result = mysqli_query($connect, "UPDATE usuario SET nomUsuario=\"$nomUsuario\", password =\"$password\", email =\"$email\", tipoUsuario= \"$tipoUsuario\",nombre=\"$nombre\", apellidos=\"$apellidos\" WHERE idUsuario=\"$idUsuario\"");
         return $result;
     }
@@ -102,6 +102,18 @@ class UsuarioMapper{
     public static function findAllEntrenadores(){
       global $connect;
       $resultado = mysqli_query($connect, 'SELECT * FROM usuario WHERE tipoUsuario="Entrenador"');
+      return $resultado;
+    }
+
+    public static function findAllDeportistasTDU(){
+      global $connect;
+      $resultado = mysqli_query($connect, 'SELECT * FROM usuario WHERE tipoUsuario="DeportistaTDU" ORDER BY apellidos');
+      return $resultado;
+    }
+
+    public static function findAllDeportistasPEF(){
+      global $connect;
+      $resultado = mysqli_query($connect, 'SELECT * FROM usuario WHERE tipoUsuario="DeportistaPEF" ORDER BY apellidos');
       return $resultado;
     }
 
@@ -123,6 +135,45 @@ class UsuarioMapper{
       } else {
           return NULL;
       }
+    }
+
+    public static function deleteEntrenadorActividad($idUsuario){
+      global $connect;
+      $resultado = mysqli_query($connect, "DELETE FROM usuario_actividad WHERE Usuario_idUsuario=\"$idUsuario\"");
+      return $resultado;
+    }
+
+    public static function deleteDeportistaReserva($idUsuario){
+      global $connect;
+      $resultado = mysqli_query($connect, "DELETE FROM reserva WHERE Usuario_idUsuario=\"$idUsuario\"");
+      return $resultado;
+    }
+
+    public static function deleteDeportistaTabla($idUsuario){
+      global $connect;
+      $resultado = mysqli_query($connect, "DELETE FROM tablaejercicios_has_usuario WHERE Usuario_idUsuario=\"$idUsuario\"");
+      return $resultado;
+    }
+
+    public static function deleteDeportistaComentario($idUsuario){
+      global $connect;
+      $resultado = mysqli_query($connect, "DELETE FROM comentario WHERE TablaEjercicios_has_Usuario_Usuario_idUsuario=\"$idUsuario\"");
+      return $resultado;
+    }
+
+    public static function addComentario($texto,$fecha,$completado,$idTablaEjercicios,$idUsuario){
+      global $connect;
+      $resultado = false;
+      $sqlcrear= "INSERT INTO comentario (texto,fecha,completado,TablaEjercicios_has_Usuario_TablaEjercicios_idTablaEjercicios,TablaEjercicios_has_Usuario_Usuario_idUsuario) VALUES ('";
+      $sqlcrear = $sqlcrear.$texto."','".$fecha."','".$completado."','".$idTablaEjercicios."','".$idUsuario."')";
+        $resultado = mysqli_query($connect, $sqlcrear);
+       return $resultado;
+    }
+
+    public static function getComentariosTabla($idTablaEjercicios,$idUsuario){
+      global $connect;
+      $resultado = mysqli_query($connect, "SELECT * FROM comentario WHERE TablaEjercicios_has_Usuario_TablaEjercicios_idTablaEjercicios=\"$idTablaEjercicios\" AND TablaEjercicios_has_Usuario_Usuario_idUsuario=\"$idUsuario\"");
+      return $resultado;
     }
 }
 ?>

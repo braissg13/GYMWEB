@@ -36,6 +36,7 @@ if(!isset($_SESSION)) session_start();
 
      <div class="row" style="margin-top: 20px; margin-bottom: 10px;">
         <?php 
+        if($row!=null){
             foreach ($row as $actividad) {
               //La fecha que nos devuleve la BD es de forma Año-Mes-Dia Hora:Min:Seg
               //Entonces hay cambiarla a Dia-Mes-Año Hora:Min y lo hacemos de 
@@ -54,7 +55,10 @@ if(!isset($_SESSION)) session_start();
                 <h5><b><?php echo $dateobj->format("d-M-Y H:i");?></b></h5>
                 <img alt="imgActividad" src="../../img/actividades/<?php echo $actividad['imagenAct'];?>" style="max-width: 100%;max-height: 100%;">
             </div>
-        <?php } ?>
+        <?php 
+            } 
+          }
+        ?>
         </div>
      </div>
 

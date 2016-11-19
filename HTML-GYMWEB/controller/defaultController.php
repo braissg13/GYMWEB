@@ -4,6 +4,7 @@
 	include_once __DIR__."/../controller/UsuarioController.php";
 	include_once __DIR__."/../controller/EjercicioController.php";
 	include_once __DIR__."/../controller/ActividadController.php";
+	include_once __DIR__."/../controller/TablaController.php";
 //Incluir todos los modelos de nuestro sistema
 	include_once __DIR__."/../model/model.php";
 //Llamamos alcontrolador y su accion

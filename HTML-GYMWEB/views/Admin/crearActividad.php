@@ -88,9 +88,6 @@ if(!isset($_SESSION)) session_start();
                   foreach($row as $entrenador){ ?>
                       <option value="<?php echo $entrenador['idUsuario'];?>"><?php echo $entrenador['nomUsuario'];?></option>
                   <?php } 
-                    }else{ ?>
-                      <option>Crea Un Entrenador</option>
-                  <?php
                     }
                   ?>
                  </select>

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 16-11-2016 a las 16:54:14
+-- Tiempo de generación: 19-11-2016 a las 23:57:41
 -- Versión del servidor: 10.1.19-MariaDB
 -- Versión de PHP: 5.6.24
 
@@ -16,9 +16,22 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
 
---
--- Base de datos: `gymweb`
---
+-- -----------------------------------------------------
+-- Schema gymweb
+-- -----------------------------------------------------
+DROP SCHEMA IF EXISTS `gymweb` ;
+
+-- -----------------------------------------------------
+-- Schema gymweb
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `gymweb` DEFAULT CHARACTER SET utf8 ;
+USE `gymweb` ;
+
+GRANT ALL PRIVILEGES ON gymweb.* TO 'usergymweb'@'localhost' IDENTIFIED by 'ziralla09';
+
+/*
+grant all privileges on clickapincho.* to root@localhost identified by "root";
+*/
 
 -- --------------------------------------------------------
 
@@ -42,7 +55,8 @@ CREATE TABLE `actividad` (
 
 INSERT INTO `actividad` (`idActividad`, `nomActividad`, `totalPlazas`, `descripAct`, `fecha`, `plazasOcupadas`, `imagenAct`) VALUES
 (2, 'Zumba', 40, 'Zumba es una disciplina fitness enfocada por una parte a mantener\r\nun cuerpo saludable y por otra a desarrollar,fortalecer y dar \r\nflexibilidad al cuerpo mediante movimientos de baile combinados\r\ncon una serie de rutinas aerÃ³bicas.\r\nEsta Actividad durarÃ¡ aproximadamente 50 minutos.', '2016-11-29 18:00:00', 0, 0x7a756d62612e6a7067),
-(3, 'Aerobic', 15, 'sdsadasdasdasdasdsadfddfd', '2016-11-28 22:00:00', 0, 0x6165726f6269632e6a7067);
+(10, 'Spinning', 100, 'ssadasdasdasdsdasdas', '2016-11-30 12:00:00', 0, 0x7370696e6e696e672e6a7067),
+(11, 'Aerobic', 43, 'dededeewdew', '2016-11-30 12:12:00', 0, 0x6165726f6269632e6a7067);
 
 -- --------------------------------------------------------
 
@@ -54,9 +68,18 @@ CREATE TABLE `comentario` (
   `idComentario` int(11) NOT NULL,
   `texto` varchar(500) DEFAULT NULL,
   `fecha` datetime DEFAULT NULL,
+  `completado` varchar(2) DEFAULT NULL,
   `TablaEjercicios_has_Usuario_TablaEjercicios_idTablaEjercicios` int(11) NOT NULL,
   `TablaEjercicios_has_Usuario_Usuario_idUsuario` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `comentario`
+--
+
+INSERT INTO `comentario` (`idComentario`, `texto`, `fecha`, `completado`, `TablaEjercicios_has_Usuario_TablaEjercicios_idTablaEjercicios`, `TablaEjercicios_has_Usuario_Usuario_idUsuario`) VALUES
+(1, 'El ejercicio fue dificil para el primer dia.', '2016-11-19 23:47:00', 'No', 5, 6),
+(2, 'Y el peso introducido fue mucho menor al de la Tabla', '2016-11-19 23:48:00', 'No', 5, 6);
 
 -- --------------------------------------------------------
 
@@ -84,8 +107,7 @@ INSERT INTO `ejercicio` (`idEjercicio`, `nomEjercicio`, `descripEjerc`, `tipoEje
 (3, 'Curl Concentrado', 'Mira la IMAGEN.........jafsafoasdpfksdoakfposdafopasf', 'Brazos', '10-10-10-8', 10, 0x6375726c2d636f6e63656e747261646f2e706e67),
 (4, 'Dipping', 'Mira la IMAGEN.........jafsafoasdpfksdoakfposdafopasf', 'Brazos', '10-10-10-10', 0, 0x64697070696e67732e706e67),
 (5, 'Dips Barra', 'Mira la IMAGEN.........jafsafoasdpfksdoakfposdafopasf', 'Pecho', '10-10-10-8', 0, 0x646970732d62617272612e706e67),
-(6, 'Dominadas', 'Mira la IMAGEN.........jafsafoasdpfksdoakfposdafopasf', 'Espalda', '10-10-8-5', 0, 0x646f6d696e616461732e706e67),
-(7, 'Flexiones', 'Mira la IMAGEN.........jafsafoasdpfksdoakfposdafopasf', 'Pecho', '10-10-10-10', 0, 0x666c6578696f6e65732e706e67);
+(6, 'Dominadas', 'Mira la IMAGEN.........jafsafoasdpfksdoakfposdafopasf', 'Espalda', '10-10-8-5', 0, 0x646f6d696e616461732e706e67);
 
 -- --------------------------------------------------------
 
@@ -97,6 +119,25 @@ CREATE TABLE `ejercicio_tablaejercicios` (
   `Ejercicio_idEjercicio` int(11) NOT NULL,
   `TablaEjercicios_idTablaEjercicios` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `ejercicio_tablaejercicios`
+--
+
+INSERT INTO `ejercicio_tablaejercicios` (`Ejercicio_idEjercicio`, `TablaEjercicios_idTablaEjercicios`) VALUES
+(1, 5),
+(1, 6),
+(1, 10),
+(2, 5),
+(2, 10),
+(3, 6),
+(3, 10),
+(4, 10),
+(5, 6),
+(5, 10),
+(6, 5),
+(6, 6),
+(6, 10);
 
 -- --------------------------------------------------------
 
@@ -125,6 +166,16 @@ CREATE TABLE `reserva` (
   `Actividad_idActividad` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Volcado de datos para la tabla `reserva`
+--
+
+INSERT INTO `reserva` (`idReserva`, `fecha`, `Usuario_idUsuario`, `Actividad_idActividad`) VALUES
+(3, '2016-11-28 00:00:00', 6, 10),
+(4, '2016-11-28 00:00:00', 8, 11),
+(5, '2016-11-26 00:00:00', 6, 2),
+(6, '2016-11-25 00:00:00', 8, 2);
+
 -- --------------------------------------------------------
 
 --
@@ -133,8 +184,18 @@ CREATE TABLE `reserva` (
 
 CREATE TABLE `tablaejercicios` (
   `idTablaEjercicios` int(11) NOT NULL,
-  `nomTabla` varchar(30) DEFAULT NULL
+  `nomTabla` varchar(30) DEFAULT NULL,
+  `tipoTabla` varchar(30) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `tablaejercicios`
+--
+
+INSERT INTO `tablaejercicios` (`idTablaEjercicios`, `nomTabla`, `tipoTabla`) VALUES
+(5, 'Tabla Ejercicio Generica 1', 'TablaGeneral'),
+(6, 'Tabla Ejercicio PEF 1', 'TablaPEF'),
+(10, 'Tabla Ejercicio Generica 2', 'TablaGeneral');
 
 -- --------------------------------------------------------
 
@@ -146,6 +207,16 @@ CREATE TABLE `tablaejercicios_has_usuario` (
   `TablaEjercicios_idTablaEjercicios` int(11) NOT NULL,
   `Usuario_idUsuario` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `tablaejercicios_has_usuario`
+--
+
+INSERT INTO `tablaejercicios_has_usuario` (`TablaEjercicios_idTablaEjercicios`, `Usuario_idUsuario`) VALUES
+(5, 6),
+(5, 8),
+(6, 9),
+(10, 6);
 
 -- --------------------------------------------------------
 
@@ -168,11 +239,13 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`idUsuario`, `nomUsuario`, `password`, `email`, `tipoUsuario`, `nombre`, `apellidos`) VALUES
-(3, 'Admin2', 'a906449d5769fa7361d7ecc6aa3f6d28', 'Admin2@Admin', 'Administrador', 'Admin2', '-'),
+(3, 'Admin', 'a906449d5769fa7361d7ecc6aa3f6d28', 'Admin@Admin', 'Administrador', 'Admin', '-'),
 (4, 'drSelles', 'a906449d5769fa7361d7ecc6aa3f6d28', 'drselles@gmail.com', 'Entrenador', 'Diego', 'Selles'),
 (5, 'antoportero', 'a906449d5769fa7361d7ecc6aa3f6d28', 'antoportero@gmail.com', 'Entrenador', 'Xose Antonio', 'Silva'),
 (6, 'isgarcia', 'a906449d5769fa7361d7ecc6aa3f6d28', 'isg@gmail.com', 'DeportistaTDU', 'Ismael', 'Sierra'),
-(7, 'mltallon', 'a906449d5769fa7361d7ecc6aa3f6d28', 'tallon@gmail.com', 'DeportistaPEF', 'Manuel', 'Lorenzo Tallon');
+(8, 'mroliveira', 'a906449d5769fa7361d7ecc6aa3f6d28', 'mroliveira@gmail.com', 'DeportistaTDU', 'Marcos', 'Rodriguez Oliveira'),
+(9, 'mltallon', 'a906449d5769fa7361d7ecc6aa3f6d28', 'tallonazo@gmail.com', 'DeportistaPEF', 'Manuel', 'Lorenzo Tallon'),
+(10, 'topor', 'a906449d5769fa7361d7ecc6aa3f6d28', 'casillas@gmail.com', 'DeportistaPEF', 'Iker', 'Casillas');
 
 -- --------------------------------------------------------
 
@@ -184,6 +257,15 @@ CREATE TABLE `usuario_actividad` (
   `Usuario_idUsuario` int(11) NOT NULL,
   `Actividad_idActividad` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `usuario_actividad`
+--
+
+INSERT INTO `usuario_actividad` (`Usuario_idUsuario`, `Actividad_idActividad`) VALUES
+(4, 2),
+(4, 11),
+(5, 10);
 
 --
 -- Índices para tablas volcadas
@@ -268,17 +350,17 @@ ALTER TABLE `usuario_actividad`
 -- AUTO_INCREMENT de la tabla `actividad`
 --
 ALTER TABLE `actividad`
-  MODIFY `idActividad` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `idActividad` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT de la tabla `comentario`
 --
 ALTER TABLE `comentario`
-  MODIFY `idComentario` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idComentario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `ejercicio`
 --
 ALTER TABLE `ejercicio`
-  MODIFY `idEjercicio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `idEjercicio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT de la tabla `notificacion`
 --
@@ -288,17 +370,17 @@ ALTER TABLE `notificacion`
 -- AUTO_INCREMENT de la tabla `reserva`
 --
 ALTER TABLE `reserva`
-  MODIFY `idReserva` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idReserva` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT de la tabla `tablaejercicios`
 --
 ALTER TABLE `tablaejercicios`
-  MODIFY `idTablaEjercicios` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idTablaEjercicios` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- Restricciones para tablas volcadas
 --

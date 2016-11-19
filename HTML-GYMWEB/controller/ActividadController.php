@@ -112,7 +112,7 @@
           ob_start(); 
           header("refresh: 3; url = ../views/Admin/gestionEjercicios.php"); 
           $errors = array();
-          $errors["general"] = "El formulario no fue completado.";
+          $errors["general"] = "No existe la actividad";
           echo $errors["general"]; 
           ob_end_flush();
         }else{
@@ -197,6 +197,8 @@
                 if(ActividadMapper::existeActividad($nombre)){
                   //Lamamos a la funcion que elimina la Relacion Entrenador-Actividad
                   Actividad::deleteEntrenadorActividad($idActividad);
+                  //Lamamos a la funcion que elimina la Relacion Reserva-Actividad
+                  Actividad::deleteReservaActividad($idActividad);
                   //Lamamos a la funcion que elimina la Actividad
                   Actividad::delete($idActividad);
                   //Redireccionamos a vista

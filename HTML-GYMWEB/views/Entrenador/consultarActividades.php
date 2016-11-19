@@ -62,9 +62,9 @@ if(!isset($_SESSION)) session_start();
           <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"><p><b>Plazas: <?php echo $actividad->getTotalPlazas();?></b></p></div>
           <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"><p><b>Plazas Ocupadas: <?php echo $actividad->getPlazasOcupadas();?></b></p></div>
           <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"><p><b>Fecha: <?php echo $dateobj->format("d-m-Y H:i");?></b></p></div>
-          <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"><p><b>Entrenador: <?php foreach($row as $entrenador){
+          <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"><p><b>Entrenador: <?php if($row!=null){ foreach($row as $entrenador){
              echo $entrenador['nomUsuario'];
-            }?></b></p></div>
+            } }?></b></p></div>
             <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
                 <a href="controlReserva.php?id=<?php echo $actividad->getidActividad(); ?>" style="text-decoration: none;">
                   <button type="button" style="background-color: slateblue;color: white;" class="btn btn-default4" id="botonVerReserva">ver Reserva</button></a>

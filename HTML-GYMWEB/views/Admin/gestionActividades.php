@@ -58,7 +58,8 @@ if(!isset($_SESSION)) session_start();
           </thead>
 
           <tbody>
-            <?php 
+            <?php
+            if($row!=null){ 
               foreach ($row as $actividad) {
                 //La fecha que nos devuleve la BD es de forma Año-Mes-Dia Hora:Min:Seg
                 //Entonces hay cambiarla a Dia-Mes-Año Hora:Min y lo hacemos de 
@@ -81,6 +82,7 @@ if(!isset($_SESSION)) session_start();
             </tr>
             <?php 
               }
+            }
             ?>
 
           </tbody>
@@ -99,6 +101,7 @@ if(!isset($_SESSION)) session_start();
 	      </div>
 
 	  </div><!-- FIN ROW -->
+    </div>
    <?php include("../footer.php");  /*Cargamos el footer*/ ?>
 
   </body>

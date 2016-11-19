@@ -146,5 +146,9 @@ class Ejercicio {
       EjercicioMapper::delete($idEjercicio);
   }
 
+  public static function deleteEjercicioTabla($idEjercicio){
+      EjercicioMapper::deleteEjercicioTabla($idEjercicio);
+  }
+
 }
 ?>
