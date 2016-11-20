@@ -141,5 +141,11 @@ class TablaMapper{
         $resultado = mysqli_query($connect, "DELETE FROM tablaejercicios_has_usuario WHERE TablaEjercicios_idTablaEjercicios=\"$idTablaEjercicios\" AND Usuario_idUsuario=\"$idUsuario\"");
         return $resultado;
     }
+
+    public function borrarComentarioDeportistaTabla($idTablaEjercicios,$idUsuario){
+        global $connect;
+        $resultado = mysqli_query($connect, "DELETE FROM comentario WHERE TablaEjercicios_has_Usuario_TablaEjercicios_idTablaEjercicios=\"$idTablaEjercicios\" AND TablaEjercicios_has_Usuario_Usuario_idUsuario=\"$idUsuario\"");
+        return $resultado;
+    }
 }
 ?>

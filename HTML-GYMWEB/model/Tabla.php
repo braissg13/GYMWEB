@@ -121,5 +121,9 @@ class Tabla {
     TablaMapper::borrarDeportistaAsignadoTabla($idTablaEjercicios,$idUsuario);
   }
 
+  public function borrarComentarioDeportistaTabla($idTablaEjercicios,$idUsuario){
+    TablaMapper::borrarComentarioDeportistaTabla($idTablaEjercicios,$idUsuario);
+  }
+
 }
 ?>
