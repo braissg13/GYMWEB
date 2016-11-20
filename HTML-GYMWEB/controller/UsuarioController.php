@@ -213,12 +213,12 @@ class UsuarioController{
 						}
 						if($tipoUsuario=="DeportistaTDU" || $tipoUsuario=="DeportistaPEF"){
 							//Si es Deportista hay que eliminar las siguientes relaciones
+							//Llamamos a la funcion que elimina la relacion Deportista-Comentario
+							Usuario::deleteDeportistaComentario($idUsuario);
 							//Llamamos a la funcion que elimina la relacion Deportista-Reserva
 							Usuario::deleteDeportistaReserva($idUsuario);
 							//Llamamos a la funcion que elimina la relacion Deportista-Tabla
 							Usuario::deleteDeportistaTabla($idUsuario);
-							//Llamamos a la funcion que elimina la relacion Deportista-Comentario
-							Usuario::deleteDeportistaComentario($idUsuario);
 							//Lamamos a la funcion que elimina el Usuario
 							Usuario::delete($idUsuario);
 						}

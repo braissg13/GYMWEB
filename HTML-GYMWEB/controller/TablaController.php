@@ -57,7 +57,9 @@
           if(!isset($_SESSION)) session_start();
           $deportista = $_POST['idUsuario'];
           $idTabla = $_POST['idTabla'];
-          //asignamos deportista a Tabla
+          //Primero llamamos a la funcion que elimine los Comentarios de un DeportistaTDU en la Tabla
+          Tabla::borrarComentarioDeportistaTabla($idTabla,$deportista);
+          //eliminamos asignacion deportista a Tabla
           $eliminarDeportistaAsignado = Tabla::borrarDeportistaAsignadoTabla($idTabla,$deportista);
           //redireccionamos a vista
           header("Location: ../views/Entrenador/asignarTabla.php?id=$idTabla");
@@ -79,7 +81,9 @@
           if(!isset($_SESSION)) session_start();
           $deportista = $_POST['idUsuario'];
           $idTabla = $_POST['idTabla'];
-          //asignamos deportista a Tabla
+          //Primero llamamos a la funcion que elimine los Comentarios de un DeportistaPEF en la Tabla
+          Tabla::borrarComentarioDeportistaTabla($idTabla,$deportista);
+          //eliminamos asignacion deportista a Tabla
           $eliminarDeportistaAsignado = Tabla::borrarDeportistaAsignadoTabla($idTabla,$deportista);
           //redireccionamos a vista
           header("Location: ../views/Entrenador/asignarTablaPEF.php?id=$idTabla");
@@ -196,12 +200,12 @@
                 $nombre = $_POST['nomTabla'];
                 //Comprobamos si existe la actividad para poder borrarlo
                 if(TablaMapper::existeTabla($nombre)){
+                  //Llamamos a la funcion que elimina la relacion Tabla-Comentario
+				  Tabla::deleteComentarioTabla($idTabla);
                   //Lamamos a la funcion que elimina la Relacion Ejercicio-Tabla
                   Tabla::deleteEjersTabla($idTabla);
                   //Llamamos a funcion que elimina la Relacion DeportistaAsignado-Tabla
                   Tabla::deleteDeportistaTabla($idTabla);
-                  //Llamamos a la funcion que elimina la relacion Deportista-Comentario
-				  Tabla::deleteComentarioTabla($idTabla);
                   //Lamamos a la funcion que elimina la Tabla
                   Tabla::delete($idTabla);
                   //Redireccionamos a vista
