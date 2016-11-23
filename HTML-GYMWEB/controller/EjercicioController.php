@@ -1,4 +1,7 @@
 <?php
+require_once(__DIR__."/../conexion/bdConexion.php");
+require_once(__DIR__."/../model/EjercicioMapper.php");
+require_once(__DIR__."/../model/Ejercicio.php");
 
 	class EjercicioController{
 
@@ -12,7 +15,7 @@
 		public static function crearEjercicio(){
 			if(!isset($_SESSION)) session_start();
 
-			if($_SESSION['usuario']->getTipoUsuario()=="Administrador" || $_SESSION['usuario']->getTipoUsuario()=="Entrenador" ){
+			if($_SESSION['tipoUsuario']=="Administrador" || $_SESSION['tipoUsuario'] =="Entrenador" ){
 				$nombre = $_POST['NomEjercicio'];
 				$descripcion = $_POST['DescripEjerc'];
 				$tipo = $_POST['TipoEjerc'];
@@ -28,9 +31,8 @@
 							if(Ejercicio::registroValido($nombre,$descripcion,$repeticiones)){
 								//Creamos ruta donde guardamos la imagen yle damos nombre 
 								$ruta = "../img/ejercicios";
-								$archivo = $_FILES['imagen']['tmp-name'];
 								$nombreArchivo = $_FILES['imagen']['name'];
-								move_uploaded_file($archivo, $ruta."/".$nombreArchivo);
+								move_uploaded_file($_FILES['imagen']['tmp-name'], $ruta."/".$nombreArchivo);
 								//Creamos el Ejercicio
 								$ejercicio = new Ejercicio();
 
@@ -43,7 +45,7 @@
 								$ejercicio->setImagenEjercicio($nombreArchivo);
 
 	  							$ejercicio->guardarEjercicio($ejercicio);
-	  							if ($_SESSION['usuario']->getTipoUsuario()=="Administrador") {
+	  							if ($_SESSION['tipoUsuario']=="Administrador") {
 								header("Location: ../views/Admin/gestionEjercicios.php"); 
 								}
 								else{
@@ -51,7 +53,7 @@
 								} 
 							}else{
 								ob_start(); 
-	  							if ($_SESSION['usuario']->getTipoUsuario()=="Administrador") {
+	  							if ($_SESSION['tipoUsuario'] =="Administrador") {
 								header("refresh: 3; url = ../views/Admin/gestionEjercicios.php"); 
 								}
 								else{
@@ -64,7 +66,7 @@
 							}
 						}else{
 							ob_start(); 
-	  						if ($_SESSION['usuario']->getTipoUsuario()=="Administrador") {
+	  						if ($_SESSION['tipoUsuario'] =="Administrador") {
 							header("refresh: 3; url = ../views/Admin/gestionEjercicios.php"); 
 							}
 							else{
@@ -77,7 +79,7 @@
 						}
 					}else{
 						ob_start(); 
-						if ($_SESSION['usuario']->getTipoUsuario()=="Administrador") {
+						if ($_SESSION['tipoUsuario'] =="Administrador") {
 							header("refresh: 3; url = ../views/Admin/gestionEjercicios.php"); 
 						}
 						else{
@@ -106,7 +108,7 @@
 				$ejercicio = Ejercicio::obtenerDatos($idEjercicio);
 				if ($ejercicio == NULL){
 					ob_start(); 
-	  				if ($_SESSION['usuario']->getTipoUsuario()=="Administrador") {
+	  				if ($_SESSION['tipoUsuario']=="Administrador") {
 						header("refresh: 3; url = ../views/Admin/gestionEjercicios.php"); 
 					}
 					else{
@@ -123,7 +125,7 @@
 
 			public static function modificarEjercicio(){
 				if(!isset($_SESSION)) session_start();
-					if($_SESSION['usuario']->getTipoUsuario()=="Administrador" || $_SESSION['usuario']->getTipoUsuario()=="Entrenador" ){
+					if($_SESSION['tipoUsuario']=="Administrador" || $_SESSION['tipoUsuario']=="Entrenador" ){
 							$idEjercicio = $_POST['idEjercicio'];
 							$nombre = $_POST['NomEjercicio'];
 							$descripcion = $_POST['DescripEjerc'];
@@ -143,7 +145,7 @@
 								//Lamamos a la funcion que modifica el Ejercicio
 								Ejercicio::update($idEjercicio,$nombre,$descripcion,$tipo,$repeticiones,$carga,$nombreArchivo);
 								//Redireccionamos a vista dependiendo del Usuario que modifico el Ejercicio
-								if ($_SESSION['usuario']->getTipoUsuario()=="Administrador") {
+								if ($_SESSION['tipoUsuario']=="Administrador") {
 								header("Location: ../views/Admin/consultarEjercicios.php?id=$idEjercicio"); 
 								}
 								else{
@@ -151,7 +153,7 @@
 								} 
 							}else{
 								ob_start(); 
-	  							if ($_SESSION['usuario']->getTipoUsuario()=="Administrador") {
+	  							if ($_SESSION['tipoUsuario']=="Administrador") {
 								header("refresh: 3; url = ../views/Admin/modificarEjercicios.php?id=$idEjercicio"); 
 								}
 								else{
@@ -164,7 +166,7 @@
 							}
 						}else{
 							ob_start(); 
-							if ($_SESSION['usuario']->getTipoUsuario()=="Administrador") {
+							if ($_SESSION['tipoUsuario']=="Administrador") {
 								header("refresh: 3; url = ../views/Admin/modificarEjercicios.php?id=$idEjercicio"); 
 							}
 							else{
@@ -189,7 +191,7 @@
 
 			public static function borrarEjercicio(){
 				if(!isset($_SESSION)) session_start();
-					if($_SESSION['usuario']->getTipoUsuario()=="Administrador" || $_SESSION['usuario']->getTipoUsuario()=="Entrenador" ){
+					if($_SESSION['tipoUsuario']=="Administrador" || $_SESSION['tipoUsuario']=="Entrenador" ){
 							$idEjercicio = $_POST['idEjercicio'];
 							$nombre = $_POST['NomEjercicio'];
 							//Comprobamos si existe el ejercicio para poder borrarlo
@@ -199,7 +201,7 @@
 								//LLamamos a la funcion que elimina el Ejercicio
 								Ejercicio::delete($idEjercicio);
 								//Redireccionamos a vista dependiendo del Usuario que modifico el Ejercicio
-								if ($_SESSION['usuario']->getTipoUsuario()=="Administrador") {
+								if ($_SESSION['tipoUsuario']=="Administrador") {
 								header("Location: ../views/Admin/gestionEjercicios.php"); 
 								}
 								else{
@@ -207,7 +209,7 @@
 								} 
 							}else{
 								ob_start(); 
-		  						if ($_SESSION['usuario']->getTipoUsuario()=="Administrador") {
+		  						if ($_SESSION['tipoUsuario']=="Administrador") {
 								header("refresh: 3; url = ../views/Admin/gestionEjercicios.php"); 
 								}
 								else{

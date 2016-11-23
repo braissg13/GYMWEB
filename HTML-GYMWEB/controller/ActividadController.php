@@ -1,14 +1,18 @@
 <?php
 
+require_once(__DIR__."/../conexion/bdConexion.php");
+require_once(__DIR__."/../model/ActividadMapper.php");
+require_once(__DIR__."/../model/Actividad.php");
+
 	class ActividadController{
 
 
-    		/*Obtenemos todos las ACTIVIDADES*/
-    		public static function getAll(){
-    			if(!isset($_SESSION)) session_start();
-    			$actividades = new Actividad();
-    			return $actividades->getAllActividades();
-    		}
+        /*Obtenemos todos las ACTIVIDADES*/
+        public static function getAll(){
+          if(!isset($_SESSION)) session_start();
+          $actividades = new Actividad();
+          return $actividades->getAllActividades();
+        }
 
         /*Obtenemos a un Entrenador determinado*/
         public static function getEntrenador($idActividad){
@@ -28,7 +32,7 @@
         public static function crearActividad(){
         if(!isset($_SESSION)) session_start();
 
-        if($_SESSION['usuario']->getTipoUsuario()=="Administrador"){
+        if($_SESSION['tipoUsuario']=="Administrador"){
           $nombre = $_POST['nomAct'];
           $totalPlazas = $_POST['numPl'];
           $descripcion = $_POST['descrAct'];
@@ -89,7 +93,7 @@
             }
           }else{
             ob_start(); 
-             if ($_SESSION['usuario']->getTipoUsuario()=="DeportistaPEF" || $_SESSION['usuario']->getTipoUsuario()=="DeportistaTDU") {
+             if ($_SESSION['tipoUsuario']=="DeportistaPEF" || $_SESSION['tipoUsuario']=="DeportistaTDU") {
                 header("refresh: 3; url = ../views/Deportista/principal.php"); 
               }
               else{
@@ -124,7 +128,7 @@
         public static function modificarActividad(){
         if(!isset($_SESSION)) session_start();
 
-        if($_SESSION['usuario']->getTipoUsuario()=="Administrador"){
+        if($_SESSION['tipoUsuario'] =="Administrador"){
           $idAct = $_POST['idAct'];
           $nombre = $_POST['nomAct'];
           $totalPlazas = $_POST['numPl'];
@@ -174,7 +178,7 @@
             }
           }else{
             ob_start(); 
-             if ($_SESSION['usuario']->getTipoUsuario()=="DeportistaPEF" || $_SESSION['usuario']->getTipoUsuario()=="DeportistaTDU") {
+             if ($_SESSION['tipoUsuario']=="DeportistaPEF" || $_SESSION['tipoUsuario']=="DeportistaTDU") {
                 header("refresh: 3; url = ../views/Deportista/principal.php"); 
               }
               else{
@@ -190,7 +194,7 @@
         /* BORRAR ACTIVIDAD*/
         public static function borrarActividad(){
           if(!isset($_SESSION)) session_start();
-            if($_SESSION['usuario']->getTipoUsuario()=="Administrador"){
+            if($_SESSION['tipoUsuario']=="Administrador"){
                 $idActividad = $_POST['idActividad'];
                 $nombre = $_POST['NomActividad'];
                 //Comprobamos si existe la actividad para poder borrarlo
@@ -213,7 +217,7 @@
                 }
             }else{
               ob_start(); 
-              if ($_SESSION['usuario']->getTipoUsuario()=="DeportistaPEF" || $_SESSION['usuario']->getTipoUsuario()=="DeportistaTDU") {
+              if ($_SESSION['tipoUsuario']=="DeportistaPEF" || $_SESSION['tipoUsuario']=="DeportistaTDU") {
                 header("refresh: 3; url = ../views/Deportista/principal.php"); 
               }
               else{

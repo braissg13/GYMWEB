@@ -1,4 +1,8 @@
 <?php
+require_once(__DIR__."/../conexion/bdConexion.php");
+require_once(__DIR__."/../model/UsuarioMapper.php");
+require_once(__DIR__."/../model/Usuario.php");
+
 class UsuarioController{
 	/*Obtenemos todos los Usuarios*/
 	public static function getAll(){
@@ -45,7 +49,7 @@ class UsuarioController{
 	/*Añadimos un Comentario*/
 	public static function addComentarioTabla(){
 		if(!isset($_SESSION)) session_start();
-		if($_SESSION['usuario']->getTipoUsuario()=="DeportistaTDU" || $_SESSION['usuario']->getTipoUsuario()=="DeportistaPEF"){
+		if($_SESSION['tipoUsuario'] =="DeportistaTDU" || $_SESSION['tipoUsuario']=="DeportistaPEF"){
 			$idTabla = $_POST['idTabla'];
 			$idUsuario = $_POST['idUsuario'];
 			$completado = $_POST['completado'];
@@ -59,7 +63,7 @@ class UsuarioController{
 			header("Location:../views/Deportista/consultarTabla.php?id=$idTabla");
 		}else{
 			ob_start();
-			 if ($_SESSION['usuario']->getTipoUsuario()=="Administrador"){
+			 if ($_SESSION['tipoUsuario']=="Administrador"){
 					header("refresh: 3; url = ../views/Admin/principal.php");
 				}
 				else{
@@ -110,7 +114,8 @@ class UsuarioController{
 					echo $errors["general"];
 					ob_end_flush();
 				}else{
-					$_SESSION["usuario"] = $usuario;
+					$_SESSION["idUsuario"] = $usuario->getIdUsuario();
+					$_SESSION["tipoUsuario"] = $usuario->getTipoUsuario();
 				// Si login correcto direcionamos a una vista
 				if($usuario->getTipoUsuario() =="Administrador"){
 					header("Location:../views/Admin/principal.php");
@@ -148,7 +153,7 @@ class UsuarioController{
 		/*MODIFICAR Usuario*/
 	public static function modificarUsuario(){
 	if(!isset($_SESSION)) session_start();
-	if($_SESSION['usuario']->getTipoUsuario()=="Administrador"){
+	if($_SESSION['tipoUsuario'] =="Administrador"){
 		$idUsu = $_POST['idUsu'];
 		$nomUsuario = $_POST['nomUsuario'];
 		$password = $_POST['password'];
@@ -181,7 +186,7 @@ class UsuarioController{
 					}
 		}else{
 			ob_start();
-			 if ($_SESSION['usuario']->getTipoUsuario()=="DeportistaPEF" || $_SESSION['usuario']->getTipoUsuario()=="DeportistaTDU") {
+			 if ($_SESSION['tipoUsuario'] =="DeportistaPEF" || $_SESSION['tipoUsuario']=="DeportistaTDU") {
 					header("refresh: 3; url = ../views/Deportista/principal.php");
 				}
 				else{
@@ -197,7 +202,7 @@ class UsuarioController{
 	/* BORRAR Usuario*/
 	public static function borrarUsuario(){
 		if(!isset($_SESSION)) session_start();
-			if($_SESSION['usuario']->getTipoUsuario()=="Administrador"){
+			if($_SESSION['tipoUsuario'] =="Administrador"){
 					$idUsuario = $_POST['idUsuario'];
 					$nomUsuario = $_POST['nomUsuario'];
 					$tipoUsuario = $_POST['tipoUsuario'];
@@ -234,7 +239,7 @@ class UsuarioController{
 					}
 			}else{
 				ob_start();
-				if ($_SESSION['usuario']->getTipoUsuario()=="DeportistaPEF" || $_SESSION['usuario']->getTipoUsuario()=="DeportistaTDU") {
+				if ($_SESSION['tipoUsuario'] =="DeportistaPEF" || $_SESSION['tipoUsuario']=="DeportistaTDU") {
 					header("refresh: 3; url = ../views/Deportista/principal.php");
 				}
 				else{
@@ -248,7 +253,7 @@ class UsuarioController{
 	}//FIN BORRAR USUARIO
   	public static function crearUsuario(){
   		if(!isset($_SESSION)) session_start();
-  		if($_SESSION["usuario"]->getTipoUsuario() == 'Administrador'){
+  		if($_SESSION["tipoUsuario"] == 'Administrador'){
   			/*Si lo invoca un admin, cogemos las variables que nos pasa el submit por post*/
   			$nomUser = $_POST["nomUsuario"];
   			$pass = $_POST["password"];
@@ -292,7 +297,7 @@ class UsuarioController{
   		  	}
   		}else{
   			ob_start();
-  			if($_SESSION["usuario"]->getTipoUsuario() == 'DeportistaTDU' || $_SESSION["usuario"]->getTipoUsuario() == 'DeportistaPEF') {
+  			if($_SESSION["tipoUsuario"]->getTipoUsuario() == 'DeportistaTDU' || $_SESSION["tipoUsuario"]->getTipoUsuario() == 'DeportistaPEF') {
 	  				header("refresh: 3; url = ../views/Deportista/principal.php"); 
 	  			}else{
 	  				header("refresh: 3; url = ../views/Entrenador/principal.php"); 

@@ -1,4 +1,7 @@
 <?php
+require_once(__DIR__."/../conexion/bdConexion.php");
+require_once(__DIR__."/../model/TablaMapper.php");
+require_once(__DIR__."/../model/Tabla.php");
 
 	class TablaController{
 
@@ -91,7 +94,7 @@
 
 		public static function crearTabla(){
 	  		if(!isset($_SESSION)) session_start();
-	  		if($_SESSION["usuario"]->getTipoUsuario() == 'Entrenador'){
+	  		if($_SESSION["tipoUsuario"] == 'Entrenador'){
 	  			/*Si lo invoca un entrenador, cogemos las variables que nos pasa el submit por post*/
 	  			$nomTabla = $_POST["NomTabla"];
 	  			$ejersSeleccionados = $_POST["ejerSeleccionado"];
@@ -137,7 +140,7 @@
 	  		  	}
 	  		}else{
 	  			ob_start();
-	  			if($_SESSION["usuario"]->getTipoUsuario() == 'DeportistaTDU' || $_SESSION["usuario"]->getTipoUsuario() == 'DeportistaPEF') {
+	  			if($_SESSION["tipoUsuario"] == 'DeportistaTDU' || $_SESSION["tipoUsuario"] == 'DeportistaPEF') {
 		  				header("refresh: 3; url = ../views/Deportista/principal.php"); 
 		  			}else{
 		  				header("refresh: 3; url = ../views/Admin/principal.php"); 
@@ -151,7 +154,7 @@
 
 	  	public static function modificarTabla(){
 			if(!isset($_SESSION)) session_start();
-			if($_SESSION['usuario']->getTipoUsuario()=="Entrenador"){
+			if($_SESSION['tipoUsuario']=="Entrenador"){
 				/*Si lo invoca un entrenador, cogemos las variables que nos pasa el submit por post*/
 	  			$idTabla = $_POST["idTabla"];
 	  			$nomTabla = $_POST["NomTabla"];
@@ -179,7 +182,7 @@
 							}
 				}else{
 					ob_start();
-					 if ($_SESSION['usuario']->getTipoUsuario()=="DeportistaPEF" || $_SESSION['usuario']->getTipoUsuario()=="DeportistaTDU") {
+					 if ($_SESSION['tipoUsuario'] =="DeportistaPEF" || $_SESSION['tipoUsuario']=="DeportistaTDU") {
 							header("refresh: 3; url = ../views/Deportista/principal.php");
 						}
 						else{
@@ -195,7 +198,7 @@
 		/* BORRAR TABLA*/
         public static function borrarTabla(){
           if(!isset($_SESSION)) session_start();
-            if($_SESSION['usuario']->getTipoUsuario()=="Entrenador"){
+            if($_SESSION['tipoUsuario'] =="Entrenador"){
                 $idTabla = $_POST['idTabla'];
                 $nombre = $_POST['nomTabla'];
                 //Comprobamos si existe la actividad para poder borrarlo
@@ -220,7 +223,7 @@
                 }
             }else{
               ob_start(); 
-              if ($_SESSION['usuario']->getTipoUsuario()=="DeportistaPEF" || $_SESSION['usuario']->getTipoUsuario()=="DeportistaTDU") {
+              if ($_SESSION['tipoUsuario']=="DeportistaPEF" || $_SESSION['tipoUsuario']=="DeportistaTDU") {
                 header("refresh: 3; url = ../views/Deportista/principal.php"); 
               }
               else{

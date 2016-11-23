@@ -1,12 +1,10 @@
 <?php
 
 //Incluimos todos los controladores
-	include_once __DIR__."/../controller/UsuarioController.php";
-	include_once __DIR__."/../controller/EjercicioController.php";
-	include_once __DIR__."/../controller/ActividadController.php";
-	include_once __DIR__."/../controller/TablaController.php";
-//Incluir todos los modelos de nuestro sistema
-	include_once __DIR__."/../model/model.php";
+	include_once("UsuarioController.php");
+	include_once("EjercicioController.php");
+	include_once("ActividadController.php");
+	include_once("TablaController.php");
 //Llamamos alcontrolador y su accion
 	if(isset($_GET["controlador"]) && isset($_GET["accion"])){
 		$targetController = ucfirst($_GET["controlador"])."Controller";
