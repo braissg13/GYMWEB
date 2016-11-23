@@ -30,9 +30,9 @@ require_once(__DIR__."/../model/Ejercicio.php");
 							//Comprobamos si los datosintroducidos son Correctos
 							if(Ejercicio::registroValido($nombre,$descripcion,$repeticiones)){
 								//Creamos ruta donde guardamos la imagen yle damos nombre 
-								$ruta = "../img/ejercicios";
+								  $ruta = "../img/ejercicios";
 								$nombreArchivo = $_FILES['imagen']['name'];
-								move_uploaded_file($_FILES['imagen']['tmp-name'], $ruta."/".$nombreArchivo);
+								move_uploaded_file($_FILES['imagen']['tmp_name'], $ruta."/".$nombreArchivo);
 								//Creamos el Ejercicio
 								$ejercicio = new Ejercicio();
 
@@ -137,10 +137,9 @@ require_once(__DIR__."/../model/Ejercicio.php");
 							//Comprobamos si los datosintroducidos son Correctos
 							if(Ejercicio::registroValido($nombre,$descripcion,$repeticiones)){
 								//Creamos ruta donde guardamos la imagen yle damos nombre 
-								$ruta = "../img/ejercicios";
-								$archivo = $_FILES['imagen']['tmp-name'];
+								//$ruta = "../img/ejercicios";
 								$nombreArchivo = $_FILES['imagen']['name'];
-								move_uploaded_file($archivo, $ruta."/".$nombreArchivo);
+								move_uploaded_file($_FILES['imagen']['tmp-name'], "../img/ejercicios/".$nombreArchivo);
 
 								//Lamamos a la funcion que modifica el Ejercicio
 								Ejercicio::update($idEjercicio,$nombre,$descripcion,$tipo,$repeticiones,$carga,$nombreArchivo);

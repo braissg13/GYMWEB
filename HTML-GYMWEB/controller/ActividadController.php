@@ -53,10 +53,9 @@ require_once(__DIR__."/../model/Actividad.php");
                 //Comprobamos si los datosintroducidos son Correctos
                 if(Actividad::registroValido($nombre,$descripcion)){
                   //Creamos ruta donde guardamos la imagen yle damos nombre 
-                  $ruta = "../img/actividades";
-                  $archivo = $_FILES['imagen']['tmp-name'];
+                  //$ruta = "../img/actividades";
                   $nombreArchivo = $_FILES['imagen']['name'];
-                  move_uploaded_file($archivo, $ruta."/".$nombreArchivo);
+                move_uploaded_file($_FILES['imagen']['tmp-name'], "../img/ejercicios/".$nombreArchivo);
                   //Creamos el Ejercicio
                   $actividad = new Actividad();
 
@@ -148,10 +147,9 @@ require_once(__DIR__."/../model/Actividad.php");
                 //Comprobamos si los datosintroducidos son Correctos
                 if(Actividad::registroValido($nombre,$descripcion)){
                   //Creamos ruta donde guardamos la imagen yle damos nombre 
-                  $ruta = "../img/actividades";
-                  $archivo = $_FILES['imagen']['tmp-name'];
-                  $nombreArchivo = $_FILES['imagen']['name'];
-                  move_uploaded_file($archivo, $ruta."/".$nombreArchivo);
+                 $ruta = "../img/ejercicios";
+                $nombreArchivo = $_FILES['imagen']['name'];
+                move_uploaded_file($_FILES['imagen']['tmp_name'], $ruta."/".$nombreArchivo);
                   
                   //Llamamos a la funcion que modifica la Actividad
                   $actividad = Actividad::update($idAct,$nombre,$totalPlazas,$descripcion,$fecha,$plazasOcupadas,$nombreArchivo);
