@@ -1,6 +1,3 @@
-<?php
-include_once __DIR__."/controller/defaultController.php";
-?>
 <!DOCTYPE html>
 <html lang="en">
   <head>

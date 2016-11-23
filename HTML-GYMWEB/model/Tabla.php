@@ -1,6 +1,7 @@
 <?php
-include_once __DIR__."/../conexion/bdConexion.php";
-include_once __DIR__."/../model/TablaMapper.php";
+require_once(__DIR__."/../conexion/bdConexion.php");
+require_once(__DIR__."/../model/TablaMapper.php");
+
 class Tabla {
   protected $idTablaEjercicios;
   protected $nomTabla;

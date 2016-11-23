@@ -1,10 +1,10 @@
 <?php
- include_once __DIR__."/../../model/model.php";
-	include_once __DIR__."/../../controller/defaultController.php";
+require_once("../../controller/defaultController.php");
 
-	if(!isset($_SESSION)) session_start();
- 		$user=$_SESSION["usuario"];
- 	if ($_SESSION["usuario"]->getTipoUsuario() =='Administrador'){
+if(!isset($_SESSION)) session_start();
+ $idUsuario=$_SESSION['idUsuario'];
+ /*Aqui comprobamos que no intenten entrar otros Usuarios que no sean Administradores*/
+ if ($_SESSION['tipoUsuario'] =='Administrador'){
 
     $idEjer = $_GET['id'];
 
@@ -43,7 +43,7 @@
 		 <div id="container-ejercicios">
 
 			<div class="row">
-  				<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4" style="border-style: solid;border-color: black;margin-bottom: 20px;"><img alt="AperMancuernas" src="../../img/ejercicios/<?php echo $ejercicio->getImagenEjercicio(); ?>" style="max-width: 100%;max-height: 100%;"></div>
+  				<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4" style="border-style: solid;border-color: black;margin-bottom: 20px;"><img alt="Ejercicio" src="../../img/ejercicios/<?php echo $ejercicio->getImagenEjercicio(); ?>" style="max-width: 100%;max-height: 100%;"></div>
   				<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
   					<pre style="background-color: transparent; border-color: black;">
 <?php echo $ejercicio->getDescripEjercicio(); ?>
@@ -101,10 +101,10 @@
 <?php
   }else{
         ob_start(); 
-         if (($_SESSION["usuario"]->getTipoUsuario()=='DeportistaPEF') || ($_SESSION["usuario"]->getTipoUsuario()=='DeportistaTDU')){
+         if (($_SESSION['tipoUsuario']=='DeportistaPEF') || ($_SESSION['tipoUsuario'] =='DeportistaTDU')){
             header("refresh: 1; url = ../Deportista/principal.php");  
           }else{
-             if($_SESSION["usuario"]->getTipoUsuario()=='Entrenador'){
+             if($_SESSION['tipoUsuario']=='Entrenador'){
                   header("Location: ../Entrenador/principal.php");  
              }else{
                 header("Location: = /../index.php"); 

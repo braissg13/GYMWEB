@@ -1,10 +1,10 @@
 <?php
-	include_once __DIR__."/../../model/model.php";
-  include_once __DIR__."/../../controller/defaultController.php";
+require_once("../../controller/defaultController.php");
 
-if(!isset($_SESSION)) session_start();
- $user=$_SESSION["usuario"];
- if ($_SESSION["usuario"]->getTipoUsuario() =='DeportistaPEF' || $_SESSION["usuario"]->getTipoUsuario() =='DeportistaTDU' ){
+  if(!isset($_SESSION)) session_start();
+    $idUsuario=$_SESSION['idUsuario'];
+    $tipo=$_SESSION['tipoUsuario'];
+  if (($tipo=='DeportistaPEF') || ($tipo=='DeportistaTDU')){
 ?>
 
 <!DOCTYPE html>
@@ -46,10 +46,10 @@ if(!isset($_SESSION)) session_start();
 <?php
   }else{
         ob_start(); 
-         if (($_SESSION["usuario"]->getTipoUsuario()=='Administrador')){
+         if (($_SESSION['tipoUsuario']=='Administrador')){
             header("Location: ../Admin/principal.php");  
           }else{
-             if($_SESSION["usuario"]->getTipoUsuario()=='Entrenador'){
+             if($_SESSION['tipoUsuario']=='Entrenador'){
                   header("Location: ../Entrenador/principal.php");  
              }else{
                 header("Location: = /../index.php"); 

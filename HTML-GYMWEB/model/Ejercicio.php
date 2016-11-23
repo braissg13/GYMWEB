@@ -1,8 +1,7 @@
 <?php
 
-
-include_once __DIR__."/../conexion/bdConexion.php";
-include_once __DIR__."/../model/EjercicioMapper.php";
+require_once(__DIR__."/../conexion/bdConexion.php");
+require_once(__DIR__."/../model/EjercicioMapper.php");
 
 class Ejercicio {
  

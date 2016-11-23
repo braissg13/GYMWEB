@@ -1,16 +1,17 @@
 <?php
- include_once __DIR__."/../../model/model.php";
-	include_once __DIR__."/../../controller/defaultController.php";
+ require_once("../../controller/defaultController.php");
 
 	if(!isset($_SESSION)) session_start();
- 		$user=$_SESSION["usuario"];
- 	if (($_SESSION["usuario"]->getTipoUsuario()=='DeportistaPEF') || ($_SESSION["usuario"]->getTipoUsuario()=='DeportistaTDU')){
+ 		$idUsuario=$_SESSION['idUsuario'];
+    $tipo=$_SESSION['tipoUsuario'];
+ 	if (($tipo=='DeportistaPEF') || ($tipo=='DeportistaTDU')){
 
     $idTabla = $_GET['id'];
 
     $tabla = TablaController::getTabla($idTabla);
     $row = TablaController::getEjercicios($idTabla);
-    $row2 = UsuarioController::getComentarios($idTabla,$_SESSION["usuario"]->getIdUsuario());
+    $row2 = UsuarioController::getComentarios($idTabla,$idUsuario);
+    $user = UsuarioController::getUsuario($idUsuario);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -128,7 +129,7 @@
                    <input type="radio" name="completado" required="" value="Si"><b>Entrenamiento Completado</b>
                   <input type="radio" name="completado" required="" value="No"><b>Entrenamiento no Completado</b>
                </div>
-               <input type="hidden" name="idUsuario" value="<?php echo $_SESSION["usuario"]->getIdUsuario();?>">
+               <input type="hidden" name="idUsuario" value="<?php echo $user->getIdUsuario();?>">
                <input type="hidden" name="idTabla" value="<?php echo $tabla->getIdTabla();?>">
               <p style="text-align:center">
               <button type="submit" class="btn btn-default1" style="margin-right: 10px;">
@@ -151,11 +152,11 @@
 <?php
   }else{
         ob_start(); 
-         if (($_SESSION["usuario"]->getTipoUsuario()=='Entrenador')){
-            header("refresh: 1; url = ../Entrenador/principal.php");  
+         if (($_SESSION['tipoUsuario']=='Administrador')){
+            header("Location: ../Admin/principal.php");  
           }else{
-             if($_SESSION["usuario"]->getTipoUsuario()=='Administrador'){
-                  header("Location: ../Admin/principal.php");  
+             if($_SESSION['tipoUsuario']=='Entrenador'){
+                  header("Location: ../Entrenador/principal.php");  
              }else{
                 header("Location: = /../index.php"); 
              }

@@ -1,9 +1,9 @@
 <?php
-include_once __DIR__."/../../model/model.php";
-include_once __DIR__."/../../controller/defaultController.php";
+require_once("../../controller/defaultController.php");
+
 if(!isset($_SESSION)) session_start();
- $user=$_SESSION["usuario"];
- if ($_SESSION["usuario"]->getTipoUsuario() =='Entrenador'){
+ $idUsuario=$_SESSION['idUsuario'];
+ if ($_SESSION['tipoUsuario'] =='Entrenador'){
   $idActividad = $_GET['id'];
   $row = ActividadController::getUsuariosEntrenador($idActividad);
 ?>
@@ -89,18 +89,18 @@ if(!isset($_SESSION)) session_start();
   </body>
 </html>
 <?php
-  /*Dependiendo que tipo de Usuario intente entrar donde no debe lo mandamosa su pagina principal.*/
   }else{
-        ob_start();
-         if (($_SESSION["usuario"]->getTipoUsuario()=='DeportistaPEF') || ($_SESSION["usuario"]->getTipoUsuario()=='DeportistaTDU')){
-            header("refresh: 1; url = ../Deportista/principal.php");
+        ob_start(); 
+         if (($_SESSION['tipoUsuario']=='DeportistaPEF') || ($_SESSION['tipoUsuario']=='DeportistaTDU')){
+            header("refresh: 1; url = ../Deportista/principal.php");  
           }else{
-             if($_SESSION["usuario"]->getTipoUsuario()=='Administrador'){
-                  header("Location: ../Administrador/principal.php");
+             if($_SESSION['tipoUsuario']=='Administrador'){
+                  header("Location: ../Admin/principal.php");  
              }else{
-                header("Location: = /../index.php");
+                header("Location: = /../index.php"); 
              }
           }
-        ob_end_flush();
+          
+        ob_end_flush();  
   }
 ?>

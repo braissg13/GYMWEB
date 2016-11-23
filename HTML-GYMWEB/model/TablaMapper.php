@@ -1,5 +1,5 @@
 <?php
-include_once __DIR__."/../conexion/bdConexion.php";
+require_once(__DIR__."/../conexion/bdConexion.php");
 
 class TablaMapper{
     /*Buscamos todos las Actividades*/

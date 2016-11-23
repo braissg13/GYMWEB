@@ -1,10 +1,9 @@
 <?php
-include_once __DIR__."/../../model/model.php";
-include_once __DIR__."/../../controller/defaultController.php";
+require_once("../../controller/defaultController.php");
 
 if(!isset($_SESSION)) session_start();
- $user=$_SESSION["usuario"];
- if ($_SESSION["usuario"]->getTipoUsuario() =='Entrenador'){
+ $idUsuario=$_SESSION['idUsuario'];
+ if ($_SESSION['tipoUsuario'] =='Entrenador'){
 
  	$idEjer = $_GET['id'];
     $ejercicio = EjercicioController::getEjercicio($idEjer);
@@ -40,7 +39,7 @@ if(!isset($_SESSION)) session_start();
 		 <div id="container-ejercicios">
 		 <!-- COMIENZO ROW -->
 			<div class="row row1">
-  				<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4" style="border-style: solid;border-color: black;margin-bottom: 20px;"><img alt="AperMancuernas" src="../../img/ejercicios/<?php echo $ejercicio->getImagenEjercicio();?>" style="max-width: 100%;max-height: 100%;"></div>
+  				<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4" style="border-style: solid;border-color: black;margin-bottom: 20px;"><img alt="Ejercicio" src="../../img/ejercicios/<?php echo $ejercicio->getImagenEjercicio();?>" style="max-width: 100%;max-height: 100%;"></div>
   				<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
   					<pre style="background-color: transparent; border-color: black;">
 <?php echo $ejercicio->getDescripEjercicio(); ?>
@@ -123,10 +122,10 @@ if(!isset($_SESSION)) session_start();
 <?php
   }else{
         ob_start(); 
-         if (($_SESSION["usuario"]->getTipoUsuario()=='DeportistaPEF') || ($_SESSION["usuario"]->getTipoUsuario()=='DeportistaTDU')){
+         if (($_SESSION['tipoUsuario']=='DeportistaPEF') || ($_SESSION['tipoUsuario']=='DeportistaTDU')){
             header("refresh: 1; url = ../Deportista/principal.php");  
           }else{
-             if($_SESSION["usuario"]->getTipoUsuario()=='Administrador'){
+             if($_SESSION['tipoUsuario']=='Administrador'){
                   header("Location: ../Admin/principal.php");  
              }else{
                 header("Location: = /../index.php"); 

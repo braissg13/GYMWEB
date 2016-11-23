@@ -1,10 +1,9 @@
 <?php
-include_once __DIR__."/../../model/model.php";
-include_once __DIR__."/../../controller/defaultController.php";
+require_once("../../controller/defaultController.php");
 
 if(!isset($_SESSION)) session_start();
- $user=$_SESSION["usuario"];
- if ($_SESSION["usuario"]->getTipoUsuario() =='Entrenador'){
+ $idUsuario=$_SESSION['idUsuario'];
+ if ($_SESSION['tipoUsuario'] =='Entrenador'){
 
  	 $row = EjercicioController::getAll();
 ?>
@@ -56,7 +55,7 @@ if(!isset($_SESSION)) session_start();
                 <label for="idEjers">Selecciona los Ejercicios deseados: </label>
                   <?php if($row!=null){ foreach ($row as $ejercicio){
                   echo "<div class=\"radio col-xs-12 col-sm-4 col-md-4 col-lg-4\" style=\"margin-top:30px;\">";
-                    echo "<img alt=\"Imagen\" src=\""."../../img/ejercicios/".$ejercicio['imagen']."\" style=\"max-width: 100%;\">";
+                    echo "<img alt=\"ImgEjer\" src=\""."../../img/ejercicios/".$ejercicio['imagen']."\" style=\"max-width: 100%;\">";
                   ?>
                     <p style="text-align: center; margin-bottom: 40px;"><input type="checkbox" name="ejerSeleccionado[]"  value="<?php echo $ejercicio['idEjercicio'];?>" aria-label="true"></p>
                   <?php   echo "</div>";
@@ -108,10 +107,10 @@ if(!isset($_SESSION)) session_start();
 <?php
   }else{
         ob_start(); 
-         if (($_SESSION["usuario"]->getTipoUsuario()=='DeportistaPEF') || ($_SESSION["usuario"]->getTipoUsuario()=='DeportistaTDU')){
+         if (($_SESSION['tipoUsuario']=='DeportistaPEF') || ($_SESSION['tipoUsuario']=='DeportistaTDU')){
             header("refresh: 1; url = ../Deportista/principal.php");  
           }else{
-             if($_SESSION["usuario"]->getTipoUsuario()=='Administrador'){
+             if($_SESSION['tipoUsuario']=='Administrador'){
                   header("Location: ../Admin/principal.php");  
              }else{
                 header("Location: = /../index.php"); 

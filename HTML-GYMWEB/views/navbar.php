@@ -1,5 +1,5 @@
 <?php
-	$tipo = $_SESSION['usuario']->getTipoUsuario();
+	$tipo = $_SESSION['tipoUsuario'];
 ?>
 
 <nav class="navbar navbar-default">

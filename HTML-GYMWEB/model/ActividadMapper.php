@@ -1,5 +1,7 @@
 <?php
-include_once __DIR__."/../conexion/bdConexion.php";
+require_once(__DIR__."/../conexion/bdConexion.php");
+
+
 class ActividadMapper{
     /*Buscamos todos las Actividades*/
     public static function findAll()
