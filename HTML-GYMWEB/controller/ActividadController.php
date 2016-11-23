@@ -147,7 +147,7 @@ require_once(__DIR__."/../model/Actividad.php");
                 //Comprobamos si los datosintroducidos son Correctos
                 if(Actividad::registroValido($nombre,$descripcion)){
                   //Creamos ruta donde guardamos la imagen yle damos nombre 
-                 $ruta = "../img/ejercicios";
+                 $ruta = "../img/actividades";
                 $nombreArchivo = $_FILES['imagen']['name'];
                 move_uploaded_file($_FILES['imagen']['tmp_name'], $ruta."/".$nombreArchivo);
                   
