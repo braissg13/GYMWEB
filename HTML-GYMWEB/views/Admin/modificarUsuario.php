@@ -92,17 +92,18 @@ if(!isset($_SESSION)) session_start();
 
 
                       <!-- DIV TIPO USU -->
+                      <?php if($usuario->getTipoUsuario()!="Administrador"){ ?>
                              <div class="form-group">
                                  <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
                                    <label for="tipoUsu">TipoUsuario: </label>
                                      <select class="form-control" name="tipoUsuario">
-                                       <option value="Administrador">Administrador</option>
                                        <option value="Entrenador">Entrenador</option>
                                        <option value="DeportistaPEF">DeportistaPEF</option>
                                        <option value="DeportistaTDU">DeportistaTDU</option>
                                      </select>
                                  </div>
                            </div>
+                      <?php } ?>
 
                     </div> <!-- FIN ROW -->
 
