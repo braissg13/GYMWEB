@@ -64,30 +64,30 @@ if(!isset($_SESSION)) session_start();
                        <!-- DIV nombreUsuario USU -->
                          <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-4">
                                      <label for="nomUser">Nombre Usuario: </label>
-                                     <input type="text" required="" class="form-control" name="nomUsuario" maxlength="30" placeholder="nombre usuario">
+                                     <input type="text" class="form-control" name="nomUsuario" maxlength="30" placeholder="nombre usuario">
                          </div>
 
                          <!-- DIV password nueva USU -->
                          <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-4">
                                      <label for="passUsu">Password nueva: </label>
-                                     <input type="password" required="" class="form-control"  name="password" maxlength="20" placeholder="password usuario">
+                                     <input type="password" class="form-control"  name="password" maxlength="20" placeholder="password usuario">
                          </div>
                          <!-- DIV NOMBRE USU -->
                          <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-4">
                              <label for="nomUsu">Nombre: </label>
-                             <input type="text" class="form-control" required="" name="nombre" maxlength="30" placeholder="Nombre">
+                             <input type="text" class="form-control" name="nombre" maxlength="30" placeholder="Nombre">
                          </div>
                          <!-- DIV APELLIDOS USU -->
                          <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-4">
                              <label for="apellUsu">Apellidos: </label>
-                             <input type="text" class="form-control" required="" name="apellidos" maxlength="30" placeholder="Apellidos">
+                             <input type="text" class="form-control" name="apellidos" maxlength="30" placeholder="Apellidos">
                          </div>
 
 
                          <!-- DIV EMAIL USU -->
                          <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-4">
                                      <label for="emailUsu">Email: </label>
-                                     <input type="email" class="form-control" name="email" required="" maxlength="50" placeholder="email usuario">
+                                     <input type="email" class="form-control" name="email" maxlength="50" placeholder="email usuario">
                          </div>
 
 
@@ -95,7 +95,7 @@ if(!isset($_SESSION)) session_start();
                              <div class="form-group">
                                  <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
                                    <label for="tipoUsu">TipoUsuario: </label>
-                                     <select class="form-control" required="" name="tipoUsuario">
+                                     <select class="form-control" name="tipoUsuario">
                                        <option value="Administrador">Administrador</option>
                                        <option value="Entrenador">Entrenador</option>
                                        <option value="DeportistaPEF">DeportistaPEF</option>
