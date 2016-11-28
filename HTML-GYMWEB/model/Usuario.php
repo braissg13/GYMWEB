@@ -133,6 +133,11 @@ class Usuario {
       UsuarioMapper::update($idUsuario,$nomUsuario,$password,$email, $tipoUsuario, $nombre, $apellidos);
   }
 
+  public static function updateSinPass($idUsuario,$nomUsuario,$email, $tipoUsuario, $nombre, $apellidos)
+  {
+      UsuarioMapper::updateSinPass($idUsuario,$nomUsuario,$email, $tipoUsuario, $nombre, $apellidos);
+  }
+
    public static function delete($idUsuario){
       UsuarioMapper::delete($idUsuario);
   }
