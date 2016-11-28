@@ -72,7 +72,7 @@ if(!isset($_SESSION)) session_start();
               <!-- DIV NOMBRE EJER -->
               <div class="form-group col-xs-12 col-sm-4 col-md-4 col-lg-4">
                   <label for="nomTabla">Nombre Tabla: </label>
-                  <input type="text" class="form-control" name="NomTabla" maxlength="30" placeholder="Nombre Tabla" required="">
+                <input type="text" class="form-control" name="NomTabla" maxlength="30" placeholder="Nombre Tabla">
               </div>
 
               <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="visibility: hidden; margin-bottom: 10px;"></div>
@@ -91,15 +91,6 @@ if(!isset($_SESSION)) session_start();
                    }
                   } 
                 ?>
-                <div id= "paginacion">
-                      <ul class="pagination">
-                        <li><a href="#">«</a></li>
-                        <li><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">»</a></li>
-                      </ul>
-                  </div>
               </div>    
 
                 

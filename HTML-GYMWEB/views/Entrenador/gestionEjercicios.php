@@ -79,16 +79,6 @@ if(!isset($_SESSION)) session_start();
           ?>
 
 			</div>
-			<!--  PAGINACION NO VISIBLE XS -->
-			<div id= "paginacion">
-				<ul class="pagination">
-				  <li><a href="#">«</a></li>
-				  <li><a href="#">1</a></li>
-				  <li><a href="#">2</a></li>
-				  <li><a href="#">3</a></li>
-				  <li><a href="#">»</a></li>
-				</ul>
-			</div>
 
 		 </div>
 

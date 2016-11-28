@@ -66,12 +66,12 @@ if(!isset($_SESSION)) session_start();
 		 			<!-- DIV NOMBRE EJER -->
 					<div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-4">
 					    <label for="nomEjer">Nombre Ejercicio: </label>
-					    <input type="text" required="" class="form-control" name="NomEjercicio" maxlength="30" placeholder="Nombre ejercicio">
+					    <input type="text"  class="form-control" name="NomEjercicio" maxlength="30" placeholder="Nombre ejercicio">
 					</div>
 					<!-- DIV DESCRIP EJER -->
 					<div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-8">
 					    <label for="descEjer">Descripci&oacuten Ejercicio: </label>
-					    <textarea class="form-control" required="" rows="4" name="DescripEjerc" maxlength="500"></textarea>
+					    <textarea class="form-control" rows="4" name="DescripEjerc" maxlength="500"></textarea>
 					</div>
 					<!-- DIV TIPO EJER -->
                    	<div class="form-group">
@@ -87,12 +87,12 @@ if(!isset($_SESSION)) session_start();
 					<!-- DIV REPETICIONES -->
 					<div class="form-group col-xs-12 col-sm-4 col-md-4 col-lg-4">
 					    <label for="Repeticiones">Repeticiones: </label>
-					    <input type="text" class="form-control" required="" name="Repeticiones" maxlength="15" placeholder="xx-xx-xx-xx">
+					    <input type="text" class="form-control" name="Repeticiones" maxlength="15" placeholder="xx-xx-xx-xx">
 					</div>
 					<!-- DIV CARGA -->
 					<div class="form-group col-xs-12 col-sm-4 col-md-4 col-lg-4">
 					    <label for="Carga">Peso: </label>
-					    <input type="number" min="0" required="" name="carga" class="form-control">
+					    <input type="number" min="0" name="carga" class="form-control">
 					</div>
 					<!-- DIV IMAGEN-->
 					<div class="form-group col-xs-12 col-sm-4 col-md-4 col-lg-4" style="margin-top:30px;">

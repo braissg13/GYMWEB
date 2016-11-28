@@ -103,13 +103,13 @@ if(!isset($_SESSION)) session_start();
       <!-- DIV IMAGEN ACTIVIDAD -->
                 <div class="form-group col-xs-12 col-sm-4 col-md-4 col-lg-4" style="margin-top:30px;">
                   <label for="imgAct">Subir Imagen: </label>
-                  <input type="file" name="imagen">
+                  <input type="file" name="imagen" required="">
                 </div>
        <!-- DIV ASIGNAR ENTRENADOR-->         
                 <div class="form-group">
                    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
                      <label for="tipoUsu">Asignar entrenador: </label>
-                       <select class="form-control" name="entrenador" required="">
+                       <select class="form-control" name="entrenador">
                        <?php if($row!=null){ foreach($row as $entrenador){ ?>
                             <option value="<?php echo $entrenador['idUsuario'];?>"><?php echo $entrenador['nomUsuario'];?></option>
                         <?php }} ?>
