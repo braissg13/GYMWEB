@@ -155,27 +155,52 @@ class UsuarioController{
 	if(!isset($_SESSION)) session_start();
 	if($_SESSION['tipoUsuario'] =="Administrador"){
 		$idUsu = $_POST['idUsu'];
-		$nomUsuario = $_POST['nomUsuario'];
-		$password = $_POST['password'];
-		$nombre = $_POST['nombre'];
-		$apellidos = $_POST['apellidos'];
-		$email = $_POST['email'];
-		$tipoUsuario = $_POST['tipoUsuario'];
-				//Comprobamos si los datosintroducidos son Correctos
+		//Utilizamos el usuario sin modificar por si no nos pasan unos argumentos, asignarle los que ya tenía
+        $usuarioSinModificar = Usuario::devolverDatos($idUsu);
+        //Si no pasan nombreUsuario, cogemos el nombre que ya tenia
+        if ($_POST['nomUsuario']!= null) {
+          $nomUsuario = $_POST['nomUsuario'];
+        }else{
+            $nomUsuario = $usuarioSinModificar->getNomUsuario();
+        }
+        //Si no pasan nombre, cogemos el nombre que ya tenia
+        if ($_POST['nombre']!= null) {
+          $nombre = $_POST['nombre'];
+        }else{
+          $nombre = $usuarioSinModificar->getNombre();
+        }
+        //Si no pasan apellidos, cogemos los apellidos que ya tenia
+        if ($_POST['apellidos']!= null) {
+          $apellidos = $_POST['apellidos'];
+        }else{
+          $apellidos = $usuarioSinModificar->getApellidos();
+        }
+        //Si no pasan email, cogemos el email que ya tenia
+        if ($_POST['email']!= null) {
+          $email = $_POST['email'];
+        }else{
+          $email = $usuarioSinModificar->getEmail();
+        }
+        //Si no pasan tipoUsuario, cogemos el tipoUsuario que ya tenia
+        if ($_POST['tipoUsuario']!= null) {
+          $tipoUsuario = $_POST['tipoUsuario'];
+        }else{
+            $tipoUsuario = $usuarioSinModificar->getTipoUsuario();
+        }
+        //Si no pasan contraseña hacemos un update sin hacerle el md5. En caso contrario tambien modificaremos la contraseña
+        if ($_POST['password'] == null) {
+				//Lamamos a la funcion que modifica al Usuario
+				Usuario::updateSinPass($idUsu,$nomUsuario,$email,$tipoUsuario,$nombre,$apellidos);
+				//Redireccionamos a vista
+				header("Location: ../views/Admin/consultarUsuarios.php?id=$idUsu");
+        }else{
+          $password = $_POST['password'];
+			//Comprobamos si los datosintroducidos son Correctos
 			if(Usuario::registroValido($nomUsuario,$password,$email,$nombre,$apellidos)){
-				if(!UsuarioMapper::usuarioValido($nomUsuario)){
 				//Lamamos a la funcion que modifica al Usuario
 				Usuario::update($idUsu,$nomUsuario,$password,$email,$tipoUsuario,$nombre,$apellidos);
 				//Redireccionamos a vista
 				header("Location: ../views/Admin/consultarUsuarios.php?id=$idUsu");
-			    }else{
-			    	ob_start();
-					header("refresh: 3; url = ../views/Admin/modificarUsuario.php?id=$idUsu");
-					$errors = array();
-					$errors["general"] = "ERROR.El nombre de Usuario ya existe.";
-					echo $errors["general"];
-					ob_end_flush();
-			    }
 			}else{
 				ob_start();
 				header("refresh: 3; url = ../views/Admin/modificarUsuario.php?id=$idUsu");
@@ -183,7 +208,8 @@ class UsuarioController{
 				$errors["general"] = "ERROR.El formulario no fue bien completado.";
 				echo $errors["general"];
 				ob_end_flush();
-					}
+			}
+		  }
 		}else{
 			ob_start();
 			 if ($_SESSION['tipoUsuario'] =="DeportistaPEF" || $_SESSION['tipoUsuario']=="DeportistaTDU") {

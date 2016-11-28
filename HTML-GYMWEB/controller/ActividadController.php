@@ -53,9 +53,9 @@ require_once(__DIR__."/../model/Actividad.php");
                 //Comprobamos si los datosintroducidos son Correctos
                 if(Actividad::registroValido($nombre,$descripcion)){
                   //Creamos ruta donde guardamos la imagen yle damos nombre 
-                  //$ruta = "../img/actividades";
-                  $nombreArchivo = $_FILES['imagen']['name'];
-                move_uploaded_file($_FILES['imagen']['tmp-name'], "../img/ejercicios/".$nombreArchivo);
+                $ruta = "../img/actividades";
+                $nombreArchivo = $_FILES['imagen']['name'];
+                move_uploaded_file($_FILES['imagen']['tmp_name'], $ruta."/".$nombreArchivo);
                   //Creamos el Ejercicio
                   $actividad = new Actividad();
 
@@ -129,15 +129,32 @@ require_once(__DIR__."/../model/Actividad.php");
 
         if($_SESSION['tipoUsuario'] =="Administrador"){
           $idAct = $_POST['idAct'];
-          $nombre = $_POST['nomAct'];
-          $totalPlazas = $_POST['numPl'];
-          $descripcion = $_POST['descrAct'];
+          $plazasOcupadas=$_POST['plazasOc'];
+          //Utilizamos la actividad sin modificar por si no nos pasan unos argumentos, asignarle los que ya tenía
+          $actividadSinModificar = Actividad::obtenerDatos($idAct);
+          //Si no pasan nombre, cogemos el nombre que ya tenia
+          if ($_POST['nomAct']!= null) {
+            $nombre = $_POST['nomAct'];
+          }else{
+            $nombre = $actividadSinModificar->getNomActividad();
+          }
+          //Si no pasan numero Total de Plazas, cogemos el numero Total de Plazas que ya tenia
+          if ($_POST['numPl']!= null) {
+            $totalPlazas = $_POST['numPl'];
+          }else{
+            $totalPlazas = $actividadSinModificar->getTotalPlazas();
+          }
+          //Si no pasan descrip, cogemos la descrip que ya tenia
+          if ($_POST['descrAct']!= null) {
+            $descripcion = $_POST['descrAct'];
+          }else{
+            $descripcion = $actividadSinModificar->getDescripActividad();
+          }
           //Cogemos fecha y hora.
           $date = $_POST['fecha'];
           $tiempo = $_POST['hora'];
           //Juntamos Fecha y Hora en $fecha y el :00 es para añadirle los segundos
           $fecha= "$date $tiempo:00";
-          $plazasOcupadas=$_POST['plazasOc'];
 
           // Recogemos el ID del entrenador a asignar
           $entrenador = $_POST['entrenador'];
@@ -146,8 +163,8 @@ require_once(__DIR__."/../model/Actividad.php");
           if($_FILES['imagen']['type']=="image/jpeg" || $_FILES['imagen']['type']=="image/png" || $_FILES['imagen']['type']=="image/jpg"){
                 //Comprobamos si los datosintroducidos son Correctos
                 if(Actividad::registroValido($nombre,$descripcion)){
-                  //Creamos ruta donde guardamos la imagen yle damos nombre 
-                 $ruta = "../img/actividades";
+                 //Creamos ruta donde guardamos la imagen yle damos nombre 
+                $ruta = "../img/actividades";
                 $nombreArchivo = $_FILES['imagen']['name'];
                 move_uploaded_file($_FILES['imagen']['tmp_name'], $ruta."/".$nombreArchivo);
                   

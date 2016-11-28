@@ -157,42 +157,57 @@ require_once(__DIR__."/../model/Tabla.php");
 			if($_SESSION['tipoUsuario']=="Entrenador"){
 				/*Si lo invoca un entrenador, cogemos las variables que nos pasa el submit por post*/
 	  			$idTabla = $_POST["idTabla"];
-	  			$nomTabla = $_POST["NomTabla"];
-	  			$ejersSeleccionados = $_POST["ejerSeleccionado"];
 	  			$tipoTabla = $_POST["TipoTabla"];
-				//Comprobamos si los datos introducidos son Correctos
-					if(Tabla::registroValido($nomTabla)){
-						//Lamamos a la funcion que modifica la Tabla
-						Tabla::update($idTabla,$nomTabla,$tipoTabla);
-						//Para modificar los Ejercicios que corresponden a la tabla primero tenemosque elimar los que esaban asignados y despues los asignamos.
-						Tabla::deleteEjersTabla($idTabla);
-						//En el foreach creamos la asignacion de los ejercicios a la Tabla en ejercicio_tablaejercicios
-		  				foreach ($ejersSeleccionados as $ejercicio) {
-		  					$asignarEjer = Tabla::asignarEjers($ejercicio,$idTabla);
-		  				}
-						//Redireccionamos a vista
-						header("Location: ../views/Entrenador/consultarTabla.php?id=$idTabla");
-					}else{
-						ob_start();
-						header("refresh: 3; url = ../views/Entrenador/modificarTabla.php?id=$idTabla");
-						$errors = array();
-						$errors["general"] = "ERROR.El formulario no fue bien completado.";
-						echo $errors["general"];
-						ob_end_flush();
-							}
-				}else{
-					ob_start();
-					 if ($_SESSION['tipoUsuario'] =="DeportistaPEF" || $_SESSION['tipoUsuario']=="DeportistaTDU") {
-							header("refresh: 3; url = ../views/Deportista/principal.php");
+	  			//Utilizamos la Tabla sin modificar por si no nos pasan unos argumentos, asignarle los que ya tenía
+	  			$tablaSinModificar = Tabla::obtenerDatos($idTabla);
+	  			//Si no pasan nombre, cogemos el nombre que ya tenia
+		        if ($_POST['NomTabla']!= null) {
+		          $nomTabla = $_POST['NomTabla'];
+		        }else{
+		          $nomTabla = $tablaSinModificar->getNomTabla();
+		        }
+		        //Si no pasan ejercicios, modificamos solo el nombre. En caso COntrario modificamos los ejercicios.
+		        if ($_POST['ejerSeleccionado']== null) {
+		          Tabla::update($idTabla,$nomTabla,$tipoTabla);
+		          //Redireccionamos a vista
+				  header("Location: ../views/Entrenador/consultarTabla.php?id=$idTabla");
+		        }else{
+
+			        $ejersSeleccionados = $_POST['ejerSeleccionado'];
+					//Comprobamos si los datos introducidos son Correctos
+						if(Tabla::registroValido($nomTabla)){
+							//Lamamos a la funcion que modifica la Tabla
+							Tabla::update($idTabla,$nomTabla,$tipoTabla);
+							//Para modificar los Ejercicios que corresponden a la tabla primero tenemosque elimar los que esaban asignados y despues los asignamos.
+							Tabla::deleteEjersTabla($idTabla);
+							//En el foreach creamos la asignacion de los ejercicios a la Tabla en ejercicio_tablaejercicios
+			  				foreach ($ejersSeleccionados as $ejercicio) {
+			  					$asignarEjer = Tabla::asignarEjers($ejercicio,$idTabla);
+			  				}
+							//Redireccionamos a vista
+							header("Location: ../views/Entrenador/consultarTabla.php?id=$idTabla");
+						}else{
+							ob_start();
+							header("refresh: 3; url = ../views/Entrenador/modificarTabla.php?id=$idTabla");
+							$errors = array();
+							$errors["general"] = "ERROR.El formulario no fue bien completado.";
+							echo $errors["general"];
+							ob_end_flush();
 						}
-						else{
-							header("refresh: 3; url = ../views/Admin/principal.php");
-						}
-					$errors = array();
-					$errors["general"] = "No tiene permiso para modificar una Tabla";
-					echo $errors["general"];
-					ob_end_flush();
-				}
+				} 	
+			}else{
+				ob_start();
+				 if ($_SESSION['tipoUsuario'] =="DeportistaPEF" || $_SESSION['tipoUsuario']=="DeportistaTDU") {
+						header("refresh: 3; url = ../views/Deportista/principal.php");
+					}
+					else{
+						header("refresh: 3; url = ../views/Admin/principal.php");
+					}
+				$errors = array();
+				$errors["general"] = "No tiene permiso para modificar una Tabla";
+				echo $errors["general"];
+				ob_end_flush();
+			}
 		} //FIN MODIFICAR TABLA
 
 		/* BORRAR TABLA*/

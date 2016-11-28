@@ -30,7 +30,7 @@ require_once(__DIR__."/../model/Ejercicio.php");
 							//Comprobamos si los datosintroducidos son Correctos
 							if(Ejercicio::registroValido($nombre,$descripcion,$repeticiones)){
 								//Creamos ruta donde guardamos la imagen yle damos nombre 
-								  $ruta = "../img/ejercicios";
+								$ruta = "../img/ejercicios";
 								$nombreArchivo = $_FILES['imagen']['name'];
 								move_uploaded_file($_FILES['imagen']['tmp_name'], $ruta."/".$nombreArchivo);
 								//Creamos el Ejercicio
@@ -127,19 +127,46 @@ require_once(__DIR__."/../model/Ejercicio.php");
 				if(!isset($_SESSION)) session_start();
 					if($_SESSION['tipoUsuario']=="Administrador" || $_SESSION['tipoUsuario']=="Entrenador" ){
 							$idEjercicio = $_POST['idEjercicio'];
-							$nombre = $_POST['NomEjercicio'];
-							$descripcion = $_POST['DescripEjerc'];
-							$tipo = $_POST['TipoEjerc'];
-							$repeticiones = $_POST['Repeticiones'];
-							$carga = $_POST['carga'];
+							 //Utilizamos el ejercicio sin modificar por si no nos pasan unos argumentos, asignarle los que ya tenía
+							$ejercSinModificar = Ejercicio::obtenerDatos($idEjercicio);
+							//Si no pasan nombre, cogemos el nombre que ya tenia
+							if ($_POST['NomEjercicio']!= null) {
+					           $nombre = $_POST['NomEjercicio'];
+					        }else{
+					           $nombre = $ejercSinModificar->getNomEjercicio();
+					        }
+					        //Si no pasan descrip, cogemos la descrip que ya tenia
+					        if ($_POST['DescripEjerc']!= null) {
+					           $descripcion = $_POST['DescripEjerc'];
+					        }else{
+					           $descripcion = $ejercSinModificar->getDescripEjercicio();
+					        }
+					        //Si no pasan tipoEjercicio, cogemos el tipoEjercicio que ya tenia
+					        if ($_POST['TipoEjerc']!= null) {
+					           $tipo = $_POST['TipoEjerc'];
+					        }else{
+					           $tipo = $ejercSinModificar->getTipoEjercicio();
+					        }
+					        //Si no pasan repeticiones, cogemos las repeticiones que ya tenia
+					        if ($_POST['Repeticiones']!= null) {
+					           $repeticiones = $_POST['Repeticiones'];
+					        }else{
+					           $repeticiones = $ejercSinModificar->getRepeticiones();
+					        }
+					        //Si no pasan carga, cogemos la carga que ya tenia
+					        if ($_POST['carga']!= null) {
+					           $carga = $_POST['carga'];
+					        }else{
+					           $carga = $ejercSinModificar->getCarga();
+					        }
 						//Comprobamos el tipo de la Imagen, SI es correcto, obtenemos los datos de la ruta y de la imagen
 						if($_FILES['imagen']['type']=="image/jpeg" || $_FILES['imagen']['type']=="image/png" || $_FILES['imagen']['type']=="image/jpg"){
 							//Comprobamos si los datosintroducidos son Correctos
 							if(Ejercicio::registroValido($nombre,$descripcion,$repeticiones)){
 								//Creamos ruta donde guardamos la imagen yle damos nombre 
-								//$ruta = "../img/ejercicios";
+								$ruta = "../img/ejercicios";
 								$nombreArchivo = $_FILES['imagen']['name'];
-								move_uploaded_file($_FILES['imagen']['tmp-name'], "../img/ejercicios/".$nombreArchivo);
+								move_uploaded_file($_FILES['imagen']['tmp_name'], $ruta."/".$nombreArchivo);
 
 								//Lamamos a la funcion que modifica el Ejercicio
 								Ejercicio::update($idEjercicio,$nombre,$descripcion,$tipo,$repeticiones,$carga,$nombreArchivo);
