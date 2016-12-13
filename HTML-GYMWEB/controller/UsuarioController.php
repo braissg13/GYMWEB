@@ -38,6 +38,12 @@ class UsuarioController{
          $actividad = Usuario::getActividadesAsignadas($idUsuario);
          return $actividad;
 	}
+	/*Obtenemos todos las Actividades que reservo un deportista*/
+	public static function getActividadesDeportista($idUsuario){
+		if(!isset($_SESSION)) session_start();
+				 $actividad = Usuario::getActividadesReservadas($idUsuario);
+				 return $actividad;
+	}
 
 	/*Obtenemos todos las Tablas que Pertenecen a un Deportista*/
 	public static function getTablasDeportista($idUsuario){
@@ -193,7 +199,7 @@ class UsuarioController{
 	public static function modificarPerfil(){
 	if(!isset($_SESSION)) session_start();
 		$idUsu = $_POST['idUsu'];
-		print_r($_FILES['imagen']); 
+		print_r($_FILES['imagen']);
 		//Utilizamos el usuario sin modificar por si no nos pasan unos argumentos, asignarle los que ya tenía
         $usuarioSinModificar = Usuario::devolverDatos($idUsu);
         //Si no pasan nombreUsuario, cogemos el nombre que ya tenia
@@ -229,14 +235,14 @@ class UsuarioController{
         //Si no pasan imagen, cogemos la imagen que ya tenia
         if ($_FILES['imagen']['name'] != null) {
           if($_FILES['imagen']['type']=="image/jpeg" || $_FILES['imagen']['type']=="image/png" || $_FILES['imagen']['type']=="image/jpg"){
-          	//Creamos ruta donde guardamos la imagen yle damos nombre 
+          	//Creamos ruta donde guardamos la imagen yle damos nombre
 			$ruta = "../img/usuarios";
 			$nombreArchivo = $_FILES['imagen']['name'];
 			move_uploaded_file($_FILES['imagen']['tmp_name'], $ruta."/".$nombreArchivo);
 		  }else{
 			$error = "ERROR. Formato de imagen no válido.";
 			header("Location: ../error.php?error=$error");
-			//echo $errors["general"]; 
+			//echo $errors["general"];
 		  }
         }else{
             $nombreArchivo = $usuarioSinModificar->getImagenPerfil();
