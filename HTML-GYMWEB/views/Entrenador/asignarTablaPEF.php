@@ -42,7 +42,6 @@ if(!isset($_SESSION)) session_start();
            <thead>
 
               <tr>
-                <th>#</th>
                 <th>Nombre</th>
                 <th>Apellidos</th>
               </tr>
@@ -55,7 +54,6 @@ if(!isset($_SESSION)) session_start();
                 foreach ($row as $usuario) {
                ?>
               <tr>
-                <td><?php echo $usuario['idUsuario']; ?></td>
                 <td><?php echo $usuario['nombre']; ?></td>
                 <td><?php echo $usuario['apellidos']; ?></td>
                 

@@ -51,7 +51,6 @@ if(!isset($_SESSION)) session_start();
          <thead>
 
             <tr>
-              <th>#</th>
               <th>Nombre Tabla</th>
               <th>Tipo Tabla</th>
             </tr>
@@ -64,7 +63,6 @@ if(!isset($_SESSION)) session_start();
               foreach ($row as $tabla) {
              ?>
             <tr>
-              <td><?php echo $tabla['idTablaEjercicios']; ?></td>
               <td><a href="consultarTabla.php?id=<?php echo $tabla['idTablaEjercicios']; ?>" style="text-decoration: none;"><?php echo $tabla['nomTabla']; ?></a></td>
               <td><?php echo $tabla['tipoTabla']; ?></td>
               <td><a href="modificarTabla.php?id=<?php echo $tabla['idTablaEjercicios']; ?>" style="text-decoration: none;"><button type="button" class="btn btn-default3" id="botonModificar">Modificar Tabla</button></a></td>

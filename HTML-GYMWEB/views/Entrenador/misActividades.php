@@ -46,7 +46,6 @@ if(!isset($_SESSION)) session_start();
          <thead>
 
             <tr>
-              <th>#</th>
               <th>Nombre Actividad</th>
               <th >Fecha</th>
             </tr>
@@ -70,7 +69,6 @@ if(!isset($_SESSION)) session_start();
             
             ?>
             <tr>
-              <td><?php echo $actividad['idActividad']; ?></td>
               <td><a href="consultarActividades.php?id=<?php echo $actividad['idActividad']; ?>" style="text-decoration: none;"><?php echo $actividad['nomActividad']; ?></a></td>
               <td><?php   echo $dateobj->format("d-m-Y H:i");?></td>
 

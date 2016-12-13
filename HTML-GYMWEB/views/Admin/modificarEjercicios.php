@@ -97,7 +97,7 @@ if(!isset($_SESSION)) session_start();
 					<!-- DIV IMAGEN-->
 					<div class="form-group col-xs-12 col-sm-4 col-md-4 col-lg-4" style="margin-top:30px;">
 					    <label for="imgEjer">Subir Imagen: </label>
-					    <input type="file" required="" name="imagen">
+					    <input type="file" name="imagen">
 					</div>
 					
 					  

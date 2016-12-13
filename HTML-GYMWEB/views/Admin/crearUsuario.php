@@ -69,17 +69,17 @@ if(!isset($_SESSION)) session_start();
                            <input type="email" class="form-control" name="email" required="" maxlength="50" placeholder="email">
                </div>
                <!-- DIV TIPO USU -->
-                         <div class="form-group">
-                             <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
-                               <label for="tipoUsu">TipoUsuario: </label>
-                                 <select class="form-control" name="tipoUsuario" required="">
-                                      <option value="Administrador">Administrador</option>
-                                       <option value="Entrenador">Entrenador</option>
-                                       <option value="DeportistaPEF">DeportistaPEF</option>
-                                       <option value="DeportistaTDU">DeportistaTDU</option>
-                                 </select>
-                             </div>
-                       </div>
+               <div class="form-group">
+                <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                  <label for="tipoUsu">TipoUsuario: </label>
+                    <select class="form-control" name="tipoUsuario" required="">
+                      <option value="Administrador">Administrador</option>
+                      <option value="Entrenador">Entrenador</option>
+                      <option value="DeportistaPEF">DeportistaPEF</option>
+                      <option value="DeportistaTDU">DeportistaTDU</option>
+                    </select>
+                </div>
+               </div>
 
              </div> <!-- FIN ROW -->
 

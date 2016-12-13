@@ -32,27 +32,29 @@
 	       		<?php }else if($tipo == 'DeportistaPEF' || $tipo == 'DeportistaTDU'){ ?> 
 	       	<li><a id="Item1" href="principal.php">Principal</a></li>
 	        <li><a id="Item2" href="#">Mis Actividades</a></li>
-	        <li><a id="Item3" href="#">Ejercicios</a></li>
+	        <li><a id="Item3" href="ejercicios.php">Ejercicios</a></li>
 	        <li><a id="Item4" href="misTablas.php">Tablas de Ejercicios</a></li>
 	       	<?php	}
 	       	}
 	       	?>
 	      </ul>
-	      <form class="navbar-form navbar-left">
-	        <div class="form-group">
-	          <input type="text" class="form-control" placeholder="Buscar...">
-	        </div>
-	        <button type="submit" id="botonBuscar" class="btn btn-default">Buscar</button>
-	      </form>
+	      <?php if($tipo == 'DeportistaPEF' || $tipo == 'DeportistaTDU'){ ?>
+		      <form class="navbar-form navbar-left">
+		        <div class="form-group">
+		          <input type="text" class="form-control" placeholder="Buscar...">
+		        </div>
+		        <button type="submit" id="botonBuscar" class="btn btn-default">Buscar</button>
+		      </form>
+	      <?php	
+	  		} 
+	      ?>
 	      <ul class="nav navbar-nav navbar-right">
-
-
-	       <!-- COMINENZO VER PERFIL -->
+	       <!-- COMIENZO VER PERFIL -->
 	       <li class="dropdown">
 	          <a href="#" id="drop" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Perfil <span class="caret"></span></a>
 	          <ul id="ulDrop" class="dropdown-menu">
-	            <li><a id="aVerPerf" href="#">Ver perfil</a></li>
-	            <li><a id="aModificarPerf" href="#">Modificar perfil</a></li>
+	            <li><a id="aVerPerf" href="verPerfil.php">Ver perfil</a></li>
+	            <li><a id="aModificarPerf" href="modificarPerfil.php">Modificar perfil</a></li>
 	            <li id="separador" role="separator" class="divider"></li>
 	            <li><a href="../../controller/defaultController.php?controlador=usuario&accion=logout" id="aCerrarSesion">Cerrar Sesi&oacuten</a></li>
 	            <!--<li><a href="../../controller/logout.php" id="aCerrarSesion">Cerrar Sesi&oacuten</a></li>-->

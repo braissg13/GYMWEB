@@ -41,7 +41,18 @@ if(!isset($_SESSION)) session_start();
       <div id="container-usuarios">
       <!-- COMIENZO ROW -->
        <div class="row">
-
+          <?php //Comprobamos si el usuario tiene imagen, si no tiene mostramos una por defecto
+              if($usuario->getImagenPerfil()==Null){
+          ?>
+            <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4" style="margin-bottom: 20px; margin-right: 10px;"><img alt="imgUsuario" src="../../img/usuarios/default.png" style="max-width: 100%;max-height: 100%;">
+            </div>
+          <?php }else{
+          ?>
+            <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4" style="margin-bottom: 20px; margin-right: 10px;"><img alt="imgUsuario" src="../../img/usuarios/<?php echo $usuario->getImagenPerfil(); ?>" style="max-width: 100%;max-height: 100%;">
+            </div>
+          <?php
+          }
+          ?>
             <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4" style="border-style: solid;border-color: black; margin-bottom: 10px;">
             <p><b>Nombre Usuario:  <?php echo $usuario->getNomUsuario(); ?></b></p>
             <p><b>Nombre: <?php echo $usuario->getNombre(); ?></b></p>
