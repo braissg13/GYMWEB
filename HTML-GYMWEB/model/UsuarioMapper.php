@@ -64,7 +64,7 @@ class UsuarioMapper{
            return true;
        }
    }
-    
+
     /*Mira si el Usuario es valido (solo comprobando el nombre) y devuelve true.*/
    public static function usuarioValidoId($idUsuario) {
        global $connect;
@@ -87,9 +87,9 @@ class UsuarioMapper{
     public static function update($idUsuario,$nomUsuario,$password,$email, $tipoUsuario, $nombre, $apellidos)
     {
         global $connect;
-        
+
         $password = md5($password);
-        
+
         $result = mysqli_query($connect, "UPDATE usuario SET nomUsuario=\"$nomUsuario\", password =\"$password\", email =\"$email\", tipoUsuario= \"$tipoUsuario\",nombre=\"$nombre\", apellidos=\"$apellidos\" WHERE idUsuario=\"$idUsuario\"");
         return $result;
     }
@@ -97,7 +97,7 @@ class UsuarioMapper{
     public static function updateSinPass($idUsuario,$nomUsuario,$email, $tipoUsuario, $nombre, $apellidos,$imagenPerfil)
     {
         global $connect;
-        
+
         $result = mysqli_query($connect, "UPDATE usuario SET nomUsuario=\"$nomUsuario\", email =\"$email\", tipoUsuario= \"$tipoUsuario\",nombre=\"$nombre\", apellidos=\"$apellidos\" WHERE idUsuario=\"$idUsuario\"");
         return $result;
     }
@@ -105,9 +105,9 @@ class UsuarioMapper{
     public static function updatePerfil($idUsuario,$nomUsuario,$password,$email, $tipoUsuario, $nombre, $apellidos,$imagenPerfil)
     {
         global $connect;
-        
+
         $password = md5($password);
-        
+
         $result = mysqli_query($connect, "UPDATE usuario SET nomUsuario=\"$nomUsuario\", password =\"$password\", email =\"$email\", tipoUsuario= \"$tipoUsuario\",nombre=\"$nombre\", apellidos=\"$apellidos\", imagenPerfil=\"$imagenPerfil\" WHERE idUsuario=\"$idUsuario\"");
         return $result;
     }
@@ -115,7 +115,7 @@ class UsuarioMapper{
     public static function updatePerfilSinPass($idUsuario,$nomUsuario,$email, $tipoUsuario, $nombre, $apellidos,$imagenPerfil)
     {
         global $connect;
-        
+
         $result = mysqli_query($connect, "UPDATE usuario SET nomUsuario=\"$nomUsuario\", email =\"$email\", tipoUsuario= \"$tipoUsuario\",nombre=\"$nombre\", apellidos=\"$apellidos\", imagenPerfil=\"$imagenPerfil\" WHERE idUsuario=\"$idUsuario\"");
         return $result;
     }
@@ -147,6 +147,16 @@ class UsuarioMapper{
     public static function getActividadesAsignadas($idUsuario){
       global $connect;
         $resultado = mysqli_query($connect, 'SELECT * FROM actividad A, usuario_actividad U WHERE U.Usuario_idUsuario= "'.$idUsuario.'" AND U.Actividad_idActividad = A.idActividad ');
+        if (mysqli_num_rows($resultado) > 0) {
+            return $resultado;
+        } else {
+            return NULL;
+        }
+    }
+
+    public static function getActividadesReservadas($idUsuario){
+      global $connect;
+        $resultado = mysqli_query($connect, 'SELECT * FROM actividad A, reserva R WHERE R.Usuario_idUsuario= "'.$idUsuario.'" AND R.Actividad_idActividad = A.idActividad ');
         if (mysqli_num_rows($resultado) > 0) {
             return $resultado;
         } else {
