@@ -27,7 +27,7 @@ require_once("../../controller/defaultController.php");
 
   </head>
   <body>
-  <header> 
+  <header>
   	<?php include("../navbar.php");  /*Cargamos la barra de navegación*/ ?>
   </header>
 
@@ -35,13 +35,13 @@ require_once("../../controller/defaultController.php");
 		 <h1>Actividades</h1>
 
      <div class="row" style="margin-top: 20px; margin-bottom: 10px;">
-        <?php 
+        <?php
           if($row!=null){
             foreach ($row as $actividad) {
               //La fecha que nos devuleve la BD es de forma Año-Mes-Dia Hora:Min:Seg
-              //Entonces hay cambiarla a Dia-Mes-Año Hora:Min y lo hacemos de 
+              //Entonces hay cambiarla a Dia-Mes-Año Hora:Min y lo hacemos de
               //La siguiente manera: $format especificamos la manera en la que viene
-              //La fecha de la bd, createfromformat() crea un Objeto de tipo DateTime 
+              //La fecha de la bd, createfromformat() crea un Objeto de tipo DateTime
               //con elformato anterior y nuestra fecha de la bd.
               // $dateobj->format("d-m-Y H:i") Convierte la Fecha en el formato que queremos.
               // Este ultimo lo pondermos solo donde queremos mostrarlo que es en la tabla.
@@ -51,12 +51,12 @@ require_once("../../controller/defaultController.php");
         ?>
 
             <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8" style="margin-bottom: 10px;border-color: #d0cccc;border-style: ridge; background-color: #0275d8;">
-                <h3><b><a href="#" style="color: white;"><?php echo $actividad['nomActividad'];?></a></b></h3>
+				<td><a href="consultarActividades.php?id=<?php echo $actividad['idActividad']; ?>" style="color: white;"><?php echo $actividad['nomActividad']; ?></a></td>
                 <h5><b><?php echo $dateobj->format("d-M-Y H:i");?></b></h5>
                 <img alt="imgActividad" src="../../img/actividades/<?php echo $actividad['imagenAct'];?>" style="max-width: 100%;max-height: 100%;">
             </div>
-        <?php 
-          } 
+        <?php
+          }
         }
         ?>
         </div>
@@ -75,17 +75,17 @@ require_once("../../controller/defaultController.php");
 
 <?php
   }else{
-        ob_start(); 
+        ob_start();
          if (($_SESSION['tipoUsuario']=='Administrador')){
-            header("Location: ../Admin/principal.php");  
+            header("Location: ../Admin/principal.php");
           }else{
              if($_SESSION['tipoUsuario']=='Entrenador'){
-                  header("Location: ../Entrenador/principal.php");  
+                  header("Location: ../Entrenador/principal.php");
              }else{
-                header("Location: = /../index.php"); 
+                header("Location: = /../index.php");
              }
           }
-          
-        ob_end_flush();  
+
+        ob_end_flush();
   }
 ?>
