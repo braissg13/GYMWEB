@@ -52,52 +52,20 @@ require_once(__DIR__."/../model/Ejercicio.php");
 								header("Location: ../views/Entrenador/gestionEjercicios.php"); 
 								} 
 							}else{
-								ob_start(); 
-	  							if ($_SESSION['tipoUsuario'] =="Administrador") {
-								header("refresh: 3; url = ../views/Admin/gestionEjercicios.php"); 
-								}
-								else{
-								header("refresh: 3; url = ../views/Entrenador/gestionEjercicios.php"); 
-								} 
-								$errors = array();
-								$errors["general"] = "ERROR.El formulario no fue bien completado.";
-								echo $errors["general"]; 
-								ob_end_flush();
+								$error = "ERROR.El formulario no fue bien completado.";
+								header("Location: ../views/error.php?error=$error");
 							}
 						}else{
-							ob_start(); 
-	  						if ($_SESSION['tipoUsuario'] =="Administrador") {
-							header("refresh: 3; url = ../views/Admin/gestionEjercicios.php"); 
-							}
-							else{
-							header("refresh: 3; url = ../views/Entrenador/gestionEjercicios.php"); 
-							} 
-							$errors = array();
-							$errors["general"] = "ERROR.El ejercicio ya existe.";
-							echo $errors["general"]; 
-							ob_end_flush();
+							$error = "ERROR.El ejercicio ya existe.";
+							header("Location: ../views/error.php?error=$error");
 						}
 					}else{
-						ob_start(); 
-						if ($_SESSION['tipoUsuario'] =="Administrador") {
-							header("refresh: 3; url = ../views/Admin/gestionEjercicios.php"); 
-						}
-						else{
-							header("refresh: 3; url = ../views/Entrenador/gestionEjercicios.php"); 
-						}
-	  					
-						$errors = array();
-						$errors["general"] = "ERROR. Formato de imagen no válido.";
-						echo $errors["general"]; 
-						ob_end_flush();
+						$error = "ERROR. Formato de imagen no válido.";
+						header("Location: ../views/error.php?error=$error");
 					}
 				}else{
-					ob_start(); 
-	  				header("refresh: 3; url = ../views/Deportista/principal.php"); 
-					$errors = array();
-					$errors["general"] = "No tiene permiso para crear un Ejercicio";
-					echo $errors["general"]; 
-					ob_end_flush();
+					$error = "No tiene permiso para crear un Ejercicio";
+					header("Location: ../views/error.php?error=$error"); 
 				}
 			} //FIN CREAR EJERCICIO
 
@@ -107,17 +75,8 @@ require_once(__DIR__."/../model/Ejercicio.php");
 				$ejercicio = NULL;
 				$ejercicio = Ejercicio::obtenerDatos($idEjercicio);
 				if ($ejercicio == NULL){
-					ob_start(); 
-	  				if ($_SESSION['tipoUsuario']=="Administrador") {
-						header("refresh: 3; url = ../views/Admin/gestionEjercicios.php"); 
-					}
-					else{
-						header("refresh: 3; url = ../views/Entrenador/gestionEjercicios.php"); 
-					} 
-					$errors = array();
-					$errors["general"] = "El ejercicio no existe";
-					echo $errors["general"]; 
-					ob_end_flush();
+					$error = "El ejercicio no existe";
+					header("Location: ../views/error.php?error=$error");
 				}else{
 					return $ejercicio;
 				}
@@ -159,6 +118,8 @@ require_once(__DIR__."/../model/Ejercicio.php");
 					        }else{
 					           $carga = $ejercSinModificar->getCarga();
 					        }
+					         //Si no pasan imagen, cogemos la imagen que ya tenia
+        					if ($_FILES['imagen']['name'] != null) {
 						//Comprobamos el tipo de la Imagen, SI es correcto, obtenemos los datos de la ruta y de la imagen
 						if($_FILES['imagen']['type']=="image/jpeg" || $_FILES['imagen']['type']=="image/png" || $_FILES['imagen']['type']=="image/jpg"){
 							//Comprobamos si los datosintroducidos son Correctos
@@ -178,39 +139,34 @@ require_once(__DIR__."/../model/Ejercicio.php");
 								header("Location: ../views/Entrenador/consultarEjercicios.php?id=$idEjercicio"); 
 								} 
 							}else{
-								ob_start(); 
-	  							if ($_SESSION['tipoUsuario']=="Administrador") {
-								header("refresh: 3; url = ../views/Admin/modificarEjercicios.php?id=$idEjercicio"); 
-								}
-								else{
-								header("refresh: 3; url = ../views/Entrenador/modificarEjercicios.php?id=$idEjercicio"); 
-								} 
-								$errors = array();
-								$errors["general"] = "ERROR.El formulario no fue bien completado.";
-								echo $errors["general"]; 
-								ob_end_flush();
+								$error = "ERROR.El formulario no fue bien completado.";
+								header("Location: ../views/error.php?error=$error");
 							}
 						}else{
-							ob_start(); 
+							$error = "ERROR. Formato de imagen no válido.";
+							header("Location: ../views/error.php?error=$error");
+						}
+					  }else{
+					  	$nombreArchivo = $ejercSinModificar->getImagenEjercicio();
+					  	//Comprobamos si los datosintroducidos son Correctos
+						if(Ejercicio::registroValido($nombre,$descripcion,$repeticiones)){
+						  	//Lamamos a la funcion que modifica el Ejercicio
+							Ejercicio::update($idEjercicio,$nombre,$descripcion,$tipo,$repeticiones,$carga,$nombreArchivo);
+							//Redireccionamos a vista dependiendo del Usuario que modifico el Ejercicio
 							if ($_SESSION['tipoUsuario']=="Administrador") {
-								header("refresh: 3; url = ../views/Admin/modificarEjercicios.php?id=$idEjercicio"); 
+							header("Location: ../views/Admin/consultarEjercicios.php?id=$idEjercicio"); 
 							}
 							else{
-								header("refresh: 3; url = ../views/Entrenador/modificarEjercicios.php?id=$idEjercicio"); 
+							header("Location: ../views/Entrenador/consultarEjercicios.php?id=$idEjercicio"); 
 							}
-		  					
-							$errors = array();
-							$errors["general"] = "ERROR. Formato de imagen no válido.";
-							echo $errors["general"]; 
-							ob_end_flush();
+						}else{
+							$error = "ERROR.El formulario no fue bien completado.";
+							header("Location: ../views/error.php?error=$error");
 						}
+					  }
 					}else{
-						ob_start(); 
-		  				header("refresh: 3; url = ../views/Deportista/principal.php"); 
-						$errors = array();
-						$errors["general"] = "No tiene permiso para modificar un Ejercicio";
-						echo $errors["general"]; 
-						ob_end_flush();
+						$error= "No tiene permiso para modificar un Ejercicio";
+						header("Location: ../views/error.php?error=$error");
 					}
 
 			} //FIN MODIFICAR EJERCICIO
@@ -234,25 +190,12 @@ require_once(__DIR__."/../model/Ejercicio.php");
 								header("Location: ../views/Entrenador/gestionEjercicios.php"); 
 								} 
 							}else{
-								ob_start(); 
-		  						if ($_SESSION['tipoUsuario']=="Administrador") {
-								header("refresh: 3; url = ../views/Admin/gestionEjercicios.php"); 
-								}
-								else{
-								header("refresh: 3; url = ../views/Entrenador/gestionEjercicios.php"); 
-								} 
-								$errors = array();
-								$errors["general"] = "ERROR.El ejercicio no existe.";
-								echo $errors["general"]; 
-								ob_end_flush();
+								$error = "ERROR.El ejercicio no existe.";
+								header("Location: ../views/error.php?error=$error");
 							}
 					}else{
-						ob_start(); 
-		  				header("refresh: 3; url = ../views/Deportista/principal.php"); 
-						$errors = array();
-						$errors["general"] = "No tiene permiso para modificar un Ejercicio";
-						echo $errors["general"]; 
-						ob_end_flush();
+						$error = "No tiene permiso para modificar un Ejercicio";
+						header("Location: ../views/error.php?error=$error");
 					}
 			}//FIN BORRAR EJERCICIO
 	}

@@ -75,33 +75,16 @@ require_once(__DIR__."/../model/Actividad.php");
                   header("Location: ../views/Admin/gestionActividades.php"); 
                 
                   }else{
-                  ob_start(); 
-                  header("refresh: 3; url = ../views/Admin/gestionActividades.php"); 
-                  $errors = array();
-                  $errors["general"] = "ERROR.El formulario no fue bien completado.";
-                  echo $errors["general"]; 
-                  ob_end_flush();
+                  $error = "ERROR.El formulario no fue bien completado.";
+                  header("Location: ../views/error.php?error=$error");
                 }
             }else{
-              ob_start(); 
-              header("refresh: 3; url = ../views/Admin/gestionActividades.php"); 
-              $errors = array();
-              $errors["general"] = "ERROR. Formato de imagen no válido.";
-              echo $errors["general"]; 
-              ob_end_flush();
+              $error = "ERROR. Formato de imagen no válido.";
+              header("Location: ../views/error.php?error=$error");
             }
           }else{
-            ob_start(); 
-             if ($_SESSION['tipoUsuario']=="DeportistaPEF" || $_SESSION['tipoUsuario']=="DeportistaTDU") {
-                header("refresh: 3; url = ../views/Deportista/principal.php"); 
-              }
-              else{
-                header("refresh: 3; url = ../views/Entrenador/principal.php"); 
-              } 
-            $errors = array();
-            $errors["general"] = "No tiene permiso para crear una Actividad";
-            echo $errors["general"]; 
-            ob_end_flush();
+            $error = "No tiene permiso para crear una Actividad";
+            header("Location: ../views/error.php?error=$error");
           }
         } //FIN CREAR Actividad
 
@@ -112,12 +95,8 @@ require_once(__DIR__."/../model/Actividad.php");
         $actividad = NULL;
         $actividad = Actividad::obtenerDatos($idActividad);
         if ($actividad == NULL){
-          ob_start(); 
-          header("refresh: 3; url = ../views/Admin/gestionEjercicios.php"); 
-          $errors = array();
-          $errors["general"] = "No existe la actividad";
-          echo $errors["general"]; 
-          ob_end_flush();
+          $error = "No existe la actividad";
+          header("Location: ../views/error.php?error=$error");
         }else{
           return $actividad;
         }
@@ -176,33 +155,16 @@ require_once(__DIR__."/../model/Actividad.php");
                   header("Location: ../views/Admin/consultarActividades.php?id=$idAct"); 
                 
                   }else{
-                  ob_start(); 
-                  header("refresh: 3; url = ../views/Admin/modificarActividad.php?id=$idAct"); 
-                  $errors = array();
-                  $errors["general"] = "ERROR.El formulario no fue bien completado.";
-                  echo $errors["general"]; 
-                  ob_end_flush();
+                  $error = "ERROR.El formulario no fue bien completado.";
+                  header("Location: ../views/error.php?error=$error");
                 }
             }else{
-              ob_start(); 
-              header("refresh: 3; url = ../views/Admin/modificarActividad.php?id=$idAct"); 
-              $errors = array();
-              $errors["general"] = "ERROR. Formato de imagen no válido.";
-              echo $errors["general"]; 
-              ob_end_flush();
+              $error = "ERROR. Formato de imagen no válido.";
+              header("Location: ../views/error.php?error=$error");
             }
           }else{
-            ob_start(); 
-             if ($_SESSION['tipoUsuario']=="DeportistaPEF" || $_SESSION['tipoUsuario']=="DeportistaTDU") {
-                header("refresh: 3; url = ../views/Deportista/principal.php"); 
-              }
-              else{
-                header("refresh: 3; url = ../views/Entrenador/principal.php"); 
-              } 
-            $errors = array();
-            $errors["general"] = "No tiene permiso para modificar una Actividad";
-            echo $errors["general"]; 
-            ob_end_flush();
+            $error = "No tiene permiso para modificar una Actividad";
+            header("Location: ../views/error.php?error=$error");
           }
         } //FIN MODIFICAR Actividad
 
@@ -223,25 +185,12 @@ require_once(__DIR__."/../model/Actividad.php");
                   //Redireccionamos a vista
                   header("Location: ../views/Admin/gestionActividades.php"); 
                 }else{
-                  ob_start();  
-                  header("refresh: 3; url = ../views/Admin/gestionActividades.php");   
-                  $errors = array();
-                  $errors["general"] = "ERROR.La Actividad no existe.";
-                  echo $errors["general"]; 
-                  ob_end_flush();
+                  $error = "ERROR.La Actividad no existe.";
+                  header("Location: ../views/error.php?error=$error");
                 }
             }else{
-              ob_start(); 
-              if ($_SESSION['tipoUsuario']=="DeportistaPEF" || $_SESSION['tipoUsuario']=="DeportistaTDU") {
-                header("refresh: 3; url = ../views/Deportista/principal.php"); 
-              }
-              else{
-                header("refresh: 3; url = ../views/Entrenador/principal.php"); 
-              }  
-              $errors = array();
-              $errors["general"] = "No tiene permiso para modificar un Ejercicio";
-              echo $errors["general"]; 
-              ob_end_flush();
+              $error = "No tiene permiso para modificar un Ejercicio";
+              header("Location: ../views/error.php?error=$error");
             }
         }//FIN BORRAR ACTIVIDAD
 

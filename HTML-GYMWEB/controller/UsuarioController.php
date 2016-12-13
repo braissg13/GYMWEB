@@ -62,17 +62,8 @@ class UsuarioController{
 			//Redireccionamos a la vista
 			header("Location:../views/Deportista/consultarTabla.php?id=$idTabla");
 		}else{
-			ob_start();
-			 if ($_SESSION['tipoUsuario']=="Administrador"){
-					header("refresh: 3; url = ../views/Admin/principal.php");
-				}
-				else{
-					header("refresh: 3; url = ../views/Entrenador/principal.php");
-				}
-			$errors = array();
-			$errors["general"] = "No tiene permiso para añadir un Comentario";
-			echo $errors["general"];
-			ob_end_flush();
+			$error = "No tiene permiso para añadir un Comentario";
+			header("Location: ../views/error.php?error=$error");
 		}
 	}
 
@@ -89,12 +80,8 @@ class UsuarioController{
 	$usuario = NULL;
 	$usuario = Usuario::devolverDatos($idUsuario);
 	if ($usuario == NULL){
-		ob_start();
-		header("refresh: 3; url = ../views/Admin/gestionUsuarios.php");
-		$errors = array();
-		$errors["general"] = "El Usuario no puede ser recuperado.";
-		echo $errors["general"];
-		ob_end_flush();
+		$error = "El Usuario no puede ser recuperado.";
+		header("Location: ../views/error.php?error=$error");
 	}else{
 		return $usuario;
 	}
@@ -103,44 +90,34 @@ class UsuarioController{
 		/*Comprobamos si nos pasan un Usuario por metodo POST*/
 		if(!isset($_SESSION)) session_start();
 	    if (isset($_POST["username"]) && isset($_POST["password"])){
-	    	if($_POST["username"] && $_POST["password"]){
 	    		$usuario = Usuario::obtenerDatos($_POST["username"], md5($_POST["password"]));
 				//User no existe
 				if ($usuario==NULL) {
-					ob_start();
-  					header("refresh: 3; url = ../index.php");
-					$errors = array();
-					$errors["general"] = "Nombre de Usuario no valido.";
-					echo $errors["general"];
-					ob_end_flush();
+					$_SESSION["idUsuario"] = null;
+					$_SESSION["tipoUsuario"] = null;
+					$error = "Nombre de Usuario y/o Password no validos.";
+					header("Location: ../views/error.php?error=$error");
 				}else{
 					$_SESSION["idUsuario"] = $usuario->getIdUsuario();
 					$_SESSION["tipoUsuario"] = $usuario->getTipoUsuario();
-				// Si login correcto direcionamos a una vista
-				if($usuario->getTipoUsuario() =="Administrador"){
-					header("Location:../views/Admin/principal.php");
-				}
-				else{
-					if($usuario->getTipoUsuario()=="Entrenador"){
-						header("Location:../views/Entrenador/principal.php");
-					}else{
-						header("Location:../views/Deportista/principal.php");
+					// Si login correcto direcionamos a una vista
+					if($usuario->getTipoUsuario() =="Administrador"){
+						header("Location:../views/Admin/principal.php");
 					}
-				}
-			  }
-	      	}else{
-	      		$error = array();
-				$error= "Nombre de Usuario no valido";
-				print_r($error);
-				header("refresh: 3; url = ../index.php");
-				/*ob_start();
-  				header("refresh: 5; url = index.php");
-				$errors = array();
-				$errors["general"] = "Nombre de Usuario no valido.";
-				echo $errors["general"];
-				ob_end_flush();  */
+					else{
+						if($usuario->getTipoUsuario()=="Entrenador"){
+							header("Location:../views/Entrenador/principal.php");
+						}else{
+							header("Location:../views/Deportista/principal.php");
+						}
+					}
+			    }
+	    }else{
+	    		$_SESSION["idUsuario"] = null;
+				$_SESSION["tipoUsuario"] = null;
+				$error= "Nombre de Usuario y/o Password no validos";
+				header("Location: ../views/error.php?error=$error");
 	      	}
-	    }
 	}
 	public static function logout() {
 		if(!isset($_SESSION)) session_start();
@@ -202,28 +179,98 @@ class UsuarioController{
 				//Redireccionamos a vista
 				header("Location: ../views/Admin/consultarUsuarios.php?id=$idUsu");
 			}else{
-				ob_start();
-				header("refresh: 3; url = ../views/Admin/modificarUsuario.php?id=$idUsu");
-				$errors = array();
-				$errors["general"] = "ERROR.El formulario no fue bien completado.";
-				echo $errors["general"];
-				ob_end_flush();
+				$error = "ERROR.El formulario no fue bien completado.";
+				header("Location: ../views/error.php?error=$error");
 			}
 		  }
 		}else{
-			ob_start();
-			 if ($_SESSION['tipoUsuario'] =="DeportistaPEF" || $_SESSION['tipoUsuario']=="DeportistaTDU") {
-					header("refresh: 3; url = ../views/Deportista/principal.php");
-				}
-				else{
-					header("refresh: 3; url = ../views/Entrenador/principal.php");
-				}
-			$errors = array();
-			$errors["general"] = "No tiene permiso para modificar una Usuario";
-			echo $errors["general"];
-			ob_end_flush();
+			$error = "No tiene permiso para modificar una Usuario";
+			header("Location: ../views/error.php?error=$error");
 		}
 	} //FIN MODIFICAR Usuario
+
+	/*MODIFICAR PERFIL*/
+	public static function modificarPerfil(){
+	if(!isset($_SESSION)) session_start();
+		$idUsu = $_POST['idUsu'];
+		print_r($_FILES['imagen']); 
+		//Utilizamos el usuario sin modificar por si no nos pasan unos argumentos, asignarle los que ya tenía
+        $usuarioSinModificar = Usuario::devolverDatos($idUsu);
+        //Si no pasan nombreUsuario, cogemos el nombre que ya tenia
+        if ($_POST['nomUsuario']!= null) {
+          $nomUsuario = $_POST['nomUsuario'];
+        }else{
+            $nomUsuario = $usuarioSinModificar->getNomUsuario();
+        }
+        //Si no pasan nombre, cogemos el nombre que ya tenia
+        if ($_POST['nombre']!= null) {
+          $nombre = $_POST['nombre'];
+        }else{
+          $nombre = $usuarioSinModificar->getNombre();
+        }
+        //Si no pasan apellidos, cogemos los apellidos que ya tenia
+        if ($_POST['apellidos']!= null) {
+          $apellidos = $_POST['apellidos'];
+        }else{
+          $apellidos = $usuarioSinModificar->getApellidos();
+        }
+        //Si no pasan email, cogemos el email que ya tenia
+        if ($_POST['email']!= null) {
+          $email = $_POST['email'];
+        }else{
+          $email = $usuarioSinModificar->getEmail();
+        }
+        //Si no pasan tipoUsuario, cogemos el tipoUsuario que ya tenia
+        if ($_POST['tipoUsuario']!= null) {
+          $tipoUsuario = $_POST['tipoUsuario'];
+        }else{
+            $tipoUsuario = $usuarioSinModificar->getTipoUsuario();
+        }
+        //Si no pasan imagen, cogemos la imagen que ya tenia
+        if ($_FILES['imagen']['name'] != null) {
+          if($_FILES['imagen']['type']=="image/jpeg" || $_FILES['imagen']['type']=="image/png" || $_FILES['imagen']['type']=="image/jpg"){
+          	//Creamos ruta donde guardamos la imagen yle damos nombre 
+			$ruta = "../img/usuarios";
+			$nombreArchivo = $_FILES['imagen']['name'];
+			move_uploaded_file($_FILES['imagen']['tmp_name'], $ruta."/".$nombreArchivo);
+		  }else{
+			$error = "ERROR. Formato de imagen no válido.";
+			header("Location: ../error.php?error=$error");
+			//echo $errors["general"]; 
+		  }
+        }else{
+            $nombreArchivo = $usuarioSinModificar->getImagenPerfil();
+        }
+        //Si no pasan contraseña hacemos un update sin hacerle el md5. En caso contrario tambien modificaremos la contraseña
+        if ($_POST['password'] == null) {
+				//Lamamos a la funcion que modifica al Usuario
+				Usuario::updatePerfilSinPass($idUsu,$nomUsuario,$email,$tipoUsuario,$nombre,$apellidos,$nombreArchivo);
+				//Redireccionamos a vista
+				if ($_SESSION['tipoUsuario'] =="Administrador"){
+					header("Location: ../views/Admin/verPerfil.php");
+				}
+				if ($_SESSION['tipoUsuario'] =="Entrenador"){
+					header("Location: ../views/Entrenador/verPerfil.php");
+				}
+				if ($_SESSION['tipoUsuario'] =="DeportistaTDU" || $_SESSION['tipoUsuario'] =="DeportistaPEF"){
+					header("Location: ../views/Deportista/verPerfil.php");
+				}
+        }else{
+          		$password = $_POST['password'];
+				//Lamamos a la funcion que modifica al Usuario
+				Usuario::updatePerfil($idUsu,$nomUsuario,$password,$email,$tipoUsuario,$nombre,$apellidos,$nombreArchivo);
+				//Redireccionamos a vista
+				if ($_SESSION['tipoUsuario'] =="Administrador"){
+					header("Location: ../views/Admin/verPerfil.php");
+				}
+				if ($_SESSION['tipoUsuario'] =="Entrenador"){
+					header("Location: ../views/Entrenador/verPerfil.php");
+				}
+				if ($_SESSION['tipoUsuario'] =="DeportistaTDU" || $_SESSION['tipoUsuario'] =="DeportistaPEF"){
+					header("Location: ../views/Deportista/verPerfil.php");
+				}
+		  }
+	} //FIN MODIFICAR PERFIL
 
 	/* BORRAR Usuario*/
 	public static function borrarUsuario(){
@@ -256,25 +303,12 @@ class UsuarioController{
 						//Redireccionamos a vista
 						header("Location: ../views/Admin/gestionUsuarios.php");
 					}else{
-						ob_start();
-						header("refresh: 3; url = ../views/Admin/gestionUsuarios.php");
-						$errors = array();
-						$errors["general"] = "ERROR.El usuario no existe.";
-						echo $errors["general"];
-						ob_end_flush();
+						$error= "ERROR.El usuario no existe.";
+						header("Location: ../views/error.php?error=$error");
 					}
 			}else{
-				ob_start();
-				if ($_SESSION['tipoUsuario'] =="DeportistaPEF" || $_SESSION['tipoUsuario']=="DeportistaTDU") {
-					header("refresh: 3; url = ../views/Deportista/principal.php");
-				}
-				else{
-					header("refresh: 3; url = ../views/Entrenador/principal.php");
-				}
-				$errors = array();
-				$errors["general"] = "No tiene permiso para modificar un usuario";
-				echo $errors["general"];
-				ob_end_flush();
+				$error = "No tiene permiso para modificar un usuario";
+				header("Location: ../views/error.php?error=$error");
 			}
 	}//FIN BORRAR USUARIO
   	public static function crearUsuario(){
@@ -288,6 +322,8 @@ class UsuarioController{
   			$email = $_POST["email"];
   			$tipoUser = $_POST["tipoUsuario"];
   			$idUser = "NULL";
+  			$imagen= null;
+
   			/*Comprobamos que el nombre de Usuario no existe para seguir con el registro*/
   			if(!UsuarioMapper::existeUsuario($nomUser)){
 	  			/*Comprobamos si es valido el registro, para despues darlo de alta*/
@@ -302,36 +338,21 @@ class UsuarioController{
 	  				$user->setTipoUsuario($tipoUser);
 	  				$user->setNombre($nombre);
 	  				$user->setApellidos($apellidos);
+	  				$user->setImagenPerfil($imagen);
 	  				$user->guardarUsuario($user);
 	  				header("Location: ../views/Admin/gestionUsuarios.php");
 	  			}else{
 	  				/*Si no le decimos cual es el error*/
-	  				ob_start();
-	  				header("refresh: 5; url = ../views/Admin/crearUsuario.php");
-					$errors = array();
-					$errors["general"] = "El usuario no pudo ser creado.";
-					echo $errors["general"];
-					ob_end_flush();
+					$error = "El usuario no pudo ser creado.";
+					header("Location: ../views/error.php?error=$error");
 	  			}
   		  	}else{
-  		  			ob_start();
-	  				header("refresh: 5; url = ../views/Admin/crearUsuario.php");
-					$errors = array();
-					$errors["general"] = "ERROR. El Nombre de Usuario ya existe.";
-					echo $errors["general"];
-					ob_end_flush();
+					$error = "ERROR. El Nombre de Usuario ya existe.";
+					header("Location: ../views/error.php?error=$error");
   		  	}
   		}else{
-  			ob_start();
-  			if($_SESSION["tipoUsuario"]->getTipoUsuario() == 'DeportistaTDU' || $_SESSION["tipoUsuario"]->getTipoUsuario() == 'DeportistaPEF') {
-	  				header("refresh: 3; url = ../views/Deportista/principal.php"); 
-	  			}else{
-	  				header("refresh: 3; url = ../views/Entrenador/principal.php"); 
-	  			}
-			$errors = array();
-			$errors["general"] = "No tiene permiso para crear un Usuario";
-			echo $errors["general"]; 
-			ob_end_flush();
+			$error = "No tiene permiso para crear un Usuario";
+			header("Location: ../views/error.php?error=$error");
   		}
   	}
 }

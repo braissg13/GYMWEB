@@ -19,12 +19,8 @@ require_once(__DIR__."/../model/Tabla.php");
 	        $tabla = NULL;
 	        $tabla = Tabla::obtenerDatos($idTablaEjercicios);
 	        if ($tabla == NULL){
-	          ob_start(); 
-	          header("refresh: 3; url = ../views/Entrenador/gestionTablas.php"); 
-	          $errors = array();
-	          $errors["general"] = "La tabla no existe.";
-	          echo $errors["general"]; 
-	          ob_end_flush();
+	          $error = "La tabla no existe.";
+	          header("Location: ../views/error.php?error=$error");
 	        }else{
 	          return $tabla;
 	        }
@@ -123,32 +119,16 @@ require_once(__DIR__."/../model/Tabla.php");
 		  				header("Location: ../views/Entrenador/gestionTablas.php");
 		  			}else{
 		  				/*Si no le decimos cual es el error*/
-		  				ob_start();
-		  				header("refresh: 5; url = ../views/Entrenador/crearTablas.php");
-						$errors = array();
-						$errors["general"] = "La tabla no pudo ser creada.";
-						echo $errors["general"];
-						ob_end_flush();
+						$error = "La tabla no pudo ser creada.";
+						header("Location: ../views/error.php?error=$error");
 		  			}
 	  		  	}else{
-	  		  			ob_start();
-		  				header("refresh: 5; url = ../views/Entrenador/crearTablas.php");
-						$errors = array();
-						$errors["general"] = "ERROR. El Nombre de Tabla ya existe.";
-						echo $errors["general"];
-						ob_end_flush();
+						$error = "ERROR. El Nombre de Tabla ya existe.";
+						header("Location: ../views/error.php?error=$error");
 	  		  	}
 	  		}else{
-	  			ob_start();
-	  			if($_SESSION["tipoUsuario"] == 'DeportistaTDU' || $_SESSION["tipoUsuario"] == 'DeportistaPEF') {
-		  				header("refresh: 3; url = ../views/Deportista/principal.php"); 
-		  			}else{
-		  				header("refresh: 3; url = ../views/Admin/principal.php"); 
-		  			}
-				$errors = array();
-				$errors["general"] = "No tiene permiso para crear una Tabla de Ejercicios";
-				echo $errors["general"]; 
-				ob_end_flush();
+				$error = "No tiene permiso para crear una Tabla de Ejercicios";
+				header("Location: ../views/error.php?error=$error");
 	  		}
 	  	}//FIN CREAR TABLA
 
@@ -187,26 +167,13 @@ require_once(__DIR__."/../model/Tabla.php");
 							//Redireccionamos a vista
 							header("Location: ../views/Entrenador/consultarTabla.php?id=$idTabla");
 						}else{
-							ob_start();
-							header("refresh: 3; url = ../views/Entrenador/modificarTabla.php?id=$idTabla");
-							$errors = array();
-							$errors["general"] = "ERROR.El formulario no fue bien completado.";
-							echo $errors["general"];
-							ob_end_flush();
+							$error= "ERROR.El formulario no fue bien completado.";
+							header("Location: ../views/error.php?error=$error");
 						}
 				} 	
 			}else{
-				ob_start();
-				 if ($_SESSION['tipoUsuario'] =="DeportistaPEF" || $_SESSION['tipoUsuario']=="DeportistaTDU") {
-						header("refresh: 3; url = ../views/Deportista/principal.php");
-					}
-					else{
-						header("refresh: 3; url = ../views/Admin/principal.php");
-					}
-				$errors = array();
-				$errors["general"] = "No tiene permiso para modificar una Tabla";
-				echo $errors["general"];
-				ob_end_flush();
+				$error = "No tiene permiso para modificar una Tabla";
+				header("Location: ../views/error.php?error=$error");
 			}
 		} //FIN MODIFICAR TABLA
 
@@ -229,25 +196,12 @@ require_once(__DIR__."/../model/Tabla.php");
                   //Redireccionamos a vista
                   header("Location: ../views/Entrenador/gestionTablas.php"); 
                 }else{
-                  ob_start();  
-                  header("refresh: 3; url = ../views/Entrenador/gestionTablas.php");   
-                  $errors = array();
-                  $errors["general"] = "ERROR.La Tabla no existe.";
-                  echo $errors["general"]; 
-                  ob_end_flush();
+                  $error = "ERROR.La Tabla no existe.";
+                  header("Location: ../views/error.php?error=$error");
                 }
             }else{
-              ob_start(); 
-              if ($_SESSION['tipoUsuario']=="DeportistaPEF" || $_SESSION['tipoUsuario']=="DeportistaTDU") {
-                header("refresh: 3; url = ../views/Deportista/principal.php"); 
-              }
-              else{
-                header("refresh: 3; url = ../views/Admin/principal.php"); 
-              }  
-              $errors = array();
-              $errors["general"] = "No tiene permiso para modificar una Tabla";
-              echo $errors["general"]; 
-              ob_end_flush();
+              $error = "No tiene permiso para modificar una Tabla";
+              header("Location: ../views/error.php?error=$error");
             }
         }//FIN BORRAR TABLA
 
