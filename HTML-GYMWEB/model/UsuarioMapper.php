@@ -23,14 +23,14 @@ class UsuarioMapper{
         }
     }
 
-    /*Buscamos Usuario por su nombreUsusario*/
+    /*Buscamos Usuario por su idUsusario*/
     public static function findByUserId($idUsuario)
     {
         global $connect;
         $resultado = mysqli_query($connect, 'SELECT * FROM usuario WHERE idUsuario ="'.$idUsuario.'"');
         if (mysqli_num_rows($resultado) > 0) {
             $row = mysqli_fetch_assoc($resultado);
-            $usuario= new Usuario($row['idUsuario'],$row['nomUsuario'],$row['password'],$row['email'],$row['tipoUsuario'],$row['nombre'],$row['apellidos']);
+            $usuario= new Usuario($row['idUsuario'],$row['nomUsuario'],$row['password'],$row['email'],$row['tipoUsuario'],$row['nombre'],$row['apellidos'],$row['imagenPerfil']);
             return $usuario;
         } else {
             return NULL;
@@ -94,11 +94,29 @@ class UsuarioMapper{
         return $result;
     }
 
-    public static function updateSinPass($idUsuario,$nomUsuario,$email, $tipoUsuario, $nombre, $apellidos)
+    public static function updateSinPass($idUsuario,$nomUsuario,$email, $tipoUsuario, $nombre, $apellidos,$imagenPerfil)
     {
         global $connect;
         
         $result = mysqli_query($connect, "UPDATE usuario SET nomUsuario=\"$nomUsuario\", email =\"$email\", tipoUsuario= \"$tipoUsuario\",nombre=\"$nombre\", apellidos=\"$apellidos\" WHERE idUsuario=\"$idUsuario\"");
+        return $result;
+    }
+
+    public static function updatePerfil($idUsuario,$nomUsuario,$password,$email, $tipoUsuario, $nombre, $apellidos,$imagenPerfil)
+    {
+        global $connect;
+        
+        $password = md5($password);
+        
+        $result = mysqli_query($connect, "UPDATE usuario SET nomUsuario=\"$nomUsuario\", password =\"$password\", email =\"$email\", tipoUsuario= \"$tipoUsuario\",nombre=\"$nombre\", apellidos=\"$apellidos\", imagenPerfil=\"$imagenPerfil\" WHERE idUsuario=\"$idUsuario\"");
+        return $result;
+    }
+
+    public static function updatePerfilSinPass($idUsuario,$nomUsuario,$email, $tipoUsuario, $nombre, $apellidos,$imagenPerfil)
+    {
+        global $connect;
+        
+        $result = mysqli_query($connect, "UPDATE usuario SET nomUsuario=\"$nomUsuario\", email =\"$email\", tipoUsuario= \"$tipoUsuario\",nombre=\"$nombre\", apellidos=\"$apellidos\", imagenPerfil=\"$imagenPerfil\" WHERE idUsuario=\"$idUsuario\"");
         return $result;
     }
 

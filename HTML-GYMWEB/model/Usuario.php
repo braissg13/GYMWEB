@@ -10,10 +10,11 @@ class Usuario {
   protected $tipoUsuario;
   protected $nombre;
   protected $apellidos;
+  protected $imagenPerfil;
   /*
     Constructor del usuario
   */
-  public function __construct($idUsuario=NULL,$nomUsuario=NULL, $password=NULL, $email=NULL, $tipoUsuario=NULL, $nombre=NULL, $apellidos=NULL) {
+  public function __construct($idUsuario=NULL,$nomUsuario=NULL, $password=NULL, $email=NULL, $tipoUsuario=NULL, $nombre=NULL, $apellidos=NULL, $imagenPerfil=NULL) {
     $this->idUsuario = $idUsuario;
     $this->nomUsuario = $nomUsuario;
     $this->password = $password;
@@ -21,6 +22,7 @@ class Usuario {
     $this->tipoUsuario = $tipoUsuario;
     $this->nombre = $nombre;
     $this->apellidos = $apellidos;
+    $this->imagenPerfil = $imagenPerfil;
   }
   public function getIdUsuario() {
     return $this->idUsuario;
@@ -64,6 +66,12 @@ class Usuario {
   public function setApellidos($apellidos) {
     $this->apellidos = $apellidos;
   }
+  public function getImagenPerfil() {
+    return $this->imagenPerfil;
+  }
+  public function setImagenPerfil($imagenPerfil) {
+    $this->imagenPerfil = $imagenPerfil;
+  }
   /*Obtener todos las Actividades*/
   public static function getAllUsuarios()
     {
@@ -87,7 +95,7 @@ class Usuario {
                 echo "ERROR: Usuario o contrase&ntildea incorrectos.";
             }
         } else {
-            return "ERROR, no existe el Ususario";
+            return null;
         }
   }
   /*Comprobacion existe Usuario...(utilizando usuarioValido(idUsuario)) Si existe usuario devuelve un Objeto Usuario*/
@@ -136,6 +144,16 @@ class Usuario {
   public static function updateSinPass($idUsuario,$nomUsuario,$email, $tipoUsuario, $nombre, $apellidos)
   {
       UsuarioMapper::updateSinPass($idUsuario,$nomUsuario,$email, $tipoUsuario, $nombre, $apellidos);
+  }
+
+  public static function updatePerfil($idUsuario,$nomUsuario,$password,$email, $tipoUsuario, $nombre, $apellidos,$imagenPerfil)
+  {
+      UsuarioMapper::updatePerfil($idUsuario,$nomUsuario,$password,$email, $tipoUsuario, $nombre, $apellidos,$imagenPerfil);
+  }
+
+  public static function updatePerfilSinPass($idUsuario,$nomUsuario,$email, $tipoUsuario, $nombre, $apellidos,$imagenPerfil)
+  {
+      UsuarioMapper::updatePerfilSinPass($idUsuario,$nomUsuario,$email, $tipoUsuario, $nombre, $apellidos,$imagenPerfil);
   }
 
    public static function delete($idUsuario){
