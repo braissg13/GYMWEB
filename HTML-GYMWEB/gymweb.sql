@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 19-11-2016 a las 23:57:41
+-- Tiempo de generación: 13-12-2016 a las 10:31:31
 -- Versión del servidor: 10.1.19-MariaDB
 -- Versión de PHP: 5.6.24
 
@@ -28,10 +28,6 @@ CREATE SCHEMA IF NOT EXISTS `gymweb` DEFAULT CHARACTER SET utf8 ;
 USE `gymweb` ;
 
 GRANT ALL PRIVILEGES ON gymweb.* TO 'usergymweb'@'localhost' IDENTIFIED by 'ziralla09';
-
-/*
-grant all privileges on clickapincho.* to root@localhost identified by "root";
-*/
 
 -- --------------------------------------------------------
 
@@ -102,7 +98,7 @@ CREATE TABLE `ejercicio` (
 --
 
 INSERT INTO `ejercicio` (`idEjercicio`, `nomEjercicio`, `descripEjerc`, `tipoEjerc`, `repeticiones`, `carga`, `imagen`) VALUES
-(1, 'Aperturas Mancuernas', 'Mira la IMAGEN.........jafsafoasdpfksdoakfposdafopasf', 'Pecho', '10-10-10-10', 10, 0x6170657274757261732d6d616e637565726e61732e706e67),
+(1, 'Aperturas Mancuernas', 'Mira Imagen sasasasasas', 'Pecho', '10-10-10-10', 10, 0x6170657274757261732d6d616e637565726e61732e706e67),
 (2, 'Biceps Brazos Cruz', 'Mira la IMAGEN.........jafsafoasdpfksdoakfposdafopasf', 'Brazos', '10-10-10-10', 10, 0x6269636570732d6272617a6f732d6372757a2e706e67),
 (3, 'Curl Concentrado', 'Mira la IMAGEN.........jafsafoasdpfksdoakfposdafopasf', 'Brazos', '10-10-10-8', 10, 0x6375726c2d636f6e63656e747261646f2e706e67),
 (4, 'Dipping', 'Mira la IMAGEN.........jafsafoasdpfksdoakfposdafopasf', 'Brazos', '10-10-10-10', 0, 0x64697070696e67732e706e67),
@@ -231,21 +227,23 @@ CREATE TABLE `usuario` (
   `email` varchar(50) DEFAULT NULL,
   `tipoUsuario` varchar(13) DEFAULT NULL,
   `nombre` varchar(20) DEFAULT NULL,
-  `apellidos` varchar(40) DEFAULT NULL
+  `apellidos` varchar(40) DEFAULT NULL,
+  `imagenPerfil` longblob
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `usuario`
 --
 
-INSERT INTO `usuario` (`idUsuario`, `nomUsuario`, `password`, `email`, `tipoUsuario`, `nombre`, `apellidos`) VALUES
-(3, 'Admin', 'a906449d5769fa7361d7ecc6aa3f6d28', 'Admin@Admin', 'Administrador', 'Admin', '-'),
-(4, 'drSelles', 'a906449d5769fa7361d7ecc6aa3f6d28', 'drselles@gmail.com', 'Entrenador', 'Diego', 'Selles'),
-(5, 'antoportero', 'a906449d5769fa7361d7ecc6aa3f6d28', 'antoportero@gmail.com', 'Entrenador', 'Xose Antonio', 'Silva'),
-(6, 'isgarcia', 'a906449d5769fa7361d7ecc6aa3f6d28', 'isg@gmail.com', 'DeportistaTDU', 'Ismael', 'Sierra'),
-(8, 'mroliveira', 'a906449d5769fa7361d7ecc6aa3f6d28', 'mroliveira@gmail.com', 'DeportistaTDU', 'Marcos', 'Rodriguez Oliveira'),
-(9, 'mltallon', 'a906449d5769fa7361d7ecc6aa3f6d28', 'tallonazo@gmail.com', 'DeportistaPEF', 'Manuel', 'Lorenzo Tallon'),
-(10, 'topor', 'a906449d5769fa7361d7ecc6aa3f6d28', 'casillas@gmail.com', 'DeportistaPEF', 'Iker', 'Casillas');
+INSERT INTO `usuario` (`idUsuario`, `nomUsuario`, `password`, `email`, `tipoUsuario`, `nombre`, `apellidos`, `imagenPerfil`) VALUES
+(3, 'Admin', 'a906449d5769fa7361d7ecc6aa3f6d28', 'Admin@Admin', 'Administrador', 'Admin', '--', ''),
+(4, 'drSelles', 'a906449d5769fa7361d7ecc6aa3f6d28', 'dselles@gmail', 'Entrenador', 'Diego', 'Selless', 0x6473656c6c65732e706e67),
+(5, 'antoportero', 'a906449d5769fa7361d7ecc6aa3f6d28', 'antoportero@gmail.com', 'Entrenador', 'Xose Antonio', 'Silva', NULL),
+(6, 'isgarcia', 'a906449d5769fa7361d7ecc6aa3f6d28', 'isg@gmail.com', 'DeportistaTDU', 'Ismael', 'Sierra', NULL),
+(8, 'mroliveira', 'a906449d5769fa7361d7ecc6aa3f6d28', 'mroliveira@gmail.com', 'DeportistaTDU', 'Marcos', 'Rodriguez Oliveira', NULL),
+(9, 'mltallon', 'a906449d5769fa7361d7ecc6aa3f6d28', 'tallon@gmail.com', 'DeportistaPEF', 'Manuel', 'Lorenzo Tallon', NULL),
+(10, 'topor', 'a906449d5769fa7361d7ecc6aa3f6d28', 'casillas@gmail.com', 'DeportistaPEF', 'Iker', 'Casillas', NULL),
+(15, 'bsgarcia', 'a906449d5769fa7361d7ecc6aa3f6d28', 'bras@bras', 'DeportistaPEF', 'aaaaa', 'dddd', NULL);
 
 -- --------------------------------------------------------
 
@@ -380,7 +378,7 @@ ALTER TABLE `tablaejercicios`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 --
 -- Restricciones para tablas volcadas
 --
