@@ -4,7 +4,7 @@ require_once("../../controller/defaultController.php");
 if(!isset($_SESSION)) session_start();
  $idUsuario=$_SESSION['idUsuario'];
  /*Aqui comprobamos que no intenten entrar otros Usuarios que no sean Administradores*/
- if ($_SESSION['tipoUsuario'] =='Deportista'){
+ if ($_SESSION['tipoUsuario'] =='DeportistaPEF' || $_SESSION['tipoUsuario'] =='DeportistaTDU'){
 
    $idActividad = $_GET['id'];
 
