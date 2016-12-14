@@ -51,7 +51,7 @@ require_once("../../controller/defaultController.php");
         ?>
 
             <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8" style="margin-bottom: 10px;border-color: #d0cccc;border-style: ridge; background-color: #0275d8;">
-				<td><a href="consultarActividades.php?id=<?php echo $actividad['idActividad']; ?>" style="color: white;"><?php echo $actividad['nomActividad']; ?></a></td>
+				<td><h5><b><a href="consultarActividades.php?id=<?php echo $actividad['idActividad']; ?>" style="color: white;max-width: 100%;max-height: 100%;"><?php echo $actividad['nomActividad']; ?></a></b></h5></td>
                 <h5><b><?php echo $dateobj->format("d-M-Y H:i");?></b></h5>
                 <img alt="imgActividad" src="../../img/actividades/<?php echo $actividad['imagenAct'];?>" style="max-width: 100%;max-height: 100%;">
             </div>
