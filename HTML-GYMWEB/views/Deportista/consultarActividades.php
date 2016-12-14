@@ -68,28 +68,14 @@ if(!isset($_SESSION)) session_start();
           <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"><p><b>Entrenador: <?php if($row!=null){ foreach($row as $entrenador){
              echo $entrenador['nomUsuario'];
             }}?></b></p></div>
-	<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
-           <!-- PRINCIPIO MODAL ELMINAR Act -->
-           <div class="form-group">
 
-               <button type="button" class="btn btn-default1" data-toggle="modal" data-target=".bs-example-modal-sm">Cancelar reserva</button>
-               <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
-               <div class="modal-dialog modal-sm" role="document">
-                 <div class="modal-content" id="modalLogin">
-
-
-                 </div>
-               </div>
-               </div>
-             </div>	<!-- FIN MODAL -->
-           </div>
 		     <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
 
                 <button type="button" style="background-color: slateblue;color: white;" class="btn btn-default4" id="ReservarPlaza">Reservar plaza</button></a>
-                <a href="principal.php"><button type="button" class="btn btn-default3">Atr&aacutes</button></a>
+
               </div>
 
-
+              <a href="principal.php"><button type="button" class="btn btn-default3">Atr&aacutes</button></a>
        </div><!-- FIN ROW -->
 
      </div> <!-- FIN CONTAINER ACTIVIDADES -->
