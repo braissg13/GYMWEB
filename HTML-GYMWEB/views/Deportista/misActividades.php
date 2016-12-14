@@ -30,7 +30,7 @@ if(!isset($_SESSION)) session_start();
 
   	<div class="container">
 
-     <h1>Actividades</h1>
+     <h1>Actividades en las que reservó plaza</h1>
      <!-- Actividades creadas y botones para crear/borrar/modificar-->
 
      <div class="row" style="margin-top: 20px; margin-bottom: 10px;">
