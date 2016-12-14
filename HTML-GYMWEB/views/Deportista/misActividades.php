@@ -68,10 +68,10 @@ if(!isset($_SESSION)) session_start();
 
             ?>
             <tr>
-              <td><a href="consultarActividades.php?id=<?php echo $actividad['idActividad']; ?>" style="text-decoration: none;"><?php echo $actividad['nomActividad']; ?></a></td>
+              <td><a href="consultarMisActividades.php?id=<?php echo $actividad['idActividad']; ?>" style="text-decoration: none;"><?php echo $actividad['nomActividad']; ?></a></td>
               <td><?php   echo $dateobj->format("d-m-Y H:i");?></td>
-			  <td><a href="consultarActividades.php?id=<?php echo $actividad['idActividad']; ?>" style="text-decoration: none;"><button type="button" class="btn btn-default2" id="cancelarReserva">Cancelar reserva</button></a></td>
 
+          
             </tr>
             <?php
                 }
