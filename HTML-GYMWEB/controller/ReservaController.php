@@ -5,9 +5,10 @@ require_once(__DIR__."/../model/Reserva.php");
 
 class ReservaController{
 
-  /* BORRAR Usuario*/
+  /* BORRAR reserva*/
   public static function borrarReserva(){
     if(!isset($_SESSION)) session_start();
+    $idReserva= $_POST['idReserva'];
 
             if($tipoUsuario=="DeportistaTDU" || $tipoUsuario=="DeportistaPEF"){
               Reserva::delete($idReserva);
@@ -15,6 +16,6 @@ class ReservaController{
             //Redireccionamos a vista
             header("Location: ../views/Deportista/misActividades.php");
 
-  }//FIN BORRAR USUARIO
+  }//FIN BORRAR reserva
 
 }
