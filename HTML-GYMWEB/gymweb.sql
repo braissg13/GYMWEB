@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 13-12-2016 a las 10:31:31
+-- Tiempo de generación: 20-12-2016 a las 01:38:16
 -- Versión del servidor: 10.1.19-MariaDB
 -- Versión de PHP: 5.6.24
 
@@ -50,9 +50,10 @@ CREATE TABLE `actividad` (
 --
 
 INSERT INTO `actividad` (`idActividad`, `nomActividad`, `totalPlazas`, `descripAct`, `fecha`, `plazasOcupadas`, `imagenAct`) VALUES
-(2, 'Zumba', 40, 'Zumba es una disciplina fitness enfocada por una parte a mantener\r\nun cuerpo saludable y por otra a desarrollar,fortalecer y dar \r\nflexibilidad al cuerpo mediante movimientos de baile combinados\r\ncon una serie de rutinas aerÃ³bicas.\r\nEsta Actividad durarÃ¡ aproximadamente 50 minutos.', '2016-11-29 18:00:00', 0, 0x7a756d62612e6a7067),
-(10, 'Spinning', 100, 'ssadasdasdasdsdasdas', '2016-11-30 12:00:00', 0, 0x7370696e6e696e672e6a7067),
-(11, 'Aerobic', 43, 'dededeewdew', '2016-11-30 12:12:00', 0, 0x6165726f6269632e6a7067);
+(2, 'Zumba', 40, 'Zumba es una disciplina fitness enfocada por una parte a mantener\r\nun cuerpo saludable y por otra a desarrollar,fortalecer y dar \r\nflexibilidad al cuerpo mediante movimientos de baile combinados\r\ncon una serie de rutinas aerÃ³bicas.\r\nEsta Actividad durarÃ¡ aproximadamente 50 minutos.', '2016-11-29 18:00:00', 2, 0x7a756d62612e6a7067),
+(10, 'Spinning', 100, 'ssadasdasdasdsdasdas', '2016-11-30 12:00:00', 1, 0x7370696e6e696e672e6a7067),
+(11, 'Aerobic', 43, 'dededeewdew', '2016-11-30 12:12:00', 1, 0x6165726f6269632e6a7067),
+(12, 'Spinning', 2, 'werwerwerwerwerrw', '2016-12-28 20:00:00', 2, 0x7370696e6e696e672e6a7067);
 
 -- --------------------------------------------------------
 
@@ -170,7 +171,9 @@ INSERT INTO `reserva` (`idReserva`, `fecha`, `Usuario_idUsuario`, `Actividad_idA
 (3, '2016-11-28 00:00:00', 6, 10),
 (4, '2016-11-28 00:00:00', 8, 11),
 (5, '2016-11-26 00:00:00', 6, 2),
-(6, '2016-11-25 00:00:00', 8, 2);
+(6, '2016-11-25 00:00:00', 8, 2),
+(8, '2016-12-20 01:31:00', 6, 12),
+(9, '2016-12-20 01:34:00', 8, 12);
 
 -- --------------------------------------------------------
 
@@ -263,6 +266,7 @@ CREATE TABLE `usuario_actividad` (
 INSERT INTO `usuario_actividad` (`Usuario_idUsuario`, `Actividad_idActividad`) VALUES
 (4, 2),
 (4, 11),
+(4, 12),
 (5, 10);
 
 --
@@ -348,7 +352,7 @@ ALTER TABLE `usuario_actividad`
 -- AUTO_INCREMENT de la tabla `actividad`
 --
 ALTER TABLE `actividad`
-  MODIFY `idActividad` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `idActividad` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT de la tabla `comentario`
 --
@@ -368,7 +372,7 @@ ALTER TABLE `notificacion`
 -- AUTO_INCREMENT de la tabla `reserva`
 --
 ALTER TABLE `reserva`
-  MODIFY `idReserva` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `idReserva` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT de la tabla `tablaejercicios`
 --
