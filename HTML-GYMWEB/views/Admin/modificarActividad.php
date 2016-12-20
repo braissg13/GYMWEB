@@ -103,7 +103,7 @@ if(!isset($_SESSION)) session_start();
       <!-- DIV IMAGEN ACTIVIDAD -->
                 <div class="form-group col-xs-12 col-sm-4 col-md-4 col-lg-4" style="margin-top:30px;">
                   <label for="imgAct">Subir Imagen: </label>
-                  <input type="file" name="imagen" required="">
+                  <input type="file" name="imagen">
                 </div>
        <!-- DIV ASIGNAR ENTRENADOR-->         
                 <div class="form-group">
