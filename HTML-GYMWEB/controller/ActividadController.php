@@ -144,30 +144,48 @@ require_once(__DIR__."/../model/Actividad.php");
           // Recogemos el ID del entrenador a asignar
           $entrenador = $_POST['entrenador'];
 
-          //Comprobamos el tipo de la Imagen, SI es correcto, obtenemos los datos de la ruta y de la imagen
-          if($_FILES['imagen']['type']=="image/jpeg" || $_FILES['imagen']['type']=="image/png" || $_FILES['imagen']['type']=="image/jpg"){
-                //Comprobamos si los datosintroducidos son Correctos
-                if(Actividad::registroValido($nombre,$descripcion)){
-                 //Creamos ruta donde guardamos la imagen yle damos nombre 
-                $ruta = "../img/actividades";
-                $nombreArchivo = $_FILES['imagen']['name'];
-                move_uploaded_file($_FILES['imagen']['tmp_name'], $ruta."/".$nombreArchivo);
+          //Si no pasan imagen, cogemos la imagen que ya tenia
+          if ($_FILES['imagen']['name'] != null) {
+            //Comprobamos el tipo de la Imagen, SI es correcto, obtenemos los datos de la ruta y de la imagen
+            if($_FILES['imagen']['type']=="image/jpeg" || $_FILES['imagen']['type']=="image/png" || $_FILES['imagen']['type']=="image/jpg"){
+                  //Comprobamos si los datosintroducidos son Correctos
+                  if(Actividad::registroValido($nombre,$descripcion)){
+                   //Creamos ruta donde guardamos la imagen yle damos nombre 
+                  $ruta = "../img/actividades";
+                  $nombreArchivo = $_FILES['imagen']['name'];
+                  move_uploaded_file($_FILES['imagen']['tmp_name'], $ruta."/".$nombreArchivo);
+                    
+                    //Llamamos a la funcion que modifica la Actividad
+                    $actividad = Actividad::update($idAct,$nombre,$totalPlazas,$descripcion,$fecha,$plazasOcupadas,$nombreArchivo);
+                    //Llamamos a la funcion que modifica Al entrenador Asignado
+                     $asignarEntr = Actividad::updateAsignarEntrenador($entrenador,$idAct);
+                    //Redireccionamos a vista 
+                    header("Location: ../views/Admin/consultarActividades.php?id=$idAct"); 
                   
+                    }else{
+                    $error = "ERROR.El formulario no fue bien completado.";
+                    header("Location: ../views/error.php?error=$error");
+                  }
+              }else{
+                $error = "ERROR. Formato de imagen no válido.";
+                header("Location: ../views/error.php?error=$error");
+              }
+            }else{
+                $nombreArchivo = $actividadSinModificar->getImagenActividad();
+                //Comprobamos si los datosintroducidos son Correctos
+              if(Actividad::registroValido($nombre,$descripcion)){
                   //Llamamos a la funcion que modifica la Actividad
                   $actividad = Actividad::update($idAct,$nombre,$totalPlazas,$descripcion,$fecha,$plazasOcupadas,$nombreArchivo);
-                  //Llamamos a la funcion que modifica Al entrenador Asignado
-                   $asignarEntr = Actividad::updateAsignarEntrenador($entrenador,$idAct);
-                  //Redireccionamos a vista 
-                  header("Location: ../views/Admin/consultarActividades.php?id=$idAct"); 
-                
-                  }else{
-                  $error = "ERROR.El formulario no fue bien completado.";
-                  header("Location: ../views/error.php?error=$error");
-                }
-            }else{
-              $error = "ERROR. Formato de imagen no válido.";
-              header("Location: ../views/error.php?error=$error");
-            }
+                    //Llamamos a la funcion que modifica Al entrenador Asignado
+                    $asignarEntr = Actividad::updateAsignarEntrenador($entrenador,$idAct);
+                    //Redireccionamos a vista 
+                    header("Location: ../views/Admin/consultarActividades.php?id=$idAct"); 
+              }else{
+                $error = "ERROR.El formulario no fue bien completado.";
+                header("Location: ../views/error.php?error=$error");
+              }
+            }  
+
           }else{
             $error = "No tiene permiso para modificar una Actividad";
             header("Location: ../views/error.php?error=$error");
