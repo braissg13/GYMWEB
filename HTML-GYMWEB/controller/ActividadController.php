@@ -28,6 +28,12 @@ require_once(__DIR__."/../model/Actividad.php");
          return $usuario;
         }
 
+        public static function existeReserva($idActividad,$idUsuario){
+           if(!isset($_SESSION)) session_start();
+           $existe = Actividad::existeReserva($idActividad,$idUsuario);
+           return $existe;
+        }
+
         /*CREAR ACTIVIDAD*/
         public static function crearActividad(){
         if(!isset($_SESSION)) session_start();
