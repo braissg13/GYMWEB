@@ -176,6 +176,7 @@ class Usuario {
   public static function getActividadesAsignadas($idUsuario){
     return $resultado = UsuarioMapper::getActividadesAsignadas($idUsuario);
   }
+
   public static function getActividadesReservadas($idUsuario){
     return $resultado = UsuarioMapper::getActividadesReservadas($idUsuario);
   }

@@ -7,7 +7,7 @@ class ActividadMapper{
     public static function findAll()
     {
         global $connect;
-        $resultado = mysqli_query($connect, 'SELECT * FROM actividad');
+        $resultado = mysqli_query($connect, 'SELECT * FROM actividad ORDER BY fecha DESC');
         return $resultado;
     }
     /*Buscamos si existe una Actividad por su Nombre, devolvemos true si existe*/
@@ -109,6 +109,30 @@ class ActividadMapper{
         global $connect;
         $resultado = mysqli_query($connect, "UPDATE usuario_actividad SET Usuario_idUsuario=\"$idUsuario\" WHERE Actividad_idActividad=\"$idActividad\"");
         return $resultado;
+    }
+
+    public static function eliminarPlaza($idActividad,$plazasOcupadas){
+         global $connect;
+         $plazasOc = $plazasOcupadas - 1;
+        $resultado = mysqli_query($connect, "UPDATE actividad SET plazasOcupadas=\"$plazasOc\" WHERE idActividad=\"$idActividad\"");
+        return $resultado;
+    }
+
+    public static function sumarPlaza($idActividad,$plazasOcupadas){
+         global $connect;
+         $plazasOc = $plazasOcupadas + 1;
+        $resultado = mysqli_query($connect, "UPDATE actividad SET plazasOcupadas=\"$plazasOc\" WHERE idActividad=\"$idActividad\"");
+        return $resultado;
+    }
+
+    public static function existeReserva($idActividad,$idUsuario){
+        global $connect;
+        $resultado = mysqli_query($connect, 'SELECT * FROM reserva WHERE Actividad_idActividad ="'.$idActividad.'" AND Usuario_idUsuario ="'.$idUsuario.'"');
+        if (mysqli_num_rows($resultado) > 0) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
      /*devolver los usuarios que han hecho una reserva a una actividad*/

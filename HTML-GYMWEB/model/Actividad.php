@@ -122,6 +122,18 @@ class Actividad {
      return ActividadMapper::asignarEntrenador($idUsuario,$idActividad);
   }
 
+  public static function eliminarPlaza($idActividad,$plazasOcupadas){
+    ActividadMapper::eliminarPlaza($idActividad,$plazasOcupadas);
+  }
+
+  public static function sumarPlaza($idActividad,$plazasOcupadas){
+    ActividadMapper::sumarPlaza($idActividad,$plazasOcupadas);
+  }
+
+  public static function existeReserva($idActividad,$idUsuario){
+    return ActividadMapper::existeReserva($idActividad,$idUsuario);
+  }
+
   public static function getEntrenadorAsignado($idActividad){
      return ActividadMapper::getEntrenadorAsignado($idActividad);
   }
