@@ -32,7 +32,7 @@ if($_SESSION['tipoUsuario']!=null){
 	        <li><a id="Item4" href="Entrenador/gestionTablas.php">Gesti&oacuten de Tablas de Ejercicios</a></li>
 	       		<?php }else if($tipo == 'DeportistaPEF' || $tipo == 'DeportistaTDU'){ ?> 
 	       	<li><a id="Item1" href="Deportista/principal.php">Principal</a></li>
-	        <li><a id="Item2" href="#">Mis Actividades</a></li>
+	        <li><a id="Item2" href="Deportista/misActividades.php">Mis Actividades</a></li>
 	        <li><a id="Item3" href="Deportista/ejercicios.php">Ejercicios</a></li>
 	        <li><a id="Item4" href="Deportista/misTablas.php">Tablas de Ejercicios</a></li>
 	       	<?php	}
