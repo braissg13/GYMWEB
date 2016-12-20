@@ -68,7 +68,7 @@ if(!isset($_SESSION)) session_start();
 
             ?>
             <tr>
-              <td><a href="consultarMisActividades.php?id=<?php echo $actividad['idActividad']; ?>" style="text-decoration: none;"><?php echo $actividad['nomActividad']; ?></a></td>
+              <td><a href="consultarActividades.php?id=<?php echo $actividad['idActividad']; ?>" style="text-decoration: none;"><?php echo $actividad['nomActividad']; ?></a></td>
               <td><?php   echo $dateobj->format("d-m-Y H:i");?></td>
 
           
@@ -94,8 +94,8 @@ if(!isset($_SESSION)) session_start();
 <?php
   }else{
         ob_start();
-         if (($_SESSION['tipoUsuario']=='DeportistaPEF') || ($_SESSION['tipoUsuario']=='DeportistaTDU')){
-            header("refresh: 1; url = ../Deportista/principal.php");
+         if (($_SESSION['tipoUsuario']=='Entrenador')){
+            header("refresh: 1; url = ../Entrenador/principal.php");
           }else{
              if($_SESSION['tipoUsuario']=='Administrador'){
                   header("Location: ../Admin/principal.php");
