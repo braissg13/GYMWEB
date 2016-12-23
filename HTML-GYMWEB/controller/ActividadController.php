@@ -58,7 +58,7 @@ require_once(__DIR__."/../model/Actividad.php");
           if($_FILES['imagen']['type']=="image/jpeg" || $_FILES['imagen']['type']=="image/png" || $_FILES['imagen']['type']=="image/jpg"){
                 //Comprobamos si los datosintroducidos son Correctos
                 if(Actividad::registroValido($nombre,$descripcion)){
-                  //Creamos ruta donde guardamos la imagen yle damos nombre 
+                  //Creamos ruta donde guardamos la imagen yle damos nombre
                 $ruta = "../img/actividades";
                 $nombreArchivo = $_FILES['imagen']['name'];
                 move_uploaded_file($_FILES['imagen']['tmp_name'], $ruta."/".$nombreArchivo);
@@ -78,8 +78,8 @@ require_once(__DIR__."/../model/Actividad.php");
                   $act = Actividad::datosActividad($nombre,$fecha);
                   $idActividad = $act->getIdActividad();
                   $asignarEntr = Actividad::asignarEntrenador($entrenador,$idActividad);
-                  header("Location: ../views/Admin/gestionActividades.php"); 
-                
+                  header("Location: ../views/Admin/gestionActividades.php");
+
                   }else{
                   $error = "ERROR.El formulario no fue bien completado.";
                   header("Location: ../views/error.php?error=$error");
@@ -150,18 +150,18 @@ require_once(__DIR__."/../model/Actividad.php");
             if($_FILES['imagen']['type']=="image/jpeg" || $_FILES['imagen']['type']=="image/png" || $_FILES['imagen']['type']=="image/jpg"){
                   //Comprobamos si los datosintroducidos son Correctos
                   if(Actividad::registroValido($nombre,$descripcion)){
-                   //Creamos ruta donde guardamos la imagen yle damos nombre 
+                   //Creamos ruta donde guardamos la imagen yle damos nombre
                   $ruta = "../img/actividades";
                   $nombreArchivo = $_FILES['imagen']['name'];
                   move_uploaded_file($_FILES['imagen']['tmp_name'], $ruta."/".$nombreArchivo);
-                    
+
                     //Llamamos a la funcion que modifica la Actividad
                     $actividad = Actividad::update($idAct,$nombre,$totalPlazas,$descripcion,$fecha,$plazasOcupadas,$nombreArchivo);
                     //Llamamos a la funcion que modifica Al entrenador Asignado
                      $asignarEntr = Actividad::updateAsignarEntrenador($entrenador,$idAct);
-                    //Redireccionamos a vista 
-                    header("Location: ../views/Admin/consultarActividades.php?id=$idAct"); 
-                  
+                    //Redireccionamos a vista
+                    header("Location: ../views/Admin/consultarActividades.php?id=$idAct");
+
                     }else{
                     $error = "ERROR.El formulario no fue bien completado.";
                     header("Location: ../views/error.php?error=$error");
@@ -178,13 +178,13 @@ require_once(__DIR__."/../model/Actividad.php");
                   $actividad = Actividad::update($idAct,$nombre,$totalPlazas,$descripcion,$fecha,$plazasOcupadas,$nombreArchivo);
                     //Llamamos a la funcion que modifica Al entrenador Asignado
                     $asignarEntr = Actividad::updateAsignarEntrenador($entrenador,$idAct);
-                    //Redireccionamos a vista 
-                    header("Location: ../views/Admin/consultarActividades.php?id=$idAct"); 
+                    //Redireccionamos a vista
+                    header("Location: ../views/Admin/consultarActividades.php?id=$idAct");
               }else{
                 $error = "ERROR.El formulario no fue bien completado.";
                 header("Location: ../views/error.php?error=$error");
               }
-            }  
+            }
 
           }else{
             $error = "No tiene permiso para modificar una Actividad";
@@ -207,7 +207,7 @@ require_once(__DIR__."/../model/Actividad.php");
                   //Lamamos a la funcion que elimina la Actividad
                   Actividad::delete($idActividad);
                   //Redireccionamos a vista
-                  header("Location: ../views/Admin/gestionActividades.php"); 
+                  header("Location: ../views/Admin/gestionActividades.php");
                 }else{
                   $error = "ERROR.La Actividad no existe.";
                   header("Location: ../views/error.php?error=$error");
@@ -218,5 +218,11 @@ require_once(__DIR__."/../model/Actividad.php");
             }
         }//FIN BORRAR ACTIVIDAD
 
-  }  
+				public static function getResultadosBusqueda($buscador){
+		      if(!isset($_SESSION)) session_start();
+		     $busq = Actividad::actividadesBuscadas($buscador);
+		     return $busq;
+		    }
+
+  }
 ?>

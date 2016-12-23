@@ -153,5 +153,13 @@ class Actividad {
   public static function getUsuariosAsignados($idActividad){
     return ActividadMapper::getUsuariosAsignados($idActividad);
   }
+
+  public static function actividadesBuscadas($busq) {
+    if ($busq) {
+            return ActividadMapper::findActBySearch($busq);
+        } else {
+            return "ERROR, no existe la actividad";
+        }
+  }
 }
 ?>

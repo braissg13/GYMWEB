@@ -8,7 +8,7 @@ if(!isset($_SESSION)) session_start();
 
    $busq = $_POST['palabra'];
 
-    $actividad = BuscarController::getResultadosBusqueda($busq);
+    $actividad = ActividadController::getResultadosBusqueda($busq);
     // $row = ActividadController::getEntrenador($idActividad);
     //$row2 = ActividadController::existeReserva($idActividad,$idUsuario);
 
