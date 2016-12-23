@@ -40,9 +40,9 @@ if($_SESSION['tipoUsuario']!=null){
 	       	?>
 	      </ul>
 	      <?php if($tipo == 'DeportistaPEF' || $tipo == 'DeportistaTDU'){ ?>
-		      <form class="navbar-form navbar-left">
+		      <form class="navbar-form navbar-left" action="../controller/defaultController.php?controlador=actividad&accion=buscar" method="POST">
 		        <div class="form-group">
-		          <input type="text" class="form-control" placeholder="Buscar...">
+		          <input type="text" name="nomActividad" class="form-control" placeholder="Buscar Actividad...">
 		        </div>
 		        <button type="submit" id="botonBuscar" class="btn btn-default">Buscar</button>
 		      </form>

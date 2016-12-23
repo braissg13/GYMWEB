@@ -29,7 +29,7 @@
 	        <li><a id="Item2" href="misActividades.php">Mis Actividades</a></li>
 	        <li><a id="Item3" href="gestionEjercicios.php">Gesti&oacuten de Ejercicios</a></li>
 	        <li><a id="Item4" href="gestionTablas.php">Gesti&oacuten de Tablas de Ejercicios</a></li>
-	       		<?php }else if($tipo == 'DeportistaPEF' || $tipo == 'DeportistaTDU'){ ?>
+	       		<?php }else if($tipo == 'DeportistaPEF' || $tipo == 'DeportistaTDU'){ ?> 
 	       	<li><a id="Item1" href="principal.php">Principal</a></li>
 	        <li><a id="Item2" href="misActividades.php">Mis Actividades</a></li>
 	        <li><a id="Item3" href="ejercicios.php">Ejercicios</a></li>
@@ -38,17 +38,15 @@
 	       	}
 	       	?>
 	      </ul>
-
 	      <?php if($tipo == 'DeportistaPEF' || $tipo == 'DeportistaTDU'){ ?>
-		      <form class="navbar-form navbar-left" action="buscar.php" method="POST">
+		      <form class="navbar-form navbar-left" action="../../controller/defaultController.php?controlador=actividad&accion=buscar" method="POST">
 		        <div class="form-group">
-		          <input type="text"  name="palabra" class="form-control" placeholder="Buscar...">
+		          <input type="text" name="nomActividad" class="form-control" placeholder="Buscar Actividad...">
 		        </div>
-		        <button type="submit"  name="buscador" value="Buscar" class="btn btn-default">Buscar</button>
+		        <button type="submit" id="botonBuscar" class="btn btn-default">Buscar</button>
 		      </form>
-	      <?php
-
-	  		}
+	      <?php	
+	  		} 
 	      ?>
 	      <ul class="nav navbar-nav navbar-right">
 	       <!-- COMIENZO VER PERFIL -->
