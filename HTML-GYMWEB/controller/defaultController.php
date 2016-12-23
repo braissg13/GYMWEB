@@ -6,7 +6,6 @@
 	include_once("ActividadController.php");
 	include_once("TablaController.php");
 	include_once("ReservaController.php");
-	include_once("BuscarController.php");
 //Llamamos alcontrolador y su accion
 	if(isset($_GET["controlador"]) && isset($_GET["accion"])){
 		$targetController = ucfirst($_GET["controlador"])."Controller";
