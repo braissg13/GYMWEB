@@ -19,6 +19,7 @@ class ActividadMapper{
             return true;
         }
     }
+
       /* Guardamos una Actividad en la BD*/
     public static function guardarActividad($actividad){
       global $connect;
@@ -61,6 +62,14 @@ class ActividadMapper{
             return true;
         }
     }
+
+    /*Buscamos todos las Actividades*/
+    public static function findActBySearch($nomActividad){
+        global $connect;
+        $resultado = mysqli_query($connect, "SELECT * FROM actividad WHERE nomActividad=\"$nomActividad\" ORDER BY fecha DESC");
+        return $resultado;
+    }
+
     public static function update($idActividad,$nomActividad,$totalPlazas,$descripAct,$fecha,$plazasOcupadas,$imagenAct)
     {
         global $connect;
@@ -141,18 +150,6 @@ class ActividadMapper{
         $resultado = mysqli_query($connect, 'SELECT * FROM usuario U, reserva R WHERE R.Actividad_idActividad="'.$idActividad.'"  AND U.idUsuario = R.Usuario_idUsuario ');
         if (mysqli_num_rows($resultado) > 0) {
             return $resultado;
-        } else {
-            return NULL;
-        }
-    }
-
-    public static function findActBySearch($busq){
-        global $connect;
-        $resultado = mysqli_query($connect, 'SELECT * FROM actividad WHERE nomActividad like %$busq%');
-        if ($resultado) {
-            $row = mysqli_fetch_assoc($resultado);
-            $actividad= new Actividad($row['idActividad'],$row['nomActividad'],$row['totalPlazas'],$row['descripAct'],$row['fecha'],$row['plazasOcupadas'],$row['imagenAct']);
-            return $actividad;
         } else {
             return NULL;
         }

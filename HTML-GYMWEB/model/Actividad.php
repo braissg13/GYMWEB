@@ -111,6 +111,15 @@ class Actividad {
        return true;
       }
   }
+
+  public static function actividadesBuscadas($nomActividad) {
+    if (ActividadMapper::existeActividad($nomActividad)) {
+            return ActividadMapper::findActBySearch($nomActividad);
+        } else {
+            return "ERROR, no existe la actividad";
+        }
+  }
+
   public static function update($idActividad, $nomActividad, $totalPlazas, $descripAct, $fecha, $plazasOcupadas, $imagenAct){
      return ActividadMapper::update($idActividad, $nomActividad,$totalPlazas,$descripAct,$fecha, $plazasOcupadas, $imagenAct);
   }
@@ -152,14 +161,6 @@ class Actividad {
 
   public static function getUsuariosAsignados($idActividad){
     return ActividadMapper::getUsuariosAsignados($idActividad);
-  }
-
-  public static function actividadesBuscadas($busq) {
-    if ($busq) {
-            return ActividadMapper::findActBySearch($busq);
-        } else {
-            return "ERROR, no existe la actividad";
-        }
   }
 }
 ?>
